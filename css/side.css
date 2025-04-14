@@ -1,0 +1,51 @@
+  /* Styling cho sidebar */
+  .sidebar {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgb(40, 38, 38);
+    padding-top: 20px;
+    font-family: "Dancing Script", cursive;
+  }
+  
+  /* Styling cho các link trong sidebar */
+  .sidebar a {
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 13px;
+    color: white;
+    display: block;
+  }
+  
+  .sidebar a:hover {
+    background-color: #575757;
+  }
+  
+
+#homepage,#product,#ordermanagement,#statistical,#usermanagement{
+  background-color:#575757 ;
+}
+
+.sidebar img{
+  border-radius: 50%;
+  width: 50%;
+  background-color: #888888;
+  margin-left:10px;
+}
+.avatar{
+  color: white;
+  justify-content: center;
+  font-size: 10px;
+  margin-left: 50px;
+}
+#admin-name {
+    margin-left: 30px;
+}
+#email-admin{
+  margin-left: 10px;
+}
+
+
+

@@ -1,0 +1,161 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style-type: none;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+}
+
+.sidebar a{
+    text-decoration: none;
+    color: white;
+}
+
+.sidebar-menu {
+    width: 150px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.sidebar-menu ul {
+    text-align: center;
+    padding: 0;
+}
+
+.sidebar-menu ul li a{
+    width: 100%;
+    padding: 30px 0;
+    display: block;
+}
+
+.main-section {
+    margin-left: 150px;
+}
+
+.input-section {
+    background-color: #F2F2F2;
+    width: 100%;
+    padding: 2em;
+}
+
+#input-table {
+    width: 650px;
+}
+
+#input-table tr {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+#input-table tr td {
+    font-size: 18px;
+}
+
+.main-section .inputs .textarea-input {
+    display: flex;
+    justify-content: space-between;
+    width: 850px;
+    margin-bottom: 1em;
+}
+
+.record-header {
+    padding: 1em;
+}
+
+.record-header .browse .record-search {
+    padding: 10px 10px;
+}
+
+#user-table {
+    font-size: 17px;
+}
+
+#user-table thead tr {
+    vertical-align: top;
+}
+
+#user-table tbody tr td:nth-child(1) {
+    font-weight: bold;
+}
+
+#user-table tbody tr td:nth-last-child(2),
+#user-table tbody tr td:last-child {
+    text-align: center;
+}
+
+i.fa-unlock {
+    cursor: pointer;
+    color: #22BAA0;
+}
+
+i.fa-lock {
+    cursor: pointer;
+    color: #D73038;
+}
+/* Products */
+
+#product-input-table tr td {
+    padding: 5px 5px;
+}
+
+#product-input-table tr td div{
+    display: flex;
+    justify-content: space-between;
+}
+
+#product-table tbody img {
+    max-width: 100px;
+    height: auto;
+}
+
+#product-table tbody tr {
+    vertical-align: middle;
+}
+
+#product-table tbody tr td:nth-child(7),
+#product-table tbody tr td:last-child {
+    text-align: center;
+}
+
+/* Orders */
+
+#orders-table tbody tr td:nth-child(5),
+#orders-table tbody tr td:nth-child(6) {
+    text-align: center;
+}
+
+#orders-table .unProcessed :first-child {
+    background-color: #D73038;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+#orders-table .processed :first-child {
+    background-color: #22ba70;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Bill */
+
+#bills-table tbody tr td:nth-child(6),
+#bills-table tbody tr td:nth-child(7) {
+    text-align: center;
+}
+
+input[readonly] {
+    /* Your styles here */
+    background-color: #f0f0f0; /* Change background color */
+    color: #888; /* Change text color */
+    cursor: not-allowed; /* Change cursor to indicate it's not editable */
+}

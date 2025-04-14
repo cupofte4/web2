@@ -1,0 +1,15 @@
+select {
+    position: absolute;
+    top: -8%;
+    right: 0%;
+}
+
+.hide {
+    display: none;
+}
+
+.select-1{
+    position: absolute;
+    top: -8%;
+    right: 15%;
+}

@@ -1,0 +1,42 @@
+/* Styling for User Menu */
+.user-icon-container {
+    position: relative;
+}
+
+.user-menu {
+    display: none;
+    position: absolute;
+    top: 29px;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    width: 200px;
+    border-radius: 5px;
+}
+
+.user-menu a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+}
+
+.user-menu a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsive Fixes for Header */
+@media only screen and (max-width: 768px) {
+    .header-icons {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .user-menu {
+        width: 100%;
+        right: 0;
+    }
+}
