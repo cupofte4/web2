@@ -134,7 +134,7 @@ if (isset($_SESSION['notification'])) {
             while ($row = $result->fetch_assoc()):
             ?>
             <div class="product" data-aos="zoom-in" data-aos-duration="1500">
-                <a href="product-detail.php?id=<?= $row['ProductID'] ?>">
+                <a href="pages/product-detail.php?id=<?= $row['ProductID'] ?>">
                     <img src="./images/products/<?php echo $row['image']; ?>"/>
                 </a>
                 <i class="far fa-heart wishlist"></i>

@@ -1,14 +1,18 @@
+--------------------------------------------
 
 CREATE TABLE `category` (
   `category_id` varchar(50) NOT NULL,
   `category_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--------------------------------------------
+
 INSERT INTO `category` (`category_id`, `category_name`) VALUES
 ('whatsnew', "WHAT'S NEW"),
 ('men', 'MEN'),
-('women', 'WOMEN'),
-('kizzu', 'KIZZU');
+('women', 'WOMEN');
+
+--------------------------------------------
 
 CREATE TABLE `product` (
   `ProductID` int(11) NOT NULL,
@@ -21,6 +25,7 @@ CREATE TABLE `product` (
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--------------------------------------------
 
 INSERT INTO `product` (`ProductID`, `name`, `image`, `category_id`, `type`, `price`, `description`, `status`) VALUES
 (1, 'allover crinkle logo print regular fit padded bomber jacket', 'mjacket1.jpg', 'men','jacket', 385, "Crafted in a muted charcoal gray, this bomber jacket is adorned with subtle, wrinkled EK logo prints that add depth to its design. The front pocket features a refined orange brand woven label, elevating the jacket's overall distinction.", 1),
@@ -51,11 +56,35 @@ INSERT INTO `product` (`ProductID`, `name`, `image`, `category_id`, `type`, `pri
 (26, "Seagull Embroidery High-Waist Skinny Jeans", "wjean1.webp", "women", 'jean', 325, "Elegant wide-leg palazzo trousers featuring a flowing silhouette, versatile for both formal and casual settings.", 1),
 (27, "Logo Appliquéd Leather Bomber Jacket", "wjacket2.webp", "women", 'jacket', 385, "A sleek leather biker jacket with studded details, adding an edgy vibe to any ensemble.", 1),
 (28, "Seagull Brocade Appliqué and Logo Embroidery Regular Fit Sweatshirt", "wsweatshirt1.webp", "women", 'sweatshirt', 215, "A cozy, oversized hoodie with a vibrant tie-dye design, offering both comfort and style for casual outings.", 1),
-(29, "Ishigaki Camouflage Inserted Daicock Slim Fit Jeans", "wsjean1.webp", "whatsnew", "jeans", 385, "These distressed skinny jeans feature a classic blue wash, perfect for a casual yet trendy look.", 1),
-(30, "Seagull Print and Hybrid Ishigaki Camouflage Regular Fit Shirt Jacket", "wsjacket1.webp", "whatsnew", "jacket", 385, "A cozy oversized sweatshirt showcasing a bold graphic design, ideal for staying warm and stylish.", 1),
-(31, "Seagull Print and Logo Tape Regular Fit Down Jacket", "wsjacket2.webp", "whatsnew", "jacket", 515, "These relaxed fit mom jeans come with a high waist and frayed hem, combining comfort and style effortlessly.", 1),
-(32, "Brushstroke Seagull Print Straight Fit Jeans", "wsjean2.webp", "whatsnew", "jeans", 349, "A soft cotton fleece sweatshirt featuring an embroidered logo, perfect for a casual, sporty look.", 1),
-(33, "Allover Logo Jacquard and Seagull Embroidery Boyfriend Fit Denim Shirt Jacket", "wsjacket3.webp", "whatsnew", "jacket", 385, "This classic denim jacket features distressed details, making it a timeless piece for any wardrobe.", 1),
-(34, "SLEEK PULLOVER SWEATSHIRT WITH RIBBED CUFFS", "wssweatshirt1.webp", "whatsnew", "sweatshirt", 235, "A sleek pullover sweatshirt with ribbed cuffs, perfect for layering and staying warm on cooler days.", 1),
-(35, "Deconstructed Contrast Relax Fit Sweatshirt", "wssweatshirt2.webp", "whatsnew", "sweatshirt", 220, "This relaxed fit boxy jacket features utility pockets, providing both style and functionality for everyday wear.", 1),
-(36, "Seagull Brocade Appliqué and Logo Embroidery Regular Fit Sweatshirt", "wssweatshirt3.webp", "whatsnew", "sweatshirt", 219, "With embroidery as the theme, this sweatshirt features a Seagull brocade appliqué on the front and logo embroidery on the back. Showcasing brand identity and exquisite embroidery craftsmanship, it adds a delicate and artistic atmosphere to this sweatshirt.", 1);
+(29, "Ishigaki Camouflage Inserted Daicock Slim Fit Jeans", "njean1.webp", "whatsnew", "jeans", 385, "These distressed skinny jeans feature a classic blue wash, perfect for a casual yet trendy look.", 1),
+(30, "Seagull Print and Hybrid Ishigaki Camouflage Regular Fit Shirt Jacket", "njacket1.webp", "whatsnew", "jacket", 385, "A cozy oversized sweatshirt showcasing a bold graphic design, ideal for staying warm and stylish.", 1),
+(31, "Seagull Print and Logo Tape Regular Fit Down Jacket", "njacket2.webp", "whatsnew", "jacket", 515, "These relaxed fit mom jeans come with a high waist and frayed hem, combining comfort and style effortlessly.", 1),
+(32, "Brushstroke Seagull Print Straight Fit Jeans", "njean2.webp", "whatsnew", "jeans", 349, "A soft cotton fleece sweatshirt featuring an embroidered logo, perfect for a casual, sporty look.", 1),
+(33, "Allover Logo Jacquard and Seagull Embroidery Boyfriend Fit Denim Shirt Jacket", "njacket3.webp", "whatsnew", "jacket", 385, "This classic denim jacket features distressed details, making it a timeless piece for any wardrobe.", 1),
+(34, "SLEEK PULLOVER SWEATSHIRT WITH RIBBED CUFFS", "nsweatshirt1.webp", "whatsnew", "sweatshirt", 235, "A sleek pullover sweatshirt with ribbed cuffs, perfect for layering and staying warm on cooler days.", 1),
+(35, "Deconstructed Contrast Relax Fit Sweatshirt", "nsweatshirt2.webp", "whatsnew", "sweatshirt", 220, "This relaxed fit boxy jacket features utility pockets, providing both style and functionality for everyday wear.", 1),
+(36, "Seagull Brocade Appliqué and Logo Embroidery Regular Fit Sweatshirt", "nsweatshirt3.webp", "whatsnew", "sweatshirt", 219, "With embroidery as the theme, this sweatshirt features a Seagull brocade appliqué on the front and logo embroidery on the back. Showcasing brand identity and exquisite embroidery craftsmanship, it adds a delicate and artistic atmosphere to this sweatshirt.", 1),
+(37, "Daicock and Seagull Print Relax Fit 2-in-1 Denim Worker Shirt Jacket", "njacket4.jpg", 'whatsnew', 'jacket', 410, "Highlighted by a Daicock and seagull print, this 2-in-1 shirt jacket features unique faded print details that align seamlessly with the retro theme. The vintage wash finish adds a touch of personality and classic appeal. The varied pocket shapes bring depth and structure, allowing for a layered, stylish look even when worn on its own, perfect for those who value both fashion and individuality.", 1),
+(38, "Deconstructed with Multi-pocket Loose Fit Denim Jacket", 'njacket5.webp', 'whatsnew', 'jacket', 440, "Combining collage techniques and deconstruction elements from graffiti art, this denim set presents a unique washed multi-pocket design. The pockets were removed and reattached post-wash, forming a shadowy outline of dark blue pockets for a displaced, layered effect. The asymmetrical deconstruction enhances texture and personality, making the design both fun and infused with a bold streetwear aesthetic.", 1);
+
+--------------------------------------------
+
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`category_id`);
+
+--------------------------------------------
+
+  ALTER TABLE `product`
+  ADD PRIMARY KEY (`ProductID`),
+  ADD KEY `category_id` (`category_id`) USING BTREE;
+
+--------------------------------------------
+
+ALTER TABLE `product`
+  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+
+--------------------------------------------
+
+ALTER TABLE `product`
+  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`);
+COMMIT;

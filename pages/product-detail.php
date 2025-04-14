@@ -1,17 +1,28 @@
-<?php 
-    require '../connection/connect.php';
-    session_start();
-    $product_id = $_GET['product_id'];
-    $sql = "SELECT * 
-    FROM product 
-    NATURAL JOIN category 
-    WHERE ProductID = $product_id";
-    $result = mysqli_query($conn, $sql);
-        $row = mysqli_fetch_assoc($result);
-        $category_id = $row['category_id'];
-        $category_name = $row['category_name'];
-        
+<?php
+require '../connection/connect.php';
+session_start();
+
+// Bảo vệ input
+$product_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+if ($product_id === 0) {
+    die("Không tìm thấy sản phẩm.");
+}
+
+// Truy vấn chi tiết sản phẩm và category
+$sql = "SELECT p.*, c.category_name, c.category_id
+        FROM product p
+        JOIN category c ON p.category_id = c.category_id
+        WHERE p.ProductID = $product_id AND p.status = 1";
+
+$result = mysqli_query($conn, $sql);
+$product = mysqli_fetch_assoc($result);
+
+if (!$product) {
+    die("Sản phẩm không tồn tại.");
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,10 +39,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/media.css">
-    <link rel="stylesheet" href="css/product-detail.css" type="text/css">
-    <link rel="stylesheet" href="css/side.css">
-    <link rel="stylesheet" href="css/user.css">
+    <link rel="stylesheet" href="../css/media.css">
+    <link rel="stylesheet" href="../css/product-detail.css" type="text/css">
+    <link rel="stylesheet" href="../css/side.css">
+    <link rel="stylesheet" href="../css/user.css">
 </head>
 
 <body>
@@ -111,21 +122,24 @@
                             JOIN category ON product.category_id = category.category_id
                             WHERE product.ProductID = '$product_id'
                             ";
-            $result_infoProduct = mysqli_query($conn,  $sql_info_products);
+            $result_infoProduct = mysqli_query($conn, $sql_info_products);
             while ($row_product = mysqli_fetch_assoc($result_infoProduct)) {
         ?>
         <!-- Breadcrumbs -->
         <div class="breadcrumbs">
             <a href="../index.php" title="EAVES">HOME</a>
-            <a href="./category.php?category_id=<?php echo $category_id ?>"><?php echo $category_name ?></a></li>
+            <span><</span>  
+            <a href="category.php?category_id=<?= htmlspecialchars($row_product['category_id']) ?>">
+                <?= htmlspecialchars($row_product['category_name']) ?></a>
+            <span><</span>  
             <?php 
-                // Truy vấn để lấy tiêu đề của sách từ cơ sở dữ liệu
-                $sql_title = "SELECT title FROM product WHERE product.ProductID = '$product_id'";
-                $result_title = mysqli_query($conn, $sql_title);
-                if (mysqli_num_rows($result_title) > 0) {
-                    $row_title = mysqli_fetch_assoc($result_title);
-                    $book_title = $row_title['title'];
-                    echo "<li>$book_title</li>";
+                // Truy vấn để lấy tên của sản phẩm từ cơ sở dữ liệu
+                $sql_name= "SELECT name FROM product WHERE product.ProductID = '$product_id'";
+                $result_name= mysqli_query($conn, $sql_name);
+                if (mysqli_num_rows($result_name) > 0) {
+                    $row_name = mysqli_fetch_assoc($result_name);
+                    $prd_name = $row_name['name'];
+                    echo "<span>$prd_name</span>";
                 } else {
                     exit;
                 }
@@ -135,9 +149,12 @@
         <!-- Product details -->
         <div class="product-detail-container">
             <div class="single-pro-img">
-                <img id="product-img" src="../images/products/<?php echo $row_product['image']; ?>alt="" />
+                <img id="product-img" src="../images/products/<?php echo $row_product['image']; ?>"alt="">
             </div>
             <div class=" product-info">
+                <?php if ($row_product['category_id'] === 'whatsnew'): ?>
+                <span class="new">NEW ARRIVAL</span>
+                <?php endif; ?>
                 <h1 id="product-name"><?php echo $row_product['name']; ?></h1>
                 <hr>
                 <p id="product-price">$<?php echo number_format($row_product['price']); ?></p>
