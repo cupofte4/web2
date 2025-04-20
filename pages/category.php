@@ -46,6 +46,13 @@ if (isset($_GET['category_id'])) {
 </head>
 
 <body>
+    <div class="sidebar" id="sidebar" style="display: none; z-index:999;;">
+        <button id="toggleButton" style="width: 30px;"><i class="fa-solid fa-xmark"></i></button>
+        <div class="sidebar-links">
+            <a href="category.php?category_id=whatsnew">WHAT'S NEW</a>
+            <a href="category.php?category_id=men">MEN</a>
+            <a href="category.php?category_id=women">WOMEN</a>
+        </div>
     </div>
     <!-- Begin sections: header-group -->
     <section class="header-group">
@@ -169,7 +176,7 @@ if (isset($_GET['category_id'])) {
                             }
             ?>
         </div>
-     
+
         <div class="pagination-container">
             <?php
                             if ($totalPages > 1) {
@@ -293,7 +300,7 @@ if (isset($_GET['category_id'])) {
     <script src="/js/User.js"></script>
     <script src="/js/search.js"></script>
     <script>
-        AOS.init();
+    AOS.init();
     </script>
 </body>
 

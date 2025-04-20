@@ -32,7 +32,7 @@ if (isset($_SESSION['notification'])) {
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="css/home.css" type="text/css">
+    <link rel="stylesheet" href="css/index.css" type="text/css">
     <link rel="stylesheet" href="css/user.css">
     <link rel="stylesheet" href="css/side.css">
     <link rel="stylesheet" href="css/media.css">
@@ -42,6 +42,14 @@ if (isset($_SESSION['notification'])) {
 </head>
 
 <body>
+    <div class="sidebar" id="sidebar" style="display: none; z-index:999;;">
+        <button id="toggleButton" style="width: 30px;"><i class="fa-solid fa-xmark"></i></button>
+        <div class="sidebar-links">
+            <a href="./pages/category.php?category_id=whatsnew">WHAT'S NEW</a>
+            <a href="./pages/category.php?category_id=men">MEN</a>
+            <a href="./pages/category.php?category_id=women">WOMEN</a>
+        </div>
+    </div>
     <!-- Begin sections: header-group -->
     <section class="header-group">
         <header class="sticky-header">
@@ -135,7 +143,7 @@ if (isset($_SESSION['notification'])) {
             ?>
             <div class="product" data-aos="zoom-in" data-aos-duration="1500">
                 <a href="pages/product-detail.php?id=<?= $row['ProductID'] ?>">
-                    <img src="./images/products/<?php echo $row['image']; ?>"/>
+                    <img src="./images/products/<?php echo $row['image']; ?>" />
                 </a>
                 <i class="far fa-heart wishlist"></i>
                 <div class="card-info">
@@ -171,7 +179,7 @@ if (isset($_SESSION['notification'])) {
             ?>
             <div class="product" data-aos="zoom-in" data-aos-duration="1500">
                 <a href="pages/product-detail.php?id=<?= $row['ProductID'] ?>">
-                    <img src="./images/products/<?php echo $row['image']; ?>"/>
+                    <img src="./images/products/<?php echo $row['image']; ?>" />
                 </a>
                 <i class="far fa-heart wishlist"></i>
                 <div class="card-info">
@@ -326,7 +334,7 @@ if (isset($_SESSION['notification'])) {
     <script src="js/addproduct.js"></script>
     <!-- <script src="/js/User.js"></script> -->
     <script>
-        AOS.init();
+    AOS.init();
     </script>
 </body>
 

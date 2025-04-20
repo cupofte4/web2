@@ -74,7 +74,7 @@ ALTER TABLE `category`
 
 --------------------------------------------
 
-  ALTER TABLE `product`
+ALTER TABLE `product`
   ADD PRIMARY KEY (`ProductID`),
   ADD KEY `category_id` (`category_id`) USING BTREE;
 
