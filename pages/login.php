@@ -1,10 +1,47 @@
+<?php
+session_start();
+require '../connection/connect.php';
+
+$error_message = "";
+
+if(isset($_SESSION['error_message'])) {
+    echo "<script>alert('{$_SESSION['error_message']}')</script>";
+    unset($_SESSION['error_message']);
+}
+
+if (isset($_POST['login'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $hashed_password = md5($password);
+
+    $sql = "SELECT * FROM customer WHERE username = '$username' AND password = '$hashed_password'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        if ($row['status'] == 0) {
+            $_SESSION['error_message'] = "Tài khoản đã bị khóa, không thể đăng nhập.";
+            header("Location: ./login.php");
+            exit();
+        } else {
+            $_SESSION['username'] = $username;
+            header("Location: ../index.php");
+            exit();
+        }
+    } else {
+        $error_message = "Tên đăng nhập hoặc mật khẩu sai. Vui lòng nhập lại !";
+    }
+}
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EAVES</title>
+    <title>Account-EAVES</title>
     <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -13,29 +50,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/css/login.css" type="text/css">
-    <link rel="stylesheet" href="/css/media.css">
-    <link rel="stylesheet" href="/css/side.css">
-    <link rel="stylesheet" href="/css/user.css">
+    <link rel="stylesheet" href="../css/auth.css" type="text/css">
+    <link rel="stylesheet" href="../css/global.css">
     <!-- aos -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 
 <body>
-    <div class="sidebar" id="sidebar" style="display: none; z-index:999;;">
-        <button id="toggleButton" style="width: 30px;"><i class="fa-solid fa-xmark"></i></button>
-        <div class="sidebar-links">
-            <a href="category.php?category_id=whatsnew">WHAT'S NEW</a>
-            <a href="category.php?category_id=men">MEN</a>
-            <a href="category.php?category_id=women">WOMEN</a>
-        </div>
-    </div>
     <!-- Begin sections: header-group -->
     <section class="header-group">
         <header class="sticky-header">
             <div class="announcement">
-                <h5>FREE SHIPPING ON ORDERS OVER USD 150!</h5>
+                <h5>FREE SHIPPING ON ORDERS OVER USD 350, 2pcs Extra 10% OFF, 3pcs+ Extra 15% OFF!</h5>
             </div>
             <div class="section-header">
                 <div class="heading-logo">
@@ -43,8 +70,6 @@
                 </div>
                 <div class="header-icons">
                     <!-- Toggle Button -->
-                    <i class="fa-solid fa-bars" id="toggleButtonopen"
-                        style="color: white; position: absolute; left: -100px;"></i>
                     <div class="search-box">
                         <input type="text" placeholder="Search" id="searchInput">
                         <button class="advanced-search-toggle" id="advancedSearchToggle">
@@ -82,12 +107,15 @@
                     <a href="#" class="icon search-icon"><i class="fas fa-search"></i></a>
                     <a href="#" class="icon"><i class="fas fa-heart"></i></a>
                     <a href="cart.html" class="icon"><i class="fas fa-shopping-cart"></i></a>
-                    <a href="#" class="icon"><i class="fas fa-user"></i></a>
-                    <div class="user-menu" id="userMenu">
-                        <a href="/log-cre/Login.html">Login</a>
-                        <a href="#">Logout</a>
-                        <a href="his.html">Purchase History</a>
+                    <div class="dropdown">
+                        <a href="#" class="icon"><i class="fas fa-user"></i></a>
+                        <div class="dropdown-content"">
+                            <a href=" /pages/userInfo.html">My Account</a>
+                            <a href="/pages/register.html">Register</a>
+                            <a href="/pages/login.html">Sign in</a>
+                        </div>
                     </div>
+
                 </div>
             </div>
             <nav class="header-navbar">
@@ -118,6 +146,11 @@
                             </div>
 
                             <button type="submit">SIGN IN</button>
+                            <?php if ($error_message): ?>
+                            <div style="color: red;">
+                                <?php echo $error_message; ?>
+                            </div>
+                            <?php endif; ?>
                         </form>
                     </div>
                 </div>
@@ -130,7 +163,7 @@
                             store multiple shipping addresses, view and track your orders in your account and more.
                         </p>
                         <button class="btn-register">
-                            <a href="#">REGISTER</a>
+                            <a href="register.php">REGISTER</a>
                         </button>
                     </div>
                 </div>
@@ -243,10 +276,7 @@
         </div>
     </section>
     <!-- End sections: footer-group -->
-    <script src="/js/addproduct.js"></script>
-    <script src="/js/women.js"></script>
-    <script src="/js/side.js"></script>
-    <script src="/js/User.js"></script>
+    <script src="../js/index.js"></script>
     <script>
         AOS.init();
     </script>

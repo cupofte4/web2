@@ -39,10 +39,8 @@ if (!$product) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../css/media.css">
+    <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/product-detail.css" type="text/css">
-    <link rel="stylesheet" href="../css/side.css">
-    <link rel="stylesheet" href="../css/user.css">
 </head>
 
 <body>
@@ -50,7 +48,7 @@ if (!$product) {
     <section class="header-group">
         <header class="sticky-header">
             <div class="announcement">
-                <h5>FREE SHIPPING ON ORDERS OVER USD 150!</h5>
+                <h5>FREE SHIPPING ON ORDERS OVER USD 350, 2pcs Extra 10% OFF, 3pcs+ Extra 15% OFF!</h5>
             </div>
             <div class="section-header">
                 <div class="heading-logo">
@@ -58,8 +56,6 @@ if (!$product) {
                 </div>
                 <div class="header-icons">
                     <!-- Toggle Button -->
-                    <i class="fa-solid fa-bars" id="toggleButtonopen"
-                        style="color: white; position: absolute; left: -120px;"></i>
                     <div class="search-box">
                         <input type="text" placeholder="Search" id="searchInput">
                         <button class="advanced-search-toggle" id="advancedSearchToggle">
@@ -97,11 +93,13 @@ if (!$product) {
                     <a href="#" class="icon search-icon"><i class="fas fa-search"></i></a>
                     <a href="#" class="icon"><i class="fas fa-heart"></i></a>
                     <a href="cart.html" class="icon"><i class="fas fa-shopping-cart"></i></a>
-                    <a href="#" class="icon"><i class="fas fa-user"></i></a>
-                    <div class="user-menu" id="userMenu">
-                        <a href="/log-cre/Login.html">Login</a>
-                        <a href="#">Logout</a>
-                        <a href="his.html">Purchase History</a>
+                    <div class="dropdown">
+                        <a href="#" class="icon"><i class="fas fa-user"></i></a>
+                        <div class="dropdown-content"">
+                            <a href=" /pages/userInfo.html">My Account</a>
+                            <a href="/pages/register.html">Register</a>
+                            <a href="/pages/login.html">Sign in</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -387,7 +385,6 @@ if (!$product) {
     <!-- End sections: footer-group -->
     <script src="/js/User.js"></script>
     <script src="/js/side.js"></script>
-    <script src="/js/addproduct-v2.js"></script>
 </body>
 
 </html>

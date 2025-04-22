@@ -1,18 +1,16 @@
-
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     initializeStickyHeader();
     initializeUserMenu();
     initializeSearch();
     initializeWishlist();
 });
 
-
 function initializeStickyHeader() {
     const header = document.querySelector(".sticky-header");
     if (!header) return;
 
     const sticky = header.offsetTop;
-    window.onscroll = function() {
+    window.onscroll = function () {
         if (window.scrollY > sticky) {
             header.classList.add("sticky");
         } else {
@@ -21,20 +19,19 @@ function initializeStickyHeader() {
     };
 }
 
-
 function initializeUserMenu() {
     const userIcon = document.querySelector('.fa-user');
     const userMenu = document.getElementById('userMenu');
-    
+
     if (!userIcon || !userMenu) return;
 
-    userIcon.addEventListener('click', function(e) {
+    userIcon.addEventListener('click', function (e) {
         e.preventDefault();
         userMenu.style.display = userMenu.style.display === 'block' ? 'none' : 'block';
     });
 
- 
-    document.addEventListener('click', function(e) {
+
+    document.addEventListener('click', function (e) {
         if (!userMenu.contains(e.target) && !userIcon.contains(e.target)) {
             userMenu.style.display = 'none';
         }
@@ -58,15 +55,15 @@ function initializeSearch() {
 
     if (!searchIcon || !searchBox || !closeBtn || !headerIcons) return;
 
- 
-    searchIcon.addEventListener('click', function(e) {
+
+    searchIcon.addEventListener('click', function (e) {
         e.preventDefault();
         headerIcons.classList.add('expanded');
         searchBox.style.display = 'block';
         searchInput.focus();
     });
 
-    closeBtn.addEventListener('click', function(e) {
+    closeBtn.addEventListener('click', function (e) {
         e.preventDefault();
         headerIcons.classList.remove('expanded');
         searchBox.style.display = 'none';
@@ -75,29 +72,29 @@ function initializeSearch() {
 
 
     if (advancedSearchToggle && advancedSearch) {
-        advancedSearchToggle.addEventListener('click', function(e) {
+        advancedSearchToggle.addEventListener('click', function (e) {
             e.preventDefault();
             advancedSearch.classList.toggle('show');
         });
 
-     
-        document.addEventListener('click', function(e) {
+
+        document.addEventListener('click', function (e) {
             if (!advancedSearch.contains(e.target) && !advancedSearchToggle.contains(e.target)) {
                 advancedSearch.classList.remove('show');
             }
         });
     }
 
-  
+
     if (applySearch) {
-        applySearch.addEventListener('click', function(e) {
+        applySearch.addEventListener('click', function (e) {
             e.preventDefault();
             performSearch();
         });
     }
 
     if (searchInput) {
-        searchInput.addEventListener('keypress', function(e) {
+        searchInput.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 performSearch();
@@ -106,7 +103,7 @@ function initializeSearch() {
     }
 
     if (resetSearch) {
-        resetSearch.addEventListener('click', function(e) {
+        resetSearch.addEventListener('click', function (e) {
             e.preventDefault();
             searchInput.value = '';
             if (categoryFilter) categoryFilter.value = '';
@@ -149,7 +146,7 @@ function performSearch() {
     if (minPriceValue) searchParams.append('min_price', minPriceValue);
     if (maxPriceValue) searchParams.append('max_price', maxPriceValue);
 
-   
+
     fetch(`pages/search.php?${searchParams.toString()}`)
         .then(response => {
             if (!response.ok) throw new Error('Network response was not ok');
@@ -208,7 +205,7 @@ function displaySearchResults(products) {
         productsContainer.appendChild(productElement);
     });
 
-   
+
     initializeWishlist();
 }
 
@@ -216,9 +213,9 @@ function displaySearchResults(products) {
 function initializeWishlist() {
     const wishlists = document.querySelectorAll('.wishlist');
     wishlists.forEach(wishlist => {
-        wishlist.addEventListener('click', function() {
+        wishlist.addEventListener('click', function () {
             this.classList.toggle('active');
-           
+
         });
     });
 } 

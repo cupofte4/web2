@@ -1,0 +1,97 @@
+/* Products Grid */
+.products {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 30px 16px;
+    gap: 20px;
+}
+
+.product {
+    width: calc(25% - 15px);
+    padding-bottom: 10px;
+    text-align: left;
+    position: relative;
+}
+
+.product img {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
+/* Product Information */
+.product .card-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product .new {
+    font-size: 15px;
+    color: rgb(131, 131, 131);
+}
+
+.product h3 {
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.25;
+    min-height: 60px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.product h3 a {
+    text-decoration: none;
+    color: #000;
+}
+
+/* Price and Add to Cart */
+.product .price-cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    margin-top: auto;
+}
+
+.product .add-to-cart {
+    display: none;
+    position: absolute;
+    right: 0;
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+}
+
+.product:hover .add-to-cart {
+    display: inline-block;
+}
+
+.product .add-to-cart:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    transition: 0.2s;
+}
+
+/* Wishlist Icon */
+.product .wishlist {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.product .wishlist:hover {
+    color: #000;
+}
+
+.product .wishlist.active {
+    color: #000;
+}

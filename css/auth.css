@@ -1,0 +1,248 @@
+/* Main */
+.main {
+    padding-top: 13rem;
+}
+
+/* Login */
+.container {
+    margin: 0 auto;
+    max-width: 58rem;
+    padding: 3rem 1.5rem;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 3rem;
+}
+
+.login-container .login-left {
+    border-right: 1px solid;
+}
+
+.login-container .login-left,
+.login-container .login-right {
+    min-width: 50%;
+    padding: 0 8px;
+}
+
+.login-container .login-left .login-left-container,
+.login-container .login-right .login-right-container {
+    max-width: 360px;
+}
+
+.login-container .login-right .login-right-container {
+    margin-left: auto;
+}
+
+.login-right-container {
+    height: 100%;
+    position: relative;
+}
+
+.login-left h2,
+.login-right h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 40px;
+}
+
+.login-container p {
+    font-size: 14px;
+    margin: 32px 0;
+    color: #333;
+}
+
+.login-left p {
+    font-style: italic;
+}
+
+.login-container label {
+    display: block;
+    font-size: 14px;
+    margin-top: 30px;
+    font-weight: 500;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+.forgot {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.forgot a {
+    font-size: 14px;
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+}
+
+.login-container button {
+    margin-top: 30px;
+    padding: 12px 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.login-right button {
+    margin-top: 10.8rem;
+}
+
+.btn-register a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Register */
+.register-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.register-container h2 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.register-container h3 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.register-container form {
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.form-group-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group-row .form-group {
+    flex: 1;
+}
+
+.register-container label {
+    display: block;
+    font-size: 14px;
+    padding: 0;
+    margin: 10px 0 8px;
+    font-weight: 400;
+    text-align: left;
+    display: inline-block;
+    line-height: 20px;
+}
+
+.register-container input[type="text"],
+input[type="email"],
+input[type="password"] {
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.checkbox-group {
+    position: relative;
+    padding-left: 0;
+    text-align: left;
+    line-height: 20px
+}
+
+.checkbox-group input {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    bottom: auto;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+}
+
+.checkbox-group label {
+    margin: 0;
+    font-size: 13px;
+    cursor: pointer;
+    white-space: normal;
+    position: relative;
+    padding-left: 25px;
+    font-weight: 400;
+    text-align: left;
+}
+
+.checkbox-group label>a {
+    color: #000;
+}
+
+.form-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    clear: left;
+    margin: 50px 0;
+}
+
+.form-action [type=submit] {
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 14px;
+    height: 40px;
+    font-weight: 700;
+    padding: 0 35px;
+    max-width: 200px;
+    border-radius: 4px;
+    color: #fff;
+    border: 1px solid #000;
+    background-color: #000;
+    margin: 0;
+}
+
+.form-action [type=submit]:hover {
+    background-color: #333;
+    border-color: #333;
+}
+
+.action {
+    transition: all .5s;
+    height: 40px;
+    background: #fff;
+    border: 1px solid #000;
+    font-weight: 600;
+    padding: 0 19px;
+    color: #000;
+    line-height: 40px;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
+}
+
+.action:hover {
+    color: #aaa;
+}
