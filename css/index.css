@@ -6,7 +6,7 @@
 }
 
 .header-group {
-    background: url('../images/home.jpg') center/cover no-repeat;
+    background: url('../images/main.webp') center/cover no-repeat;
     width: 100%;
     min-height: 300px;
     aspect-ratio: auto;
@@ -59,7 +59,6 @@ header {
     display: none;
 }
 
-
 .header-icons {
     display: flex;
     align-items: center;
@@ -76,8 +75,6 @@ header {
     transition: font-size 0.3s ease;
     display: inline-block;
 }
-
-.user-
 
 /* Dropdown */
 .dropdown {
@@ -385,7 +382,6 @@ nav a:hover {
 }
 
 .container .item {
-    width: 32%;
     text-align: center;
 }
 
@@ -396,7 +392,7 @@ nav a:hover {
 }
 
 .container .item img {
-    width: 500px;
+    width: 550px;
     height: 714px;
 }
 

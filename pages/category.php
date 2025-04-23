@@ -38,6 +38,7 @@ if (isset($_GET['category_id'])) {
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../css/category.css" type="text/css">
     <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/product-display.css">
     <!-- aos -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -95,10 +96,14 @@ if (isset($_GET['category_id'])) {
                     <a href="cart.html" class="icon"><i class="fas fa-shopping-cart"></i></a>
                     <div class="dropdown">
                         <a href="#" class="icon"><i class="fas fa-user"></i></a>
-                        <div class="dropdown-content"">
-                            <a href=" /pages/userInfo.html">My Account</a>
-                            <a href="/pages/register.html">Register</a>
-                            <a href="/pages/login.html">Sign in</a>
+                        <div class="dropdown-content">
+                            <a href="<?php echo isset($_SESSION['email']) ? '/pages/userInfo.php' : '/pages/login.php'; ?>">My Account</a>
+                            <?php if (isset($_SESSION['email'])): ?>
+                                <a href="/pages/logout.php">Sign out</a>
+                            <?php else: ?>
+                                <a href="/pages/register.php">Register</a>
+                                <a href="/pages/login.php">Sign in</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -122,61 +127,61 @@ if (isset($_GET['category_id'])) {
         <!-- Product Container -->
         <div class="products">
             <?php
-                        $item_per_page = isset($_GET['per_page']) ? $_GET['per_page'] : 8;
-                        $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-                        $offset = ($current_page - 1) * $item_per_page;
-                        // Truy vấn sản phẩm từ cơ sở dữ liệu dựa trên category_id
-                        $sql_products = "SELECT * FROM product
+            $item_per_page = isset($_GET['per_page']) ? $_GET['per_page'] : 8;
+            $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+            $offset = ($current_page - 1) * $item_per_page;
+            // Truy vấn sản phẩm từ cơ sở dữ liệu dựa trên category_id
+            $sql_products = "SELECT * FROM product
                                         JOIN category ON product.category_id = category.category_id
                                         WHERE product.category_id = '$category_id'
                                         AND NOT status = 2
                                         LIMIT $item_per_page OFFSET $offset";
-                        $result_products = mysqli_query($conn, $sql_products);
-                        $totalRecords = mysqli_query($conn, "SELECT * FROM `product` WHERE product.category_id = '$category_id' AND NOT status = 2");
-                        $totalRecords = $totalRecords->num_rows;
-                        $totalPages = ceil($totalRecords / $item_per_page);
-                        // Kiểm tra xem có sản phẩm nào không
-                        if (mysqli_num_rows($result_products) > 0) {
-                            // Duyệt qua các sản phẩm và hiển thị
-                            while ($row_product = mysqli_fetch_assoc($result_products)) {
-                        ?>
-            <div class="product" data-aos="zoom-in" data-aos-duration="1500">
-                <a href="product-detail.php?id=<?= $row_product['ProductID'] ?>">
-                    <img src="../images/products/<?php echo $row_product['image']; ?>" />
-                </a>
-                <i class="far fa-heart wishlist"></i>
-                <?php if ($category_id == "whatsnew") : ?>
-                <span class="new">NEW ARRIVAL</span>
-                <?php endif; ?>
-                <div class="card-info">
-                    <h3>
-                        <a href="product-detail.php?id=<?= $row_product['ProductID'] ?>">
-                            <?= htmlspecialchars($row_product['name']) ?>
-                        </a>
-                    </h3>
-                    <div class="price-cart">
-                        <p>$
-                            <?= number_format($row_product['price']) ?> USD
-                        </p>
-                        <a class="add-to-cart" href="#">ADD TO CART</a>
-                    </div>
-                </div>
-            </div>
-            <?php
-                            }
+            $result_products = mysqli_query($conn, $sql_products);
+            $totalRecords = mysqli_query($conn, "SELECT * FROM `product` WHERE product.category_id = '$category_id' AND NOT status = 2");
+            $totalRecords = $totalRecords->num_rows;
+            $totalPages = ceil($totalRecords / $item_per_page);
+            // Kiểm tra xem có sản phẩm nào không
+            if (mysqli_num_rows($result_products) > 0) {
+                // Duyệt qua các sản phẩm và hiển thị
+                while ($row_product = mysqli_fetch_assoc($result_products)) {
             ?>
+                    <div class="product" data-aos="zoom-in" data-aos-duration="1500">
+                        <a href="product-detail.php?id=<?= $row_product['ProductID'] ?>">
+                            <img src="../images/products/<?php echo $row_product['image']; ?>" />
+                        </a>
+                        <i class="far fa-heart wishlist"></i>
+                        <?php if ($category_id == "whatsnew") : ?>
+                            <span class="new">NEW ARRIVAL</span>
+                        <?php endif; ?>
+                        <div class="card-info">
+                            <h3>
+                                <a href="product-detail.php?id=<?= $row_product['ProductID'] ?>">
+                                    <?= htmlspecialchars($row_product['name']) ?>
+                                </a>
+                            </h3>
+                            <div class="price-cart">
+                                <p>$
+                                    <?= number_format($row_product['price']) ?> USD
+                                </p>
+                                <a class="add-to-cart" href="#">ADD TO CART</a>
+                            </div>
+                        </div>
+                    </div>
+                <?php
+                }
+                ?>
         </div>
 
         <div class="pagination-container">
-            <?php
-                            if ($totalPages > 1) {
-                                include './pagination.php';
-                            }
-                        } else {
-                           
-                            echo "<p>Không có sản phẩm trong danh mục này.</p>";
-                        }
-            ?>
+        <?php
+                if ($totalPages > 1) {
+                    include './pagination.php';
+                }
+            } else {
+
+                echo "<p>Không có sản phẩm trong danh mục này.</p>";
+            }
+        ?>
         </div>
     </section>
 
@@ -287,7 +292,7 @@ if (isset($_GET['category_id'])) {
     <!-- End sections: footer-group -->
     <script src="/js/search.js"></script>
     <script>
-    AOS.init();
+        AOS.init();
     </script>
 </body>
 

@@ -91,10 +91,14 @@ if (isset($_SESSION['notification'])) {
                     <a href="cart.html" class="icon"><i class="fas fa-shopping-cart"></i></a>
                     <div class="dropdown">
                         <a href="#" class="icon"><i class="fas fa-user"></i></a>
-                        <div class="dropdown-content"">
-                            <a href="./pages/userInfo.php">My Account</a>
-                            <a href="./pages/register.php">Register</a>
-                            <a href="./pages/login.php">Sign in</a>
+                        <div class="dropdown-content">
+                            <a href="<?php echo isset($_SESSION['email']) ? '/pages/userInfo.php' : '/pages/login.php'; ?>">My Account</a>
+                            <?php if (isset($_SESSION['email'])): ?>
+                                <a href="/pages/logout.php">Sign out</a>
+                            <?php else: ?>
+                                <a href="/pages/register.php">Register</a>
+                                <a href="/pages/login.php">Sign in</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -131,25 +135,25 @@ if (isset($_SESSION['notification'])) {
 
             while ($row = $result->fetch_assoc()):
             ?>
-            <div class="product" data-aos="zoom-in" data-aos-duration="1500">
-                <a href="pages/product-detail.php?id=<?= $row['ProductID'] ?>">
-                    <img src="./images/products/<?php echo $row['image']; ?>" />
-                </a>
-                <i class="far fa-heart wishlist"></i>
-                <div class="card-info">
-                    <h3>
-                        <a href="product-detail.php?id=<?= $row['ProductID'] ?>">
-                            <?= htmlspecialchars($row['name']) ?>
-                        </a>
-                    </h3>
-                    <div class="price-cart">
-                        <p>$
-                            <?= number_format($row['price']) ?> USD
-                        </p>
-                        <a class="add-to-cart" href="#">ADD TO CART</a>
+                <div class="product" data-aos="zoom-in" data-aos-duration="1500">
+                    <a href="pages/product-detail.php?id=<?= $row['ProductID'] ?>">
+                        <img src="./images/products/<?php echo $row['image']; ?>" />
+                    </a>
+                    <i class="far fa-heart wishlist"></i>
+                    <div class="card-info">
+                        <h3>
+                            <a href="product-detail.php?id=<?= $row['ProductID'] ?>">
+                                <?= htmlspecialchars($row['name']) ?>
+                            </a>
+                        </h3>
+                        <div class="price-cart">
+                            <p>$
+                                <?= number_format($row['price']) ?> USD
+                            </p>
+                            <a class="add-to-cart" href="#">ADD TO CART</a>
+                        </div>
                     </div>
                 </div>
-            </div>
             <?php endwhile; ?>
         </div>
 
@@ -167,25 +171,25 @@ if (isset($_SESSION['notification'])) {
 
             while ($row = $result->fetch_assoc()):
             ?>
-            <div class="product" data-aos="zoom-in" data-aos-duration="1500">
-                <a href="pages/product-detail.php?id=<?= $row['ProductID'] ?>">
-                    <img src="./images/products/<?php echo $row['image']; ?>" />
-                </a>
-                <i class="far fa-heart wishlist"></i>
-                <div class="card-info">
-                    <h3>
-                        <a href="product-detail.php?id=<?= $row['ProductID'] ?>">
-                            <?= htmlspecialchars($row['name']) ?>
-                        </a>
-                    </h3>
-                    <div class="price-cart">
-                        <p>$
-                            <?= number_format($row['price']) ?> USD
-                        </p>
-                        <a class="add-to-cart" href="#">ADD TO CART</a>
+                <div class="product" data-aos="zoom-in" data-aos-duration="1500">
+                    <a href="pages/product-detail.php?id=<?= $row['ProductID'] ?>">
+                        <img src="./images/products/<?php echo $row['image']; ?>" />
+                    </a>
+                    <i class="far fa-heart wishlist"></i>
+                    <div class="card-info">
+                        <h3>
+                            <a href="product-detail.php?id=<?= $row['ProductID'] ?>">
+                                <?= htmlspecialchars($row['name']) ?>
+                            </a>
+                        </h3>
+                        <div class="price-cart">
+                            <p>$
+                                <?= number_format($row['price']) ?> USD
+                            </p>
+                            <a class="add-to-cart" href="#">ADD TO CART</a>
+                        </div>
                     </div>
                 </div>
-            </div>
             <?php endwhile; ?>
         </div>
         <div class="container">
@@ -323,7 +327,7 @@ if (isset($_SESSION['notification'])) {
     <script src="js/index.js"></script>
     <!-- <script src="/js/User.js"></script> -->
     <script>
-    AOS.init();
+        AOS.init();
     </script>
 </body>
 

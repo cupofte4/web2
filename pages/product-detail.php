@@ -23,7 +23,6 @@ if (!$product) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -95,10 +94,14 @@ if (!$product) {
                     <a href="cart.html" class="icon"><i class="fas fa-shopping-cart"></i></a>
                     <div class="dropdown">
                         <a href="#" class="icon"><i class="fas fa-user"></i></a>
-                        <div class="dropdown-content"">
-                            <a href=" /pages/userInfo.html">My Account</a>
-                            <a href="/pages/register.html">Register</a>
-                            <a href="/pages/login.html">Sign in</a>
+                        <div class="dropdown-content">
+                            <a href="<?php echo isset($_SESSION['email']) ? '/pages/userInfo.php' : '/pages/login.php'; ?>">My Account</a>
+                            <?php if (isset($_SESSION['email'])): ?>
+                                <a href="/pages/logout.php">Sign out</a>
+                            <?php else: ?>
+                                <a href="/pages/register.php">Register</a>
+                                <a href="/pages/login.php">Sign in</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -115,104 +118,106 @@ if (!$product) {
 
     <!-- Begin sections: main -->
     <section class="main">
-        <?php 
-            $sql_info_products = "SELECT * FROM product
+        <?php
+        $sql_info_products = "SELECT * FROM product
                             JOIN category ON product.category_id = category.category_id
                             WHERE product.ProductID = '$product_id'
                             ";
-            $result_infoProduct = mysqli_query($conn, $sql_info_products);
-            while ($row_product = mysqli_fetch_assoc($result_infoProduct)) {
+        $result_infoProduct = mysqli_query($conn, $sql_info_products);
+        while ($row_product = mysqli_fetch_assoc($result_infoProduct)) {
         ?>
-        <!-- Breadcrumbs -->
-        <div class="breadcrumbs">
-            <a href="../index.php" title="EAVES">HOME</a>
-            <span><</span>  
-            <a href="category.php?category_id=<?= htmlspecialchars($row_product['category_id']) ?>">
-                <?= htmlspecialchars($row_product['category_name']) ?></a>
-            <span><</span>  
-            <?php 
-                // Truy vấn để lấy tên của sản phẩm từ cơ sở dữ liệu
-                $sql_name= "SELECT name FROM product WHERE product.ProductID = '$product_id'";
-                $result_name= mysqli_query($conn, $sql_name);
-                if (mysqli_num_rows($result_name) > 0) {
-                    $row_name = mysqli_fetch_assoc($result_name);
-                    $prd_name = $row_name['name'];
-                    echo "<span>$prd_name</span>";
-                } else {
-                    exit;
-                }
-            ?>
-        </div>
-
-        <!-- Product details -->
-        <div class="product-detail-container">
-            <div class="single-pro-img">
-                <img id="product-img" src="../images/products/<?php echo $row_product['image']; ?>"alt="">
+            <!-- Breadcrumbs -->
+            <div class="breadcrumbs">
+                <a href="../index.php" title="EAVES">HOME</a>
+                <span>
+                    << /span>
+                        <a href="category.php?category_id=<?= htmlspecialchars($row_product['category_id']) ?>">
+                            <?= htmlspecialchars($row_product['category_name']) ?></a>
+                        <span>
+                            << /span>
+                                <?php
+                                // Truy vấn để lấy tên của sản phẩm từ cơ sở dữ liệu
+                                $sql_name = "SELECT name FROM product WHERE product.ProductID = '$product_id'";
+                                $result_name = mysqli_query($conn, $sql_name);
+                                if (mysqli_num_rows($result_name) > 0) {
+                                    $row_name = mysqli_fetch_assoc($result_name);
+                                    $prd_name = $row_name['name'];
+                                    echo "<span>$prd_name</span>";
+                                } else {
+                                    exit;
+                                }
+                                ?>
             </div>
-            <div class=" product-info">
-                <?php if ($row_product['category_id'] === 'whatsnew'): ?>
-                <span class="new">NEW ARRIVAL</span>
-                <?php endif; ?>
-                <h1 id="product-name"><?php echo $row_product['name']; ?></h1>
-                <hr>
-                <p id="product-price">$<?php echo number_format($row_product['price']); ?></p>
-                <div class="size-row">
-                    <p class="product-size">SIZE</p>
-                    <a href="#" id="size-guide-link" class="size-guide-link">View Size Guide</a>
-                </div>
-                <select>
-                    <option hidden>CHOOSE SIZE</option>
-                    <option>S</option>
-                    <option>M</option>
-                    <option>L</option>
-                    <option>XL</option>
-                </select>
 
-                <div class="buttons">
-                    <button class="add-to-cart"><i class="fas fa-shopping-cart"></i>ADD TO CART</button>
-                    <button class="add-to-wishlist"><i class="fas fa-heart"></i>ADD TO WISHLIST</button>
+            <!-- Product details -->
+            <div class="product-detail-container">
+                <div class="single-pro-img">
+                    <img id="product-img" src="../images/products/<?php echo $row_product['image']; ?>" alt="">
                 </div>
-                <div class="container">
-                    <a href="#" class="contact-us"><i class="fas fa-envelope"></i>CONTACT US</a>
-                </div>
+                <div class=" product-info">
+                    <?php if ($row_product['category_id'] === 'whatsnew'): ?>
+                        <span class="new">NEW ARRIVAL</span>
+                    <?php endif; ?>
+                    <h1 id="product-name"><?php echo $row_product['name']; ?></h1>
+                    <hr>
+                    <p id="product-price">$<?php echo number_format($row_product['price']); ?></p>
+                    <div class="size-row">
+                        <p class="product-size">SIZE</p>
+                        <a href="#" id="size-guide-link" class="size-guide-link">View Size Guide</a>
+                    </div>
+                    <select>
+                        <option hidden>CHOOSE SIZE</option>
+                        <option>S</option>
+                        <option>M</option>
+                        <option>L</option>
+                        <option>XL</option>
+                    </select>
 
-                <div class="product-introduce">
-                    <h3>PRODUCT DETAILS</h3>
-                    <hr>
-                    <p id="product-description"><?php echo $row_product['description']; ?></p>
-                    <h3>CARE</h3>
-                    <hr>
-                    <ul class="care-list">
-                        <li>HAND WASH COLD INSIDE OUT</li>
-                        <li>DO NOT BLEACH</li>
-                        <li>HANG DRY ONLY</li>
-                        <li>COOL IRON ON REVERSE SIDE IF NEEDED</li>
-                        <li>STEAM IRONING MAY CAUSE IRREVERSIBLE DAMAGE</li>
-                        <li>DO NOT DRY CLEAN</li>
-                        <li>DO NOT IRON ON PRINT</li>
-                    </ul>
+                    <div class="buttons">
+                        <button class="add-to-cart"><i class="fas fa-shopping-cart"></i>ADD TO CART</button>
+                        <button class="add-to-wishlist"><i class="fas fa-heart"></i>ADD TO WISHLIST</button>
+                    </div>
+                    <div class="container">
+                        <a href="#" class="contact-us"><i class="fas fa-envelope"></i>CONTACT US</a>
+                    </div>
 
-                    <h3>RETURN POLICY</h3>
-                    <hr>
-                    <ul> of delivery for a
-                        refund or exchange.
-                        <li>
-                            - You can simply return any item within 14 calendar days from the date
-                        </li>
-                        <li>
-                            - Customer needs to bear the return shipping fee and any cost incurred.
-                        </li>
-                        <li>
-                            - Online Orders cannot be returned to any of Eaves' boutiques.
-                        </li>
-                        <li>
-                            - Read here (/pages/delivery-and-returns) for more details.
-                        </li>
-                    </ul>
+                    <div class="product-introduce">
+                        <h3>PRODUCT DETAILS</h3>
+                        <hr>
+                        <p id="product-description"><?php echo $row_product['description']; ?></p>
+                        <h3>CARE</h3>
+                        <hr>
+                        <ul class="care-list">
+                            <li>HAND WASH COLD INSIDE OUT</li>
+                            <li>DO NOT BLEACH</li>
+                            <li>HANG DRY ONLY</li>
+                            <li>COOL IRON ON REVERSE SIDE IF NEEDED</li>
+                            <li>STEAM IRONING MAY CAUSE IRREVERSIBLE DAMAGE</li>
+                            <li>DO NOT DRY CLEAN</li>
+                            <li>DO NOT IRON ON PRINT</li>
+                        </ul>
+
+                        <h3>RETURN POLICY</h3>
+                        <hr>
+                        <ul> of delivery for a
+                            refund or exchange.
+                            <li>
+                                - You can simply return any item within 14 calendar days from the date
+                            </li>
+                            <li>
+                                - Customer needs to bear the return shipping fee and any cost incurred.
+                            </li>
+                            <li>
+                                - Online Orders cannot be returned to any of Eaves' boutiques.
+                            </li>
+                            <li>
+                                - Read here (/pages/delivery-and-returns) for more details.
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
             <?php } ?>
-        </div>
+            </div>
     </section>
     <!-- End sections: main -->
 
@@ -258,24 +263,24 @@ if (!$product) {
     </div>
 
     <script>
-    const sizeGuideLink = document.getElementById("size-guide-link");
-    const modal = document.getElementById("size-guide-modal");
-    const closeModal = document.querySelector(".close");
+        const sizeGuideLink = document.getElementById("size-guide-link");
+        const modal = document.getElementById("size-guide-modal");
+        const closeModal = document.querySelector(".close");
 
-    sizeGuideLink.onclick = function(event) {
-        event.preventDefault();
-        modal.style.display = "block";
-    }
+        sizeGuideLink.onclick = function(event) {
+            event.preventDefault();
+            modal.style.display = "block";
+        }
 
-    closeModal.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
+        closeModal.onclick = function() {
             modal.style.display = "none";
         }
-    }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     </script>
 
     <!-- Begin sections: footer-group -->

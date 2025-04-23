@@ -10,11 +10,11 @@ if(isset($_SESSION['error_message'])) {
 }
 
 if (isset($_POST['login'])) {
-    $username = $_POST['username'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
     $hashed_password = md5($password);
 
-    $sql = "SELECT * FROM customer WHERE username = '$username' AND password = '$hashed_password'";
+    $sql = "SELECT * FROM customer WHERE email = '$email' AND password = '$hashed_password'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -24,12 +24,12 @@ if (isset($_POST['login'])) {
             header("Location: ./login.php");
             exit();
         } else {
-            $_SESSION['username'] = $username;
+            $_SESSION['email'] = $email;
             header("Location: ../index.php");
             exit();
         }
     } else {
-        $error_message = "Tên đăng nhập hoặc mật khẩu sai. Vui lòng nhập lại !";
+        $error_message = "Email hoặc mật khẩu sai. Vui lòng nhập lại !";
     }
 }
 $conn->close();
@@ -110,12 +110,11 @@ $conn->close();
                     <div class="dropdown">
                         <a href="#" class="icon"><i class="fas fa-user"></i></a>
                         <div class="dropdown-content"">
-                            <a href=" /pages/userInfo.html">My Account</a>
+                            <a href=" /pages/login.html">My Account</a>
                             <a href="/pages/register.html">Register</a>
-                            <a href="/pages/login.html">Sign in</a>
+                            <a href="#">Sign in</a>
                         </div>
                     </div>
-
                 </div>
             </div>
             <nav class="header-navbar">
@@ -134,18 +133,18 @@ $conn->close();
                     <div class="login-left-container">
                         <h2>SIGN IN</h2>
                         <p>If you have an account, sign in with your email address.</p>
-                        <form>
+                        <form method="post" action="login.php">
                             <label for="email">EMAIL ADDRESS*</label>
-                            <input type="email" id="email" placeholder="Enter email address" required>
+                            <input type="email" id="email" name="email" placeholder="Enter email address" required>
 
                             <label for="password">ENTER YOUR PASSWORD*</label>
-                            <input type="password" id="password" placeholder="Enter your password" required>
+                            <input type="password" id="password" name="password" placeholder="Enter your password" required>
 
                             <div class="forgot">
                                 <a href="#">Forgot Password?</a>
                             </div>
 
-                            <button type="submit">SIGN IN</button>
+                            <button type="submit" name="login">SIGN IN</button>
                             <?php if ($error_message): ?>
                             <div style="color: red;">
                                 <?php echo $error_message; ?>

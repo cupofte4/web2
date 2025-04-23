@@ -130,9 +130,9 @@ if (isset($_POST['btn-reg'])) {
                     <a href="cart.html" class="icon"><i class="fas fa-shopping-cart"></i></a>
                     <div class="dropdown">
                         <a href="#" class="icon"><i class="fas fa-user"></i></a>
-                        <div class="dropdown-content"">
-                            <a href=" /pages/userInfo.html">My Account</a>
-                            <a href="/pages/register.html">Register</a>
+                        <div class="dropdown-content">
+                            <a href=" /pages/login.html">My Account</a>
+                            <a href="#">Register</a>
                             <a href="/pages/login.html">Sign in</a>
                         </div>
                     </div>
