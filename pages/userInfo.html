@@ -1,27 +1,25 @@
-<?php
+<!-- <?php
 session_start();
-require '../connects/connect.php';
-require '../connects/connectDGHCVN.php';
+require '../connection/connect.php';
+require '../connection/connectDGHCVN.php';
 
 // Kiểm tra xem người dùng đã đăng nhập chưa
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['customer_id'])) {
     // Nếu chưa, chuyển hướng người dùng đến trang đăng nhập
     header("Location: ./login.php");
     exit();
 }
 
-// Lấy username của người dùng từ session
-$username = $_SESSION['username'];
-
 // Truy vấn thông tin người dùng từ cơ sở dữ liệu
-$sql = "SELECT * FROM customer WHERE username = '$username'";
+$sql = "SELECT * FROM customer WHERE email = '$email'";
 $result = $conn->query($sql);
 
 // Kiểm tra xem có kết quả từ truy vấn hay không
 if ($result->num_rows > 0) {
     // Lấy thông tin người dùng từ kết quả truy vấn
     $row = $result->fetch_assoc();
-    $fullname = $row['fullname'];
+    $first_name = $row['first_name'];
+    $last_name = $row['last_name'];
     $email = $row['email'];
     $phone = $row['phone'];
     $street = $row['street'];
@@ -102,17 +100,17 @@ if (isset($_POST['changeEmail'])) {
 if (
     isset($_POST["capnhat"]) && $_POST["capnhat"]
 ) {
-    $username = $_SESSION["username"];
-    $fullname = $_POST["customer-fullname"];
-    $email = $_POST["customer-email"];
-    $phone = $_POST["customer-phone"];
-    $street = $_POST["customer-street"];
-    $ward = $_POST["customer-ward"];
-    $district = $_POST["customer-district"];
-    $city = $_POST["customer-city"];
+   $first_name = $_POST["first_name"];
+    $last_name = $_POST["last_name"];
+    $email = $_POST["email"];
+    $phone = $_POST["phone"];
+    $street = $_POST["street"];
+    $ward = $_POST["ward"];
+    $district = $_POST["district"];e
+    $city = $_POST["city"];
 
-    $sql = "UPDATE `customer` SET `fullname` = '$fullname', `email` = '$email', `phone` = '$phone', `street` = '$street', `city` = '$city', `district` = '$district', `ward` = '$ward'
-    WHERE `username` = '$username'";
+    $sql = "UPDATE `customer` SET `first_name` = '$first_name', `last_name` = '$last_name', `email` = '$email', `phone` = '$phone', `street` = '$street', `city` = '$city', `district` = '$district', `ward` = '$ward'
+    WHERE `customer_id` = '$customer_id'";
     $result = mysqli_query($conn, $sql);
     if ($result) {
         header("location: myInfo.php");
@@ -120,7 +118,7 @@ if (
         echo "Có lỗi xảy ra khi cập nhật thông tin: " . mysqli_error($conn);
     }
 }
-?>
+?> -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -133,7 +131,6 @@ if (
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -214,109 +211,140 @@ if (
 
     <!-- Begin sections: main -->
     <section class="main">
-        <h1>Customer's Account</h1>
-        <main class="container-fluid d-flex gap-4" style="background-color:#EBF3E8">
-            <div class="d-flex flex-column align-items-center bg-white side-bar-container">
-                <div class="d-flex align-items-center side-bar-title menu">
-                    <span class="fw-bold fs-4">
-                        <i class="fas fa-bars"></i>
-                    </span>
-                    <span class="fw-bold ms-2">Thông tin tài khoản</span>
-                </div>
-        
-                <div class="side-bar-items">
-                    <ul class="fw-bold list-inline mt-2">
-                        <li onclick="tabs(0)"><h3>Tài khoản của tôi</h3></li>
-                        <li onclick="tabs(1)"><h3>Lịch sử mua hàng</h3></li>
-                        <li onclick="tabs(2)"><h3>Đổi mật khẩu</h3></li>
-                        <li onclick="tabs(3)"><h3>Đổi email</h3></li>
-                    </ul>
-                </div>
+        <div class="title">Account Navigation
+            <hr>
+        </div>
+
+        <div class="container">
+            <div class="side-bar-container">
+                <ul class="list-inline">
+                    <li onclick="tabs(0)">
+                        <h3>My Account</h3>
+                    </li>
+                    <li onclick="tabs(1)">
+                        <h3>My orders</h3>
+                    </li>
+                    <li onclick="tabs(2)">
+                        <h3>Change Password</h3>
+                    </li>
+                    <li onclick="tabs(3)">
+                        <h3>Change Email</h3>
+                    </li>
+                </ul>
             </div>
-        
+
             <div class="infor-container">
                 <!-- Tab 0: Thông tin tài khoản -->
-                <div class="fs-2 fw-normal bg-green2 p-3 tabShow">Tài khoản của bạn</div>
-                <form method="POST" class="profile tabShow" action="updateUser.php">
-                    <div class="infor-boxes"><label>Họ:</label>
-                        <input type="text" name="first-name" value="<?= $row['first_name'] ?>" disabled>
-                    </div>
-                    <div class="infor-boxes"><label>Tên:</label>
-                        <input type="text" name="last-name" value="<?= $row['last_name'] ?>" disabled>
-                    </div>
-                    <div class="infor-boxes"><label>Email:</label>
-                        <input type="email" name="email" value="<?= $row['email'] ?>" disabled>
-                    </div>
-                    <div class="infor-boxes"><label>Số điện thoại:</label>
-                        <input type="text" name="phone" value="<?= $row['phone'] ?>">
-                    </div>
-                    <div class="infor-boxes"><label>Đường:</label>
-                        <input type="text" name="street" value="<?= $row['street'] ?>">
-                    </div>
-                    <div class="infor-boxes">
-                        <div style="display: flex; height: 40px; align-items: center;">
-                            <label for="city">Thành phố:</label>
-                            <select name="city" id="customer-city" class="form-control mx-2" style="width:15%">
-                                <option value="">Chọn thành phố</option>
-                                <?php
-                                $cities = mysqli_query($connDGHCVN, "SELECT * FROM city");
-                                while ($city = mysqli_fetch_assoc($cities)) {
-                                    $selected = $city['city_id'] == $row['city'] ? 'selected' : '';
-                                    echo "<option value='{$city['city_id']}' $selected>{$city['name']}</option>";
-                                }
-                                ?>
-                            </select>
-        
-                            <label for="district">Quận/Huyện:</label>
-                            <select name="district" id="customer-district" class="form-control mx-2" style="width:15%"></select>
-        
-                            <label for="ward">Phường/Xã:</label>
-                            <select name="ward" id="customer-ward" class="form-control mx-2" style="width:15%"></select>
+                <div>
+
+                    <div class="sub-title">Account information</div>
+                    <form method="POST" class="profile tabShow">
+                        <div class="infor-row">
+                            <div class="infor-boxes">
+                                <label>First Name:</label>
+                                <input type="text" name="first-name" value="<?php echo $first_name?>">
+                            </div>
+
+                            <div class="infor-boxes">
+                                <label>Last Name:</label>
+                                <input type="text" name="last-name" value="<?php echo $last_name?>">
+                            </div>
                         </div>
-                    </div>
-        
-                    <div class="d-flex justify-content-end">
-                        <input class="btn btn-primary" type="submit" value="Lưu thay đổi" name="capnhat">
-                    </div>
-                </form>
+
+                        <div class="infor-boxes">
+                            <label>Email:</label>
+                            <input type="email" name="email" value="<?php echo $email?>">
+                        </div>
+
+                        <div class="infor-boxes">
+                            <label>Phone:</label>
+                            <input type="text" name="phone" value="<?php echo $phone?>">
+                        </div>
+
+                        <div class="infor-boxes">
+                            <label>Street:</label>
+                            <input type="text" name="street" value="<?php echo $street?>">
+                        </div>
+
+                        <div class="infor-boxes">
+                            <div class="city-select-container">
+                                <label for="city">City:</label>
+                                <select name="city" id="city" class="form-control">
+                                    <option value="">Choose a city</option>
+                                    <?php
+                                     $cities = mysqli_query($connDGHCVN, "SELECT * FROM city");
+                                     while ($city = mysqli_fetch_assoc($cities)) {
+                                         $selected = $city['city_id'] == $row['city'] ? 'selected' : '';
+                                         echo "<option value='{$city['city_id']}' $selected>{$city['name']}</option>";
+                                     }
+                                     ?>
+                                </select>
+
+                                <label for="district">District:</label>
+                                <select name="district" id="district" class="form-control"></select>
+
+                                <label for="ward">Ward:</label>
+                                <select name="ward" id="ward" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <div class="btn-save">
+                            <input class="btn-primary" type="submit" value="Save" name="capnhat">
+                        </div>
+                    </form>
+                </div>
                 <!-- Tab 1: Lịch sử mua hàng -->
                 <div class="history tabShow">
                     <?php include './orders.php'; ?>
                 </div>
-        
+
                 <!-- Tab 2: Đổi mật khẩu -->
-                <form method="POST" action="changePassword.php" class="changePassword tabShow">
-                    <div class="infor-boxes">Mật khẩu hiện tại:
-                        <input type="password" name="currentPassword">
-                    </div>
-                    <div class="infor-boxes">Mật khẩu mới:
-                        <input type="password" name="newPassword">
-                    </div>
-                    <div class="infor-boxes">Nhập lại mật khẩu:
-                        <input type="password" name="confirmPassword">
-                    </div>
-                    <?php if (!empty($message)) echo "<div style='color:red;'>$message</div>"; ?>
-                    <div class="d-flex justify-content-end">
-                        <button class="btn btn-primary" type="submit" name="changePassword">Lưu</button>
-                    </div>
-                </form>
-        
+                <div class="changePassword tabShow">
+                    <form method="POST" action="myInfo.php">
+                        <div class="infor-boxes">Current Password:
+                            <input type="password" name="currentPassword">
+                        </div>
+                        <div class="infor-boxes">New Password:
+                            <input type="password" name="newPassword">
+                        </div>
+                        <div class="infor-boxes">Confirm New Password:
+                            <input type="password" name="confirmPassword">
+                        </div>
+                        <?php if (!empty($empty_message)) : ?>
+                        <div style="color: red;">
+                            <?php echo $empty_message; ?>
+                        </div>
+                        <?php endif; ?>
+                        <div class="btn-save">
+                            <input class="btn-primary" type="submit" value="Save" name="capnhat">
+                        </div>
+                    </form>
+                </div>
+
                 <!-- Tab 3: Đổi email -->
-                <form method="POST" action="changeEmail.php" class="tabShow">
-                    <div class="infor-boxes">Email mới:
-                        <input type="email" name="newEmail">
-                    </div>
-                    <div class="infor-boxes">Xác nhận email mới:
-                        <input type="email" name="confirmEmail">
-                    </div>
-                    <?php if (!empty($email_message)) echo "<div style='color:red;'>$email_message</div>"; ?>
-                    <div class="d-flex justify-content-end">
-                        <button class="btn btn-primary" type="submit" name="changeEmail">Lưu</button>
-                    </div>
-                </form>
+                <div class="changeEmail tabShow">
+                    <form method="POST" action="myInfo.php">
+                        <div class="infor-boxes">Current Email:
+                            <input type="email" name="current Email" value="<?php echo $email?>" disabled>
+                        </div>
+                        <div class="infor-boxes">New Email:
+                            <input type="email" name="newEmail">
+                        </div>
+                        <div class="infor-boxes">Confirm New Email:
+                            <input type="email" name="confirmEmail">
+                        </div>
+                        <?php if (!empty($email_message)) : ?>
+                        <div style="color: red;">
+                            <?php echo $email_message; ?>
+                        </div>
+                        <?php endif; ?>
+                        <div class="btn-save">
+                            <input class="btn-primary" type="submit" value="Save" name="capnhat">
+                        </div>
+                    </form>
+                </div>
             </div>
-        </main>
-        
+        </div>
     </section>
     <!-- End sections: main -->
 
@@ -330,7 +358,7 @@ if (
                         <p>
                             COMPLIMENTARY <br>
                             SHIPPING FOR ANY <br>
-                            ORDER OVER USD 150
+                            ORDER OVER USD 350
                         </p>
                     </div>
                 </li>
@@ -369,7 +397,7 @@ if (
             <!-- Footer Section (left) -->
             <div class="footer-section">
                 <div class="footer-heading">
-                    <a href="home.html">EAVES</a>
+                    <a href="../index.php">EAVES</a>
                 </div>
                 <div class="footer-news">
                     <div class="sign-up-info">
@@ -425,11 +453,38 @@ if (
         </div>
     </section>
     <!-- End sections: footer-group -->
+
+    <!-- JS -->
     <script src="/js/index.js"></script>
     <script src="/js/User.js"></script>
     <script>
         AOS.init();
+        const tabBtn = document.querySelectorAll(".tab");
+        const tab = document.querySelectorAll(".tabShow");
+
+        function tabs(panelIndex) {
+            tab.forEach(function (node) {
+                node.style.display = "none";
+            });
+            tab[panelIndex].style.display = "block";
+        }
+        tabs(0);
     </script>
+
+    <?php
+    echo "<script>";
+    echo "$(document).ready(function () {";
+    echo "$('#city').val('{$row['city']}').trigger('change');";
+    echo "setTimeout(function() {";
+    echo "    $('#district').val('{$row['district']}').trigger('change');";
+    echo "}, 100);";
+    echo "setTimeout(function() {";
+    echo "    $('#ward').val('{$row['ward']}');";
+    echo "}, 200);";
+    echo "});";
+    echo "</script>";
+    ?>
+
 </body>
 
 </html>

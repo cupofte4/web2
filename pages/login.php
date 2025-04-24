@@ -110,8 +110,8 @@ $conn->close();
                     <div class="dropdown">
                         <a href="#" class="icon"><i class="fas fa-user"></i></a>
                         <div class="dropdown-content"">
-                            <a href=" /pages/login.html">My Account</a>
-                            <a href="/pages/register.html">Register</a>
+                            <a href="login.html">My Account</a>
+                            <a href="register.html">Register</a>
                             <a href="#">Sign in</a>
                         </div>
                     </div>
@@ -180,7 +180,7 @@ $conn->close();
                         <p>
                             COMPLIMENTARY <br>
                             SHIPPING FOR ANY <br>
-                            ORDER OVER USD 150
+                            ORDER OVER USD 350
                         </p>
                     </div>
                 </li>

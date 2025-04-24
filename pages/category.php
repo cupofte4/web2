@@ -97,12 +97,12 @@ if (isset($_GET['category_id'])) {
                     <div class="dropdown">
                         <a href="#" class="icon"><i class="fas fa-user"></i></a>
                         <div class="dropdown-content">
-                            <a href="<?php echo isset($_SESSION['email']) ? '/pages/userInfo.php' : '/pages/login.php'; ?>">My Account</a>
+                            <a href="<?php echo isset($_SESSION['email']) ? 'userInfo.php' : 'login.php'; ?>">My Account</a>
                             <?php if (isset($_SESSION['email'])): ?>
-                                <a href="/pages/logout.php">Sign out</a>
+                                <a href="logout.php">Sign out</a>
                             <?php else: ?>
-                                <a href="/pages/register.php">Register</a>
-                                <a href="/pages/login.php">Sign in</a>
+                                <a href="register.php">Register</a>
+                                <a href="login.php">Sign in</a>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -195,7 +195,7 @@ if (isset($_GET['category_id'])) {
                         <p>
                             COMPLIMENTARY <br>
                             SHIPPING FOR ANY <br>
-                            ORDER OVER USD 150
+                            ORDER OVER 350
                         </p>
                     </div>
                 </li>

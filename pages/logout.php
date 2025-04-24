@@ -7,4 +7,5 @@
 
     // hearder('Location: index.php'); // bam dang xuat xong se link toi trang index.php
     header('Location: ../index.php');
+    exit(); 
 ?>

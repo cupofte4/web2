@@ -131,9 +131,9 @@ if (isset($_POST['btn-reg'])) {
                     <div class="dropdown">
                         <a href="#" class="icon"><i class="fas fa-user"></i></a>
                         <div class="dropdown-content">
-                            <a href=" /pages/login.html">My Account</a>
+                            <a href=" login.html">My Account</a>
                             <a href="#">Register</a>
-                            <a href="/pages/login.html">Sign in</a>
+                            <a href="login.html">Sign in</a>
                         </div>
                     </div>
                 </div>
@@ -211,7 +211,7 @@ if (isset($_POST['btn-reg'])) {
                         <p>
                             COMPLIMENTARY <br>
                             SHIPPING FOR ANY <br>
-                            ORDER OVER USD 150
+                            ORDER OVER USD 350
                         </p>
                     </div>
                 </li>

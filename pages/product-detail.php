@@ -293,7 +293,7 @@ if (!$product) {
                         <p>
                             COMPLIMENTARY <br>
                             SHIPPING FOR ANY <br>
-                            ORDER OVER USD 150
+                            ORDER OVER 350
                         </p>
                     </div>
                 </li>
