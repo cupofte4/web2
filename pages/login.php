@@ -4,20 +4,31 @@ require '../connection/connect.php';
 
 $error_message = "";
 
-if(isset($_SESSION['error_message'])) {
+// Nếu đã đăng nhập thì chuyển hướng luôn (optional)
+if (isset($_SESSION['email'])) {
+    header("Location: ./userInfo.php");
+    exit();
+}
+
+// Thông báo lỗi từ session (nếu có)
+if (isset($_SESSION['error_message'])) {
     echo "<script>alert('{$_SESSION['error_message']}')</script>";
     unset($_SESSION['error_message']);
 }
 
+// Xử lý khi nhấn nút đăng nhập
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $hashed_password = md5($password);
+    $hashed_password = md5($password); // Có thể dùng password_hash sau này
 
-    $sql = "SELECT * FROM customer WHERE email = '$email' AND password = '$hashed_password'";
-    $result = $conn->query($sql);
+    // Sử dụng prepared statement để tránh SQL injection
+    $stmt = $conn->prepare("SELECT * FROM customer WHERE email = ? AND password = ?");
+    $stmt->bind_param("ss", $email, $hashed_password);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
+    if ($result && $result->num_rows > 0) {
         $row = $result->fetch_assoc();
         if ($row['status'] == 0) {
             $_SESSION['error_message'] = "Tài khoản đã bị khóa, không thể đăng nhập.";
@@ -25,12 +36,15 @@ if (isset($_POST['login'])) {
             exit();
         } else {
             $_SESSION['email'] = $email;
-            header("Location: ../index.php");
+            $_SESSION['customer_id'] = $row['customer_id'];
+            header("Location: ./userInfo.php");
             exit();
         }
     } else {
         $error_message = "Email hoặc mật khẩu sai. Vui lòng nhập lại !";
     }
+
+    $stmt->close();
 }
 $conn->close();
 ?>
@@ -110,8 +124,8 @@ $conn->close();
                     <div class="dropdown">
                         <a href="#" class="icon"><i class="fas fa-user"></i></a>
                         <div class="dropdown-content"">
-                            <a href="login.html">My Account</a>
-                            <a href="register.html">Register</a>
+                            <a href="login.php">My Account</a>
+                            <a href="register.php">Register</a>
                             <a href="#">Sign in</a>
                         </div>
                     </div>
@@ -219,7 +233,7 @@ $conn->close();
             <!-- Footer Section (left) -->
             <div class="footer-section">
                 <div class="footer-heading">
-                    <a href="home.html">EAVES</a>
+                    <a href="../index.php">EAVES</a>
                 </div>
                 <div class="footer-news">
                     <div class="sign-up-info">

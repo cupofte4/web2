@@ -1,6 +1,7 @@
 <?php
-session_start();
 require './connection/connect.php';
+session_start();
+
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
 }
@@ -24,16 +25,19 @@ if (isset($_SESSION['notification'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EAVES</title>
 
-    <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <!-- css -->
+    <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/index.css" type="text/css">
     <link rel="stylesheet" href="css/product-display.css">
+
+    <!-- js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    
     <!-- aos -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -92,12 +96,12 @@ if (isset($_SESSION['notification'])) {
                     <div class="dropdown">
                         <a href="#" class="icon"><i class="fas fa-user"></i></a>
                         <div class="dropdown-content">
-                            <a href="<?php echo isset($_SESSION['email']) ? 'pages/userInfo.php' : 'pages/login.php'; ?>">My Account</a>
+                            <a href="<?php echo isset($_SESSION['email']) ? './pages/userInfo.php' : './pages/login.php'; ?>">My Account</a>
                             <?php if (isset($_SESSION['email'])): ?>
-                                <a href="pages/logout.php">Sign out</a>
+                                <a href="./pages/logout.php">Sign out</a>
                             <?php else: ?>
-                                <a href="pages/register.php">Register</a>
-                                <a href="pages/login.php">Sign in</a>
+                                <a href="./pages/register.php">Register</a>
+                                <a href="./pages/login.php">Sign in</a>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -267,7 +271,7 @@ if (isset($_SESSION['notification'])) {
             <!-- Footer Section (left) -->
             <div class="footer-section">
                 <div class="footer-heading">
-                    <a href="home.html">EAVES</a>
+                    <a href="../index.php">EAVES</a>
                 </div>
                 <div class="footer-news">
                     <div class="sign-up-info">

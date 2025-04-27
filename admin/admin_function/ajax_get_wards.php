@@ -1,5 +1,5 @@
 <?php 
-    require '../../connects/connectDGHCVN.php';
+    require '../../connection/connectDGHCVN.php';
     $district_id = $_GET['district_id'];
 
     $sql = "SELECT * FROM `wards` WHERE `district_id` = {$district_id}";

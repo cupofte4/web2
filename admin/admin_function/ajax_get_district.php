@@ -1,5 +1,5 @@
 <?php 
-    require '../../connects/connectDGHCVN.php';
+    require '../../connection/connectDGHCVN.php';
 
     $city_id = $_GET['city_id'];
     

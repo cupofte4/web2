@@ -29,7 +29,7 @@ if (!$product) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EAVES</title>
+    <title>Product Detail-EAVES</title>
     <link href='https://fonts.googleapis.com/css?family=Afacad' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -95,12 +95,12 @@ if (!$product) {
                     <div class="dropdown">
                         <a href="#" class="icon"><i class="fas fa-user"></i></a>
                         <div class="dropdown-content">
-                            <a href="<?php echo isset($_SESSION['email']) ? '/pages/userInfo.php' : '/pages/login.php'; ?>">My Account</a>
+                            <a href="<?php echo isset($_SESSION['email']) ? 'userInfo.php' : 'login.php'; ?>">My Account</a>
                             <?php if (isset($_SESSION['email'])): ?>
-                                <a href="/pages/logout.php">Sign out</a>
+                                <a href="logout.php">Sign out</a>
                             <?php else: ?>
-                                <a href="/pages/register.php">Register</a>
-                                <a href="/pages/login.php">Sign in</a>
+                                <a href="register.php">Register</a>
+                                <a href="login.php">Sign in</a>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -332,7 +332,7 @@ if (!$product) {
             <!-- Footer Section (left) -->
             <div class="footer-section">
                 <div class="footer-heading">
-                    <a href="home.html">EAVES</a>
+                    <a href="../index.php">EAVES</a>
                 </div>
                 <div class="footer-news">
                     <div class="sign-up-info">

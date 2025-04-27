@@ -1,9 +1,19 @@
---------------------------------------------
+-- 
+-- 
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
---------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */; 
+
+-- 
+-- 
+
 CREATE TABLE `customer` (
   `customer_id` INT AUTO_INCREMENT PRIMARY KEY,
   `first_name` VARCHAR(100) NOT NULL,
@@ -18,7 +28,8 @@ CREATE TABLE `customer` (
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---------------------------------------------
+-- 
+-- 
 
 INSERT INTO `customer` (`customer_id`, `first-name`, `last-name`, `email`, `phone`, `street`, `ward`, `district`, `city`, `password`, `status`) VALUES
 ('caheoom', 'Cá Heo Ốm', 'caheoom@gmail.com', '0908888123', '321 Lý Thái Tổ', '9607', '616', '55', '24712edee9f393134eafa36dff8c53d7', 1),
@@ -33,21 +44,24 @@ INSERT INTO `customer` (`customer_id`, `first-name`, `last-name`, `email`, `phon
 ('nguyenquangvinh', 'Nguyễn Quang Vinh', 'nguyenquangvinh@gmail.com', '09012345678', '77 An Dương Vương', '2673', '159', '15', '705812d8e9d2877306f0381f21422c13', 1),
 ('nguyenxuanthang', 'Nguyễn Xuân Thắng', 'nguyenxuanthang@gmail.com', '0906666321', '75 Lữ Gia', '3827', '227', '21', '58d3ef1c35712fa06c720f79cda218f5', 1);
 
---------------------------------------------
+-- 
+-- 
 
 CREATE TABLE `category` (
   `category_id` varchar(50) NOT NULL PRIMARY KEY,
   `category_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---------------------------------------------
+-- 
+-- 
 
 INSERT INTO `category` (`category_id`, `category_name`) VALUES
 ('whatsnew', "WHAT'S NEW"),
 ('men', 'MEN'),
 ('women', 'WOMEN');
 
---------------------------------------------
+-- 
+-- 
 
 CREATE TABLE `product` (
   `ProductID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -60,7 +74,8 @@ CREATE TABLE `product` (
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---------------------------------------------
+-- 
+-- 
 
 INSERT INTO `product` (`ProductID`, `name`, `image`, `category_id`, `type`, `price`, `description`, `status`) VALUES
 (1, 'allover crinkle logo print regular fit padded bomber jacket', 'mjacket1.jpg', 'men','jacket', 385, "Crafted in a muted charcoal gray, this bomber jacket is adorned with subtle, wrinkled EK logo prints that add depth to its design. The front pocket features a refined orange brand woven label, elevating the jacket's overall distinction.", 1),
@@ -71,10 +86,10 @@ INSERT INTO `product` (`ProductID`, `name`, `image`, `category_id`, `type`, `pri
 (6, "seagull print relax fit denim jacket", "mjacket3.jpg", "men",'jacket', 579, "This classic denim jacket features a mountain landscape print, providing a rugged yet fashionable look.", 1),
 (7, "Rseagull and slogan embroidery oversized denim coach jacket", "mjacket4.jpg", "men",'jacket', 309,"This oversized denim jacket features a bold patchwork and graphic print design, adding a unique retro vibe to any outfit.", 1),
 (8, "Seagull Metallic Embroidery Carrot Fit Jeans #2017", "mjean2.webp", "men",'jean', 325, "These loose-fit jeans have a distressed faded blue wash and utility pockets, perfect for a rugged and stylish look.", 1),
-(9, "Seagull Embroidery and Logo Appliqué Fashion Fit Leather Jacket", "mjacket1.webp", "men", 'jacket', 385, "", 1),
-(10, "Allover EK Logo Velvet Relax Fit Down Jacket", "mjacket2.webp", "men",'jacket', 645, "", 1 ),
-(11, "Deconstructed Print and Logo Embroidery Relax Fit Down Jacket", "mjacket3.webp","men",'jacket', 605, "", 1),
-(12, "Seagull and Eagle Embroidery Cropped Carrot Fit Jeans", "mjean1.webp", "men",'jean', 425, "", 1),
+(9, "Seagull Embroidery and Logo Appliqué Fashion Fit Leather Jacket", "mjacket1.webp", "men", 'jacket', 900, "This leather jacket is adorned with Seagull embroidery on the front and brand logo patch embroidery on the back. The edges of the jacket also feature intentionally distressed, vintage-inspired yellowed details. This design gives the jacket a unique antique style while showcasing the brand's logo and personality.", 1),
+(10, "Allover EK Logo Velvet Relax Fit Down Jacket", "mjacket2.webp", "men",'jacket', 645, "Are you in pursuit of high-quality design? This down jacket features allover EK logo velvet, with logo embroidery on the back. The overall design is luxurious and elegant, showcasing an unparalleled sense of opulence.", 1 ),
+(11, "Deconstructed Print and Logo Embroidery Relax Fit Down Jacket", "mjacket3.webp","men",'jacket', 605, "This down jacket cleverly incorporates a deconstructed style through prints, creating intentionally worn details that add a unique sense of fashion. The back features logo embroidery with various stitch patterns that showcase a three-dimensional effect, while the front is adorned with a Seagull embroidery decoration. The overall design is both warm and individualistic.", 1),
+(12, "Seagull and Eagle Embroidery Cropped Carrot Fit Jeans", "mjean1.webp", "men",'jean', 425, "Dreaming of eagle on the first day of the new year represents good luck and realisation of wishes since Edo period. Cut for a cropped carrot fit, these jeans are intricately embroidered with eagle, logo and seagull, bringing good vibes only to the trendsetters.", 1),
 (13, "Daruma and Logo Embroidery Relax Fit Sweatshirt", "msweatshirt3.webp", 'men','sweatshirt', 155, "With a streetwear-inspired design, this hoodie features intricate embroidery combining Daruma and EAVES logo on the chest, seamlessly blending Eastern culture with contemporary urban style. Its relaxed fit and soft fabric offer both comfort and fashion, making it perfect for everyday wear or standout street looks.", 1),
 (14, "Deconstructed Contrast Relax Fit Sweatshirt", "msweatshirt4.webp", 'men','sweatshirt', 235, "This sweatshirt from EAVES features a garment dyeing process, showcasing the brand's seagull, various logo fonts, and slogans on the front. Notably, the calligraphic logo spans across the entire garment.", 1),
 (15, "Garment Dyed Multi-Logo Print Relax Fit Sweatshirt", 'msweatshirt5.webp', 'men', 'sweatshirt', 235, "This sweatshirt features a multi-logo print, with a bold and contrasting design that adds a unique and stylish touch to any ensemble.", 1),
@@ -102,24 +117,40 @@ INSERT INTO `product` (`ProductID`, `name`, `image`, `category_id`, `type`, `pri
 (37, "Daicock and Seagull Print Relax Fit 2-in-1 Denim Worker Shirt Jacket", "njacket4.jpg", 'whatsnew', 'jacket', 410, "Highlighted by a Daicock and seagull print, this 2-in-1 shirt jacket features unique faded print details that align seamlessly with the retro theme. The vintage wash finish adds a touch of personality and classic appeal. The varied pocket shapes bring depth and structure, allowing for a layered, stylish look even when worn on its own, perfect for those who value both fashion and individuality.", 1),
 (38, "Deconstructed with Multi-pocket Loose Fit Denim Jacket", 'njacket5.webp', 'whatsnew', 'jacket', 440, "Combining collage techniques and deconstruction elements from graffiti art, this denim set presents a unique washed multi-pocket design. The pockets were removed and reattached post-wash, forming a shadowy outline of dark blue pockets for a displaced, layered effect. The asymmetrical deconstruction enhances texture and personality, making the design both fun and infused with a bold streetwear aesthetic.", 1);
 
---------------------------------------------
+-- 
+-- 
 
 ALTER TABLE `category`
   ADD PRIMARY KEY (`category_id`);
 
---------------------------------------------
+-- 
+-- 
 
 ALTER TABLE `product`
   ADD PRIMARY KEY (`ProductID`),
   ADD KEY `category_id` (`category_id`) USING BTREE;
 
---------------------------------------------
+-- 
+-- 
 
 ALTER TABLE `product`
   MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT;
 
---------------------------------------------
+-- 
+--
 
 ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`);
 COMMIT;
+
+--
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`customer_id`);
+
+-- 
+--
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

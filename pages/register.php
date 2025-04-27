@@ -131,9 +131,9 @@ if (isset($_POST['btn-reg'])) {
                     <div class="dropdown">
                         <a href="#" class="icon"><i class="fas fa-user"></i></a>
                         <div class="dropdown-content">
-                            <a href=" login.html">My Account</a>
+                            <a href=" login.php">My Account</a>
                             <a href="#">Register</a>
-                            <a href="login.html">Sign in</a>
+                            <a href="login.php">Sign in</a>
                         </div>
                     </div>
                 </div>
@@ -250,7 +250,7 @@ if (isset($_POST['btn-reg'])) {
             <!-- Footer Section (left) -->
             <div class="footer-section">
                 <div class="footer-heading">
-                    <a href="home.html">EAVES</a>
+                    <a href="../index.php">EAVES</a>
                 </div>
                 <div class="footer-news">
                     <div class="sign-up-info">
