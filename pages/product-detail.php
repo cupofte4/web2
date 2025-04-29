@@ -129,12 +129,10 @@ if (!$product) {
             <!-- Breadcrumbs -->
             <div class="breadcrumbs">
                 <a href="../index.php" title="EAVES">HOME</a>
-                <span>
-                    << /span>
+                <<span>
                         <a href="category.php?category_id=<?= htmlspecialchars($row_product['category_id']) ?>">
                             <?= htmlspecialchars($row_product['category_name']) ?></a>
-                        <span>
-                            << /span>
+                            <</span>
                                 <?php
                                 // Truy vấn để lấy tên của sản phẩm từ cơ sở dữ liệu
                                 $sql_name = "SELECT name FROM product WHERE product.ProductID = '$product_id'";
@@ -388,8 +386,7 @@ if (!$product) {
         </div>
     </section>
     <!-- End sections: footer-group -->
-    <script src="/js/User.js"></script>
-    <script src="/js/side.js"></script>
+    <script src="../js/index.js"></script>
 </body>
 
 </html>

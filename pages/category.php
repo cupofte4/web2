@@ -42,8 +42,8 @@ if (isset($_GET['category_id'])) {
 
     <!-- js -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
     <!-- aos -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -61,53 +61,69 @@ if (isset($_GET['category_id'])) {
                     <a href="../index.php">EAVES</a>
                 </div>
                 <div class="header-icons">
-                    <!-- Toggle Button -->
-                    <div class="search-box">
-                        <input type="text" placeholder="Search" id="searchInput">
-                        <button class="advanced-search-toggle" id="advancedSearchToggle">
-                            <i class="fas fa-sliders-h"></i>
-                        </button>
-                        <a href="#" class="close-btn" id="closeSearch">&times;</a>
+                    <!-- Tìm kiếm sản phẩm -->
+                    <form action="search.php" method="GET">
+                        <div class="search-box">
+                            <input type="text" name="keyword" placeholder="Search" id="searchInput">
+                            <button class="basicSearch" name="timkiem" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <button class="advanced-search-toggle" id="advancedSearchToggle" type="button">
+                                <i class="fas fa-sliders-h"></i>
+                            </button>
+                            <a href="#" class="close-btn" id="closeSearch">&times;</a>
 
-                        <!-- Advanced Search Panel -->
-                        <div class="advanced-search" id="advancedSearch">
-                            <div class="search-filters">
-                                <div class="filter-group">
-                                    <label>Category:</label>
-                                    <select id="categoryFilter">
-                                        <option value="">All Categories</option>
-                                        <option value="men">Men</option>
-                                        <option value="women">Women</option>
-                                        <option value="whatsnew">What's New</option>
-                                    </select>
-                                </div>
-                                <div class="filter-group">
-                                    <label>Price Range:</label>
-                                    <div class="price-range">
-                                        <input type="number" id="minPrice" placeholder="Min">
-                                        <span>-</span>
-                                        <input type="number" id="maxPrice" placeholder="Max">
+                            <!-- Advanced Search Panel -->
+                            <div class="advanced-search" id="advancedSearch">
+                                <div class="search-filters">
+                                    <div class="filter-group">
+                                        <label>Type:</label>
+                                        <select name="type_range">
+                                            <!-- Change name attribute to "type_range" -->
+                                            <option value="all" selected>All</option>
+                                            <?php
+                                                // Truy vấn danh sách các danh mục từ cơ sở dữ liệu
+                                                $sql_type = "SELECT * FROM type";
+                                                $result_type = mysqli_query($conn, $sql_type);
+
+                                                // Lặp qua kết quả và tạo ra các tùy chọn cho dropdown menu
+                                                while ($row_type = mysqli_fetch_assoc($result_type)) {
+                                                    echo '<option value="' . $row_type['type_id'] . '">' . $row_type['type_name'] . '</option>';
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="filter-group">
+                                        <label>Price Range:</label>
+                                        <select name="price_range">
+                                            <!-- Add name attribute to the select element -->
+                                            <option value="all">All</option>
+                                            <option value="below">Below 250$</option>
+                                            <option value="middle">Between 250$ - 450$</option>
+                                            <option value="upper">Above 450$</option>
+                                        </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="search-buttons">
-                                <button class="search-btn" id="applySearch">Search</button>
-                                <button class="reset-btn" id="resetSearch">Reset</button>
+                                <div class="search-buttons">
+                                    <button class="search-btn" id="applySearch" name="advancedSearch"
+                                        type="submit">Search</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                     <a href="#" class="icon search-icon"><i class="fas fa-search"></i></a>
                     <a href="#" class="icon"><i class="fas fa-heart"></i></a>
                     <a href="cart.html" class="icon"><i class="fas fa-shopping-cart"></i></a>
                     <div class="dropdown">
                         <a href="#" class="icon"><i class="fas fa-user"></i></a>
                         <div class="dropdown-content">
-                            <a href="<?php echo isset($_SESSION['email']) ? 'userInfo.php' : 'login.php'; ?>">My Account</a>
+                            <a href="<?php echo isset($_SESSION['email']) ? 'userInfo.php' : 'login.php'; ?>">My
+                                Account</a>
                             <?php if (isset($_SESSION['email'])): ?>
-                                <a href="logout.php">Sign out</a>
+                            <a href="logout.php">Sign out</a>
                             <?php else: ?>
-                                <a href="register.php">Register</a>
-                                <a href="login.php">Sign in</a>
+                            <a href="register.php">Register</a>
+                            <a href="login.php">Sign in</a>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -122,6 +138,7 @@ if (isset($_GET['category_id'])) {
     </section>
     <!-- End sections: header-group -->
 
+    <!-- Begin sections: main -->
     <section class="main">
         <!-- Breadcrumbs -->
         <div class="breadcrumbs">
@@ -150,45 +167,45 @@ if (isset($_GET['category_id'])) {
                 // Duyệt qua các sản phẩm và hiển thị
                 while ($row_product = mysqli_fetch_assoc($result_products)) {
             ?>
-                    <div class="product" data-aos="zoom-in" data-aos-duration="1500">
+            <div class="product" data-aos="zoom-in" data-aos-duration="1500">
+                <a href="product-detail.php?id=<?= $row_product['ProductID'] ?>">
+                    <img src="../images/products/<?php echo $row_product['image']; ?>" />
+                </a>
+                <i class="far fa-heart wishlist"></i>
+                <?php if ($category_id == "whatsnew") : ?>
+                <span class="new">NEW ARRIVAL</span>
+                <?php endif; ?>
+                <div class="card-info">
+                    <h3>
                         <a href="product-detail.php?id=<?= $row_product['ProductID'] ?>">
-                            <img src="../images/products/<?php echo $row_product['image']; ?>" />
+                            <?= htmlspecialchars($row_product['name']) ?>
                         </a>
-                        <i class="far fa-heart wishlist"></i>
-                        <?php if ($category_id == "whatsnew") : ?>
-                            <span class="new">NEW ARRIVAL</span>
-                        <?php endif; ?>
-                        <div class="card-info">
-                            <h3>
-                                <a href="product-detail.php?id=<?= $row_product['ProductID'] ?>">
-                                    <?= htmlspecialchars($row_product['name']) ?>
-                                </a>
-                            </h3>
-                            <div class="price-cart">
-                                <p>$
-                                    <?= number_format($row_product['price']) ?> USD
-                                </p>
-                                <a class="add-to-cart" href="#">ADD TO CART</a>
-                            </div>
-                        </div>
+                    </h3>
+                    <div class="price-cart">
+                        <p>$
+                            <?= number_format($row_product['price']) ?> USD
+                        </p>
+                        <a class="add-to-cart" href="#">ADD TO CART</a>
                     </div>
-                <?php
+                </div>
+            </div>
+            <?php
                 }
                 ?>
         </div>
 
         <div class="pagination-container">
-        <?php
+            <?php
                 if ($totalPages > 1) {
                     include './pagination.php';
                 }
             } else {
-
                 echo "<p>Không có sản phẩm trong danh mục này.</p>";
             }
         ?>
         </div>
     </section>
+    <!-- End sections: main -->
 
     <!-- Begin sections: footer-group -->
     <section class="footer-group">
@@ -239,7 +256,7 @@ if (isset($_GET['category_id'])) {
             <!-- Footer Section (left) -->
             <div class="footer-section">
                 <div class="footer-heading">
-                    <a href="home.html">EAVES</a>
+                    <a href="../index.php">EAVES</a>
                 </div>
                 <div class="footer-news">
                     <div class="sign-up-info">
@@ -295,9 +312,9 @@ if (isset($_GET['category_id'])) {
         </div>
     </section>
     <!-- End sections: footer-group -->
-    <script src="/js/search.js"></script>
+    <script src="../js/index.js"></script>
     <script>
-        AOS.init();
+    AOS.init();
     </script>
 </body>
 

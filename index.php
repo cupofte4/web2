@@ -271,7 +271,7 @@ if (isset($_SESSION['notification'])) {
             <!-- Footer Section (left) -->
             <div class="footer-section">
                 <div class="footer-heading">
-                    <a href="../index.php">EAVES</a>
+                    <a href="index.php">EAVES</a>
                 </div>
                 <div class="footer-news">
                     <div class="sign-up-info">
@@ -328,8 +328,7 @@ if (isset($_SESSION['notification'])) {
     </section>
     <!-- End sections: footer-group -->
 
-    <script src="js/index.js"></script>
-    <!-- <script src="/js/User.js"></script> -->
+    <script src="./js/index.js"></script>
     <script>
         AOS.init();
     </script>

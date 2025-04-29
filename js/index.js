@@ -37,14 +37,9 @@ closeSearch.addEventListener('click', function (e) {
 
 // Search button
 document.getElementById("applySearch").onclick = function () {
-    window.location.href = "searchResult.html";
+    window.location.href = "../pages/search.php";
 };
 
-// Reset button
-const resetButton = document.getElementById('resetSearch');
-resetButton.addEventListener('click', () => {
-    window.location.href = 'home.html';
-});
 
 // Toggle advanced search panel
 advancedSearchToggle.addEventListener('click', () => {

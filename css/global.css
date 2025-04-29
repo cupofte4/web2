@@ -125,95 +125,102 @@ nav a:hover {
 
 /* Search */
 .search-box {
-    position: relative;
     display: none;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-}
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-19%);
+    width: 0;
+    overflow: visible;
+    background: white;
+    border-radius: 4px;
+    border: 2px solid black;
+}   
 
 /* Advanced Search Panel */
 .advanced-search {
     display: none;
     position: absolute;
     top: 100%;
-    left: 0;
     right: 0;
+    width: 250px;
     background: white;
-    padding: 15px;
-    border: 1px solid #ddd;
     border-radius: 4px;
+    padding: 15px;
     margin-top: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
 }
 
 .advanced-search.show {
     display: block;
+    border: 1px solid black;
+}
+
+.search-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .filter-group {
-    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .filter-group label {
-    display: block;
-    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
     font-weight: 500;
+    text-align: left;
+}
+
+.filter-group select {
+    padding: 8px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.filter-group option {
+    text-align: center;
 }
 
 .price-range {
     display: flex;
-    align-items: center;
     gap: 10px;
-}
-
-.price-range input {
-    width: 100px;
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    align-items: center;
 }
 
 .search-buttons {
-    display: flex;
+    display: block;
+    text-align: center;
     gap: 10px;
     margin-top: 15px;
 }
 
-.search-btn,
-.reset-btn {
-    padding: 8px 15px;
-    border: none;
+.search-btn {
+    padding: 8px 60px;
+    border: 1px solid black;
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
 }
 
 .search-btn {
-    background-color: #000;
+    background: #000;
     color: white;
 }
 
 .search-btn:hover {
-    background-color: #333;
-}
-
-.reset-btn {
-    background-color: #f1f1f1;
-    color: #333;
-}
-
-.reset-btn:hover {
-    background-color: #ddd;
+    background: #222;
 }
 
 /* Modify existing styles */
 .header-icons.expanded .search-box {
     display: block;
     width: 350px;
-    margin-right: 50px;
 }
 
 .search-box #searchInput {
@@ -221,7 +228,7 @@ nav a:hover {
     padding: 8px 10px;
     font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 4px;
     outline: none;
 }
 
@@ -229,6 +236,21 @@ nav a:hover {
 .advanced-search-toggle {
     position: absolute;
     right: 45px;
+    /* Adjusted to accommodate close button */
+    top: 53%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.basicSearch {
+    position: absolute;
+    right: 74px;
+    /* Adjusted to accommodate close button */
     top: 53%;
     transform: translateY(-50%);
     background: none;

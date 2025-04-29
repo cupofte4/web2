@@ -63,12 +63,28 @@ INSERT INTO `category` (`category_id`, `category_name`) VALUES
 -- 
 -- 
 
+CREATE TABLE `type` (
+  `type_id` varchar(50) NOT NULL PRIMARY KEY,
+  `type_name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- 
+-- 
+
+INSERT INTO `type` (`type_id`, `type_name`) VALUES
+('jacket', "Jacket"),
+('jean', 'Jean'),
+('sweatshirt', 'Sweatshirt');
+
+-- 
+-- 
+
 CREATE TABLE `product` (
   `ProductID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(200) NOT NULL,
   `image` varchar(500) NOT NULL,
   `category_id` varchar(50) NOT NULL,
-  `type` varchar(50) NOT NULL,
+  `type_id` varchar(50) NOT NULL,
   `price` int(11) NOT NULL,
   `description` longtext NOT NULL,
   `status` int(11) NOT NULL
@@ -77,7 +93,7 @@ CREATE TABLE `product` (
 -- 
 -- 
 
-INSERT INTO `product` (`ProductID`, `name`, `image`, `category_id`, `type`, `price`, `description`, `status`) VALUES
+INSERT INTO `product` (`ProductID`, `name`, `image`, `category_id`, `type_id`, `price`, `description`, `status`) VALUES
 (1, 'allover crinkle logo print regular fit padded bomber jacket', 'mjacket1.jpg', 'men','jacket', 385, "Crafted in a muted charcoal gray, this bomber jacket is adorned with subtle, wrinkled EK logo prints that add depth to its design. The front pocket features a refined orange brand woven label, elevating the jacket's overall distinction.", 1),
 (2, "distressed edges inserted daicock baggy jeans","mjean1.webp","men", 'jean',645,"These baggy cargo jeans feature an acid wash and multi-pockets, combined with a unique seagull print.", 1),
 (3, 'potassium spray seagull boxy long-sleeve t-shirt', 'msweatshirt1.webp','men', 'sweatshirt', 175, 'Relax in style with this sweatshirt featuring a logo and Ninja Daruma Daicock print for a bold, comfortable look.', 1),

@@ -140,13 +140,13 @@ nav a:hover {
     position: absolute;
     top: 50%;
     right: 0;
-    transform: translateY(-30%);
+    transform: translateY(-19%);
     width: 0;
     overflow: visible;
-    transition: width 0.4s ease-in-out;
     background: white;
-    border-radius: 5px;
-}
+    border-radius: 4px;
+    border: 2px solid black;
+}   
 
 /* Advanced Search Panel */
 .advanced-search {
@@ -154,15 +154,16 @@ nav a:hover {
     position: absolute;
     top: 100%;
     right: 0;
-    width: 350px;
+    width: 250px;
     background: white;
-    border-radius: 5px;
+    border-radius: 4px;
     padding: 15px;
     margin-top: 5px;
 }
 
 .advanced-search.show {
     display: block;
+    border: 1px solid black;
 }
 
 .search-filters {
@@ -181,15 +182,19 @@ nav a:hover {
     font-size: 14px;
     color: #333;
     font-weight: 500;
+    text-align: left;
 }
 
-.filter-group select,
-.price-range input {
+.filter-group select {
     padding: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid gray;
     border-radius: 4px;
     font-size: 14px;
     width: 100%;
+}
+
+.filter-group option {
+    text-align: center;
 }
 
 .price-range {
@@ -198,24 +203,16 @@ nav a:hover {
     align-items: center;
 }
 
-.price-range input {
-    width: 45%;
-}
-
-.price-range span {
-    color: #666;
-}
-
 .search-buttons {
-    display: flex;
+    display: block;
+    text-align: center;
     gap: 10px;
     margin-top: 15px;
 }
 
-.search-btn,
-.reset-btn {
-    padding: 8px 15px;
-    border: none;
+.search-btn {
+    padding: 8px 60px;
+    border: 1px solid black;
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
@@ -225,28 +222,16 @@ nav a:hover {
 .search-btn {
     background: #000;
     color: white;
-    flex: 2;
-}
-
-.reset-btn {
-    background: #eee;
-    color: #333;
-    flex: 1;
 }
 
 .search-btn:hover {
     background: #222;
 }
 
-.reset-btn:hover {
-    background: #ddd;
-}
-
 /* Modify existing styles */
 .header-icons.expanded .search-box {
     display: block;
     width: 350px;
-    margin-right: 50px;
 }
 
 .search-box #searchInput {
@@ -254,7 +239,7 @@ nav a:hover {
     padding: 8px 10px;
     font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 4px;
     outline: none;
 }
 
@@ -262,6 +247,20 @@ nav a:hover {
 .advanced-search-toggle {
     position: absolute;
     right: 45px;
+    /* Adjusted to accommodate close button */
+    top: 53%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.basicSearch {
+    position: absolute;
+    right: 74px;
     /* Adjusted to accommodate close button */
     top: 53%;
     transform: translateY(-50%);
