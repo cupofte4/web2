@@ -95,12 +95,13 @@ if (!$product) {
                     <div class="dropdown">
                         <a href="#" class="icon"><i class="fas fa-user"></i></a>
                         <div class="dropdown-content">
-                            <a href="<?php echo isset($_SESSION['email']) ? 'userInfo.php' : 'login.php'; ?>">My Account</a>
+                            <a href="<?php echo isset($_SESSION['email']) ? 'userInfo.php' : 'login.php'; ?>">My
+                                Account</a>
                             <?php if (isset($_SESSION['email'])): ?>
-                                <a href="logout.php">Sign out</a>
+                            <a href="logout.php">Sign out</a>
                             <?php else: ?>
-                                <a href="register.php">Register</a>
-                                <a href="login.php">Sign in</a>
+                            <a href="register.php">Register</a>
+                            <a href="login.php">Sign in</a>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -126,14 +127,14 @@ if (!$product) {
         $result_infoProduct = mysqli_query($conn, $sql_info_products);
         while ($row_product = mysqli_fetch_assoc($result_infoProduct)) {
         ?>
-            <!-- Breadcrumbs -->
-            <div class="breadcrumbs">
-                <a href="../index.php" title="EAVES">HOME</a>
-                <<span>
-                        <a href="category.php?category_id=<?= htmlspecialchars($row_product['category_id']) ?>">
-                            <?= htmlspecialchars($row_product['category_name']) ?></a>
-                            <</span>
-                                <?php
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <a href="../index.php" title="EAVES">HOME</a>
+            <<span>
+                <a href="category.php?category_id=<?= htmlspecialchars($row_product['category_id']) ?>">
+                    <?= htmlspecialchars($row_product['category_name']) ?></a>
+                <</span>
+                    <?php
                                 // Truy vấn để lấy tên của sản phẩm từ cơ sở dữ liệu
                                 $sql_name = "SELECT name FROM product WHERE product.ProductID = '$product_id'";
                                 $result_name = mysqli_query($conn, $sql_name);
@@ -145,77 +146,84 @@ if (!$product) {
                                     exit;
                                 }
                                 ?>
-            </div>
+        </div>
 
-            <!-- Product details -->
-            <div class="product-detail-container">
-                <div class="single-pro-img">
-                    <img id="product-img" src="../images/products/<?php echo $row_product['image']; ?>" alt="">
+        <!-- Product details -->
+        <div class="product-detail-container">
+            <div class="single-pro-img">
+                <img id="product-img" src="../images/products/<?php echo $row_product['image']; ?>" alt="">
+            </div>
+            <div class=" product-info">
+                <?php if ($row_product['category_id'] === 'whatsnew'): ?>
+                <span class="new">NEW ARRIVAL</span>
+                <?php endif; ?>
+                <h1 id="product-name"><?php echo $row_product['name']; ?></h1>
+                <hr>
+                <p id="product-price">$<?php echo number_format($row_product['price']); ?></p>
+                <div class="size-row">
+                    <p class="product-size">SIZE</p>
+                    <a href="#" id="size-guide-link" class="size-guide-link">View Size Guide</a>
                 </div>
-                <div class=" product-info">
-                    <?php if ($row_product['category_id'] === 'whatsnew'): ?>
-                        <span class="new">NEW ARRIVAL</span>
-                    <?php endif; ?>
-                    <h1 id="product-name"><?php echo $row_product['name']; ?></h1>
-                    <hr>
-                    <p id="product-price">$<?php echo number_format($row_product['price']); ?></p>
-                    <div class="size-row">
-                        <p class="product-size">SIZE</p>
-                        <a href="#" id="size-guide-link" class="size-guide-link">View Size Guide</a>
-                    </div>
-                    <select>
+
+                <form action="add_to_cart.php" method="POST">
+                    <input type="hidden" name="product_id" value="<?= $product_id ?>">
+
+                    <select name="size" required>
                         <option hidden>CHOOSE SIZE</option>
-                        <option>S</option>
-                        <option>M</option>
-                        <option>L</option>
-                        <option>XL</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
                     </select>
 
                     <div class="buttons">
-                        <button class="add-to-cart"><i class="fas fa-shopping-cart"></i>ADD TO CART</button>
-                        <button class="add-to-wishlist"><i class="fas fa-heart"></i>ADD TO WISHLIST</button>
-                    </div>
-                    <div class="container">
-                        <a href="#" class="contact-us"><i class="fas fa-envelope"></i>CONTACT US</a>
+                        <button class="add-to-cart" type="submit"><i class="fas fa-shopping-cart"></i>ADD TO CART</button>
+                        <button class="add-to-wishlist" type="button"><i class="fas fa-heart"></i>ADD TO WISHLIST</button>
                     </div>
 
-                    <div class="product-introduce">
-                        <h3>PRODUCT DETAILS</h3>
-                        <hr>
-                        <p id="product-description"><?php echo $row_product['description']; ?></p>
-                        <h3>CARE</h3>
-                        <hr>
-                        <ul class="care-list">
-                            <li>HAND WASH COLD INSIDE OUT</li>
-                            <li>DO NOT BLEACH</li>
-                            <li>HANG DRY ONLY</li>
-                            <li>COOL IRON ON REVERSE SIDE IF NEEDED</li>
-                            <li>STEAM IRONING MAY CAUSE IRREVERSIBLE DAMAGE</li>
-                            <li>DO NOT DRY CLEAN</li>
-                            <li>DO NOT IRON ON PRINT</li>
-                        </ul>
+                </form>
 
-                        <h3>RETURN POLICY</h3>
-                        <hr>
-                        <ul> of delivery for a
-                            refund or exchange.
-                            <li>
-                                - You can simply return any item within 14 calendar days from the date
-                            </li>
-                            <li>
-                                - Customer needs to bear the return shipping fee and any cost incurred.
-                            </li>
-                            <li>
-                                - Online Orders cannot be returned to any of Eaves' boutiques.
-                            </li>
-                            <li>
-                                - Read here (/pages/delivery-and-returns) for more details.
-                            </li>
-                        </ul>
-                    </div>
+                <div class="container">
+                    <a href="#" class="contact-us"><i class="fas fa-envelope"></i>CONTACT US</a>
                 </div>
-            <?php } ?>
+
+                <div class="product-introduce">
+                    <h3>PRODUCT DETAILS</h3>
+                    <hr>
+                    <p id="product-description"><?php echo $row_product['description']; ?></p>
+                    <h3>CARE</h3>
+                    <hr>
+                    <ul class="care-list">
+                        <li>HAND WASH COLD INSIDE OUT</li>
+                        <li>DO NOT BLEACH</li>
+                        <li>HANG DRY ONLY</li>
+                        <li>COOL IRON ON REVERSE SIDE IF NEEDED</li>
+                        <li>STEAM IRONING MAY CAUSE IRREVERSIBLE DAMAGE</li>
+                        <li>DO NOT DRY CLEAN</li>
+                        <li>DO NOT IRON ON PRINT</li>
+                    </ul>
+
+                    <h3>RETURN POLICY</h3>
+                    <hr>
+                    <ul> of delivery for a
+                        refund or exchange.
+                        <li>
+                            - You can simply return any item within 14 calendar days from the date
+                        </li>
+                        <li>
+                            - Customer needs to bear the return shipping fee and any cost incurred.
+                        </li>
+                        <li>
+                            - Online Orders cannot be returned to any of Eaves' boutiques.
+                        </li>
+                        <li>
+                            - Read here (/pages/delivery-and-returns) for more details.
+                        </li>
+                    </ul>
+                </div>
             </div>
+            <?php } ?>
+        </div>
     </section>
     <!-- End sections: main -->
 
@@ -261,24 +269,24 @@ if (!$product) {
     </div>
 
     <script>
-        const sizeGuideLink = document.getElementById("size-guide-link");
-        const modal = document.getElementById("size-guide-modal");
-        const closeModal = document.querySelector(".close");
+    const sizeGuideLink = document.getElementById("size-guide-link");
+    const modal = document.getElementById("size-guide-modal");
+    const closeModal = document.querySelector(".close");
 
-        sizeGuideLink.onclick = function(event) {
-            event.preventDefault();
-            modal.style.display = "block";
-        }
+    sizeGuideLink.onclick = function(event) {
+        event.preventDefault();
+        modal.style.display = "block";
+    }
 
-        closeModal.onclick = function() {
+    closeModal.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
             modal.style.display = "none";
         }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
+    }
     </script>
 
     <!-- Begin sections: footer-group -->
