@@ -46,7 +46,6 @@ if (isset($_POST['login'])) {
 
     $stmt->close();
 }
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -83,48 +82,63 @@ $conn->close();
                     <a href="../index.php">EAVES</a>
                 </div>
                 <div class="header-icons">
-                    <!-- Toggle Button -->
-                    <div class="search-box">
-                        <input type="text" placeholder="Search" id="searchInput">
-                        <button class="advanced-search-toggle" id="advancedSearchToggle">
-                            <i class="fas fa-sliders-h"></i>
-                        </button>
-                        <a href="#" class="close-btn" id="closeSearch">&times;</a>
+                    <!-- Tìm kiếm sản phẩm -->
+                    <form action="search.php" method="GET">
+                        <div class="search-box">
+                            <input type="text" name="keyword" placeholder="Search" id="searchInput">
+                            <button class="basicSearch" name="timkiem" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <button class="advanced-search-toggle" id="advancedSearchToggle" type="button">
+                                <i class="fas fa-sliders-h"></i>
+                            </button>
+                            <a href="#" class="close-btn" id="closeSearch">&times;</a>
 
-                        <!-- Advanced Search Panel -->
-                        <div class="advanced-search" id="advancedSearch">
-                            <div class="search-filters">
-                                <div class="filter-group">
-                                    <label>Category:</label>
-                                    <select id="categoryFilter">
-                                        <option value="">All Categories</option>
-                                        <option value="men">Men</option>
-                                        <option value="women">Women</option>
-                                        <option value="whatsnew">What's New</option>
-                                    </select>
-                                </div>
-                                <div class="filter-group">
-                                    <label>Price Range:</label>
-                                    <div class="price-range">
-                                        <input type="number" id="minPrice" placeholder="Min">
-                                        <span>-</span>
-                                        <input type="number" id="maxPrice" placeholder="Max">
+                            <!-- Advanced Search Panel -->
+                            <div class="advanced-search" id="advancedSearch">
+                                <div class="search-filters">
+                                    <div class="filter-group">
+                                        <label>Type:</label>
+                                        <select name="type_range">
+                                            <!-- Change name attribute to "type_range" -->
+                                            <option value="all" selected>All</option>
+                                            <?php
+                                                // Truy vấn danh sách các danh mục từ cơ sở dữ liệu
+                                                $sql_type = "SELECT * FROM type";
+                                                $result_type = mysqli_query($conn, $sql_type);
+
+                                                // Lặp qua kết quả và tạo ra các tùy chọn cho dropdown menu
+                                                while ($row_type = mysqli_fetch_assoc($result_type)) {
+                                                    echo '<option value="' . $row_type['type_id'] . '">' . $row_type['type_name'] . '</option>';
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="filter-group">
+                                        <label>Price Range:</label>
+                                        <select name="price_range">
+                                            <!-- Add name attribute to the select element -->
+                                            <option value="all">All</option>
+                                            <option value="below">Below 250$</option>
+                                            <option value="middle">Between 250$ - 450$</option>
+                                            <option value="upper">Above 450$</option>
+                                        </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="search-buttons">
-                                <button class="search-btn" id="applySearch">Search</button>
-                                <button class="reset-btn" id="resetSearch">Reset</button>
+                                <div class="search-buttons">
+                                    <button class="search-btn" id="applySearch" name="advancedSearch"
+                                        type="submit">Search</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                     <a href="#" class="icon search-icon"><i class="fas fa-search"></i></a>
                     <a href="#" class="icon"><i class="fas fa-heart"></i></a>
                     <a href="cart.html" class="icon"><i class="fas fa-shopping-cart"></i></a>
                     <div class="dropdown">
                         <a href="#" class="icon"><i class="fas fa-user"></i></a>
                         <div class="dropdown-content"">
-                            <a href="login.php">My Account</a>
+                            <a href=" login.php">My Account</a>
                             <a href="register.php">Register</a>
                             <a href="#">Sign in</a>
                         </div>
@@ -152,7 +166,8 @@ $conn->close();
                             <input type="email" id="email" name="email" placeholder="Enter email address" required>
 
                             <label for="password">ENTER YOUR PASSWORD*</label>
-                            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                            <input type="password" id="password" name="password" placeholder="Enter your password"
+                                required>
 
                             <div class="forgot">
                                 <a href="#">Forgot Password?</a>
@@ -291,7 +306,7 @@ $conn->close();
     <!-- End sections: footer-group -->
     <script src="../js/index.js"></script>
     <script>
-        AOS.init();
+    AOS.init();
     </script>
 </body>
 

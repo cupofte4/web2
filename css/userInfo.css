@@ -62,7 +62,7 @@ hr {
     font-family: Verdana;
 }
 
-input[type="text"],
+.main input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="email"] {
