@@ -161,7 +161,7 @@ if (isset($_SESSION['notification'])) {
                     <i class="far fa-heart wishlist"></i>
                     <div class="card-info">
                         <h3>
-                            <a href="product-detail.php?id=<?= $row['ProductID'] ?>">
+                            <a href="pages/product-detail.php?id=<?= $row['ProductID'] ?>">
                                 <?= htmlspecialchars($row['name']) ?>
                             </a>
                         </h3>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../connects/connect.php';
+require '../connection/connect.php';
 
 $error_message = "";
 
@@ -54,7 +54,7 @@ $conn->close();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Đăng Nhập</title>
+    <title>Login</title>
 </head>
 
 <body>
@@ -72,20 +72,20 @@ $conn->close();
                                         d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                                 </svg>
                                 <br>
-                                <h2 style="text-align: center;">Tài Khoản Quản Trị Viên</h2>
+                                <h2 style="text-align: center;">Admin Account</h2>
                                 <form action="#" method="POST">
                                     <input type="text" name="username" id="username" class="form-control my-3 py-2"
-                                        placeholder="Tên đăng nhập" required>
+                                        placeholder="Username" required>
                                     <input type="password" name="password" id="password" class="form-control my-3 py-2"
-                                        placeholder="Mật Khẩu" required>
-                                    <input type="submit" name="login" value="Đăng nhập" style="width: 100%;"
+                                        placeholder="Passowrd" required>
+                                    <input type="submit" name="login" value="Sign in" style="width: 100%;"
                                         class="btn btn-success d-block mx-auto mt-3">
                                     </input>
                                 </form>
                             </div>
                         </div>
                         <div class="text-center mt-1">
-                            <a href="../">Trở lại trang đăng nhập dành cho khách hàng</a>
+                            <a href="../">Return to customer login page</a>
                         </div>
                     </div>
                 </div>

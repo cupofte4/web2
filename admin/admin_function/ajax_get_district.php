@@ -8,7 +8,7 @@
 
     $data[0] = [
         'id' => null,
-        'name' => 'Chọn một Quận/huyện'
+        'name' => 'Select district'
     ];
     while ($row = mysqli_fetch_assoc($result)) {
         $data[] = [

@@ -334,7 +334,7 @@ if (isset($_POST["capnhat_info"]) && $_POST["capnhat_info"]) {
                             <div class="city-select-container">
                                 <label for="customer-city">City:</label>
                                 <select name="customer-city" id="customer-city" class="form-control">
-                                    <option value="">Choose a city</option>
+                                    <option value="">Select city</option>
                                     <?php
                                         $cities = mysqli_query($connDGHCVN, "SELECT * FROM city");
                                         while ($row_temp = mysqli_fetch_assoc($cities)) {

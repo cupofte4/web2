@@ -31,11 +31,35 @@ CREATE TABLE `customer` (
 -- 
 -- 
 
-INSERT INTO `customer` (`customer_id`, `first-name`, `last-name`, `email`, `phone`, `street`, `ward`, `district`, `city`, `password`, `status`) VALUES
-(1, 'Trần', 'Như', 'trannhu@gmail.com', '01687662528', '321 Lý Thái Tổ', '9607', '616', '55', 'c3eb4bd8dfc3dac74e8cfc3d7918d6b1', 1);
+INSERT INTO `customer` (`customer_id`, `first_name`, `last_name`, `email`, `phone`, `street`, `ward`, `district`, `city`, `password`, `status`) VALUES
+(1, 'Trần', 'Như', 'trannhu@gmail.com', '01212729580', '400 Âu Cơ', '8736', '554', '50', 'c3eb4bd8dfc3dac74e8cfc3d7918d6b1', 1);
 
 -- 
 -- 
+
+CREATE TABLE `manager` (
+  `username` varchar(20) NOT NULL,
+  `fullname` varchar(50) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `street` varchar(50) NOT NULL,
+  `ward` varchar(50) NOT NULL,
+  `district` varchar(50) NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `manager`
+--
+
+INSERT INTO `manager` (`username`, `fullname`, `email`, `phone`, `street`, `ward`, `district`, `city`, `password`, `status`) VALUES
+('Cobexinhdep', 'Cô Bé Xinh Đẹp', 'cobexinhdep@gmail.com', '0906666344', '123 Nguyễn Tri Phương', '8863', '562', '50', '2f68b7cc67237e87a5499a740c73682b', 1);
+
+--
+-- Table structure for table `category`
+--
 
 CREATE TABLE `category` (
   `category_id` varchar(50) NOT NULL PRIMARY KEY,

@@ -4,10 +4,10 @@ include '../connection/connectDGHCVN.php';
 session_start();
 
 // Kiểm tra đăng nhập
-// if (!isset($_SESSION['customer_id'])) {
-//     header("Location: login.php");
-//     exit(); // nên có để dừng chương trình sau redirect
-// }
+if (!isset($_SESSION['customer_id'])) {
+    header("Location: login.php");
+    exit(); //
+}
 
 if (isset($_POST['submit-bill']) && $_POST['submit-bill']) {
     $customer_id = $_SESSION['customer_id'];
@@ -15,19 +15,19 @@ if (isset($_POST['submit-bill']) && $_POST['submit-bill']) {
 
     if ($IsDefaultDeliveryInfo == 1) {
         $sql = "SELECT * FROM `customer` WHERE `customer_id` = {$customer_id}";
-        $result = mysqli_query($conn, $sql);
-        $row_customer = mysqli_fetch_assoc($result);
-        $receiver = $row_customer['first_name'] . ' ' . $row_customer['last_name'];
-        $email = $row_customer['email'];
-        $phone = $row_customer['phone'];
-        $city = $row_customer['city'];
-        $district = $row_customer['district'];
-        $ward = $row_customer['ward'];
-        $street = $row_customer['street'];
+        $temp = mysqli_query($conn, $sql);
+        $row_temp = mysqli_fetch_assoc($temp);
+        $receiver = $row_temp['first_name'] . ' ' . $row_temp['last_name'];
+        $email = $row_temp['email'];
+        $phone = $row_temp['phone'];
+        $city = $row_temp['city'];
+        $district = $row_temp['district'];
+        $ward = $row_temp['ward'];
+        $street = $row_temp['street'];
     } else {
         // Dùng thông tin được nhập tay
         $first_name = $_POST['receiver-first-name'] ?? '';
-        $last_name = $_POST['receiver-last-name'] ?? '';
+        $last_name = $_POST['receiver-last-name'] ?? '';    
         $receiver = trim($first_name . ' ' . $last_name);
         $email = $_POST['receiver-email'];
         $phone = $_POST['receiver-phone'];
@@ -96,11 +96,18 @@ if (isset($_POST['submit-bill']) && $_POST['submit-bill']) {
     <title>Secure Checkout</title>
     <!-- CSS -->
     <link rel="stylesheet" href="../css/payment.css">
+
+    <!-- JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../js/global.js"></script>
+    <script src="../js/pages.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
     <main class="checkout-container">
-        <form class="container" method="POST" id="sahur" onsubmit="return kiemTra()">
+        <form class="container" method="POST" id="sahur" onsubmit="return kiemTra()" action="payment.php">
             <div class="checkout-layout" style="display: flex; gap: 30px; align-items: flex-start;">
 
                 <!-- BÊN TRÁI -->
@@ -110,23 +117,21 @@ if (isset($_POST['submit-bill']) && $_POST['submit-bill']) {
                         <hr>
                         <h2>SHIPPING ADDRESS</h2>
                         <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-                            <button type="button" onclick="defaultDeliveryInfo(true)">Default</button>
-                            <button type="button" onclick="defaultDeliveryInfo(false)">Change</button>
+                            <button type="button" id="btn-default" class="selected" onclick="defaultDeliveryInfo(true)">Default</button>
+                            <button type="button" id="btn-change" onclick="defaultDeliveryInfo(false)">Other
+                                Address</button>
                         </div>
 
                         <?php
-                        // Use prepared statements for queries to prevent SQL injection
-                        $stmt = $conn->prepare("SELECT * FROM customer WHERE customer_id = ?");
-                        $stmt->bind_param("i", $customer_id); // 'i' for integer
-                        $stmt->execute();
-                        $result = $stmt->get_result();
-                        $row_customer = $result->fetch_assoc();
+                        $sql = "SELECT * FROM `customer` WHERE `customer_id` = '{$_SESSION["customer_id"]}'";
+                        $result = mysqli_query($conn, $sql);
+                        $row_customer = mysqli_fetch_assoc($result);
                         ?>
 
                         <div class="form-group">
                             <div class="name-group" style="display: flex; gap: 20px;">
                                 <div style="flex: 1;">
-                                    <label for="receiver-first-name">First name</label>
+                                    <label for="receiver-t-name">First name</label>
                                     <input type="text" class="form-control" id="receiver-first-name"
                                         name="receiver-first-name" value="<?php echo $row_customer['first_name']; ?>"
                                         disabled>
@@ -150,7 +155,7 @@ if (isset($_POST['submit-bill']) && $_POST['submit-bill']) {
                                 <div style="flex: 1;">
                                     <label for="receiver-phone">Phone number</label>
                                     <input type="text" class="form-control" name="receiver-phone" id="receiver-phone"
-                                        value="<?php echo $row_customer['phone'] ?>" disabled>
+                                        value="<?php echo $row_customer['phone']; ?>" disabled>
                                 </div>
                             </div>
 
@@ -158,12 +163,12 @@ if (isset($_POST['submit-bill']) && $_POST['submit-bill']) {
                                 <div style="flex: 1;">
                                     <label for="receiver-city">City</label>
                                     <select name="receiver-city" id="receiver-city" class="form-control" disabled>
-                                        <option value="">Choose a city</option>
+                                        <option value="">Select city</option>
                                         <?php
-                                        $cities = mysqli_query($connDGHCVN, "SELECT * FROM city");
-                                        while ($row = mysqli_fetch_assoc($cities)) {
-                                            echo "<option value={$row['city_id']}>{$row['name']}</option>";
-                                        }
+                                            $cities = mysqli_query($connDGHCVN, "SELECT * FROM city");
+                                            while ($row = mysqli_fetch_assoc($cities)) {
+                                                echo "<option value={$row['city_id']}>{$row['name']}</option>";
+                                            }
                                         ?>
                                     </select>
                                 </div>
@@ -185,7 +190,7 @@ if (isset($_POST['submit-bill']) && $_POST['submit-bill']) {
                             <div>
                                 <label for="receiver-street">Address</label>
                                 <input type="text" class="form-control" id="receiver-street" name="receiver-street"
-                                    value="<?php echo $row_customer['street'] ?>" disabled>
+                                    value="<?php echo $row_customer['street']; ?>" disabled>
                             </div>
                         </div>
 
@@ -296,136 +301,149 @@ if (isset($_POST['submit-bill']) && $_POST['submit-bill']) {
     </main>
 
     <script>
-        var bankPayment = false;
-        var IsDefaultDeliveryInfo = document.getElementById('isDefaultInfo');
-        IsDefaultDeliveryInfo.value = "1";
+    var bankPayment = false;
+    var IsDefaultDeliveryInfo = document.getElementById('isDefaultInfo');
+    IsDefaultDeliveryInfo.value = "1";
 
-        function defaultDeliveryInfo(choice) {
-            var firstName = document.getElementById('receiver-first-name'),
-                lastName = document.getElementById('receiver-last-name'),
-                email = document.getElementById('receiver-email'),
-                phone = document.getElementById('receiver-phone'),
-                city = document.getElementById('receiver-city'),
-                ward = document.getElementById('receiver-ward'),
-                district = document.getElementById('receiver-district'),
-                street = document.getElementById('receiver-street');
+    function defaultDeliveryInfo(choice) {
 
-            if (choice) {
-                firstName.disabled = true;
-                lastName.disabled = true;
-                email.disabled = true;
-                phone.disabled = true;
-                city.disabled = true;
-                district.disabled = true;
-                ward.disabled = true;
-                street.disabled = true;
+        document.getElementById('btn-default').classList.remove('selected');
+        document.getElementById('btn-change').classList.remove('selected');
 
-                firstName.value = "<?php echo $row_customer['first_name'] ?>";
-                lastName.value = "<?php echo $row_customer['last_name'] ?>";
-                email.value = "<?php echo $row_customer['email'] ?>";
-                phone.value = "<?php echo $row_customer['phone'] ?>";
-                city.value = "<?php echo $row_customer['city'] ?>";
-                city.dispatchEvent(new Event('change'));
-
-                setTimeout(function() {
-                    district.value = "<?php echo $row_customer['district'] ?>";
-                    district.dispatchEvent(new Event('change'));
-                }, 150);
-
-                setTimeout(function() {
-                    ward.value = "<?php echo $row_customer['ward'] ?>";
-                }, 300);
-
-                street.value = "<?php echo $row_customer['street'] ?>";
-                IsDefaultDeliveryInfo.value = "1";
-            } else {
-                firstName.disabled = false;
-                lastName.disabled = false;
-                email.disabled = false;
-                phone.disabled = false;
-                city.disabled = false;
-                district.disabled = false;
-                ward.disabled = false;
-                street.disabled = false;
-
-                firstName.value = "";
-                lastName.value = "";
-                email.value = "";
-                phone.value = "";
-                city.value = "";
-                city.dispatchEvent(new Event('change'));
-                street.value = "";
-                IsDefaultDeliveryInfo.value = "0";
-            }
+        if (choice) {
+            document.getElementById('btn-default').classList.add('selected');
+        } else {
+            document.getElementById('btn-change').classList.add('selected');
         }
 
-        function showBankPayment(choice) {
-            var bank_payment_input = document.getElementById('bank-payment-input');
-            if (choice) {
-                bank_payment_input.classList.remove('d-none');
-                bankPayment = true;
-            } else {
-                bank_payment_input.classList.add('d-none');
-                document.getElementById('bank-number').setAttribute('value', "");
-                document.getElementById('bank-name').setAttribute('value', "");
-                document.getElementById('bank-expired').setAttribute('value', "");
-                document.getElementById('bank-cvc').setAttribute('value', "");
-                bankPayment = false;
-            }
+        // 
+        var first_name = document.getElementById('receiver-first-name'),
+            last_name = document.getElementById('receiver-last-name'),
+            email = document.getElementById('receiver-email'),
+            phone = document.getElementById('receiver-phone'),
+            city = document.getElementById('receiver-city'),
+            ward = document.getElementById('receiver-ward'),
+            district = document.getElementById('receiver-district'),
+            street = document.getElementById('receiver-street');
+
+        if (choice) {
+            first_name.disabled = true;
+            last_name.disabled = true;
+            email.disabled = true;
+            phone.disabled = true;
+            city.disabled = true;
+            district.disabled = true;
+            ward.disabled = true;
+            street.disabled = true;
+
+            first_name.value = "<?php echo $row_customer['first_name']; ?>";
+            last_name.value = "<?php echo $row_customer['last_name']; ?>";
+            email.value = "<?php echo $row_customer['email']; ?>";
+            phone.value = "<?php echo $row_customer['phone']; ?>";
+            city.value = "<?php echo $row_customer['city']; ?>";
+            city.dispatchEvent(new Event('change'));
+
+            setTimeout(function() {
+                district.value = "<?php echo $row_customer['district']; ?>";
+                district.dispatchEvent(new Event('change'));
+            }, 150);
+
+            setTimeout(function() {
+                ward.value = "<?php echo $row_customer['ward']; ?>";
+            }, 300);
+
+            street.value = "<?php echo $row_customer['street']; ?>";
+            IsDefaultDeliveryInfo.value = "1";
+        } else {
+            first_name.disabled = false;
+            last_name.disabled = false;
+            email.disabled = false;
+            phone.disabled = false;
+            city.disabled = false;
+            district.disabled = false;
+            ward.disabled = false;
+            street.disabled = false;
+
+            first_name.value = "";
+            last_name.value = "";
+            email.value = "";
+            phone.value = "";
+            city.value = "";
+            city.dispatchEvent(new Event('change'));
+            street.value = "";
+            IsDefaultDeliveryInfo.value = "0";
+        }
+    }
+
+    function showBankPayment(choice) {
+        var bank_payment_input = document.getElementById('bank-payment-input');
+        if (choice) {
+            bank_payment_input.classList.remove('d-none');
+            bankPayment = true;
+        } else {
+            bank_payment_input.classList.add('d-none');
+            document.getElementById('bank-number').setAttribute('value', "");
+            document.getElementById('bank-name').setAttribute('value', "");
+            document.getElementById('bank-expired').setAttribute('value', "");
+            document.getElementById('bank-cvc').setAttribute('value', "");
+            bankPayment = false;
+        }
+    }
+
+    function kiemTra() {
+        var first_name = document.getElementById('receiver-first-name'),
+            last_name = document.getElementById('receiver-last-name'),
+            email = document.getElementById('receiver-email'),
+            phone = document.getElementById('receiver-phone'),
+            city = document.getElementById('receiver-city'),
+            ward = document.getElementById('receiver-ward'),
+            district = document.getElementById('receiver-district'),
+            street = document.getElementById('receiver-street');
+
+        if (IsDefaultDeliveryInfo.value == "0" && (first_name.value === "" || last_name.value === "" || email.value ===
+                "" || phone.value === "" || city.value === "" || ward.value === "" || district.value === "" || street
+                .value === "")) {
+            alert("Please fill in all the delivery information.");
+            return false;
         }
 
-        function kiemTra() {
-            var firstName = document.getElementById('receiver-first-name'),
-                lastName = document.getElementById('receiver-last-name'),
-                email = document.getElementById('receiver-email'),
-                phone = document.getElementById('receiver-phone'),
-                city = document.getElementById('receiver-city'),
-                ward = document.getElementById('receiver-ward'),
-                district = document.getElementById('receiver-district'),
-                street = document.getElementById('receiver-street');
+        var radioButtonChecked = false;
+        var radioButtons = document.getElementsByName('paymentMethod');
+        for (var i = 0; i < radioButtons.length; i++) {
+            if (radioButtons[i].checked) {
+                radioButtonChecked = true;
+                break;
+            }
+        }
+        if (!radioButtonChecked) {
+            alert("Please select a payment method.");
+            return false;
+        }
 
-            if (IsDefaultDeliveryInfo.value == "0" && (firstName.value === "" || lastName.value === "" || email.value === "" || phone.value === "" || city.value === "" || ward.value === "" || district.value === "" || street.value === "")) {
-                alert("Please fill in all the delivery information.");
+        if (bankPayment) {
+            var bankNumber = document.getElementById('bank-number'),
+                bankName = document.getElementById('bank-name'),
+                bankExpired = document.getElementById('bank-expired'),
+                bankCVC = document.getElementById('bank-cvc');
+
+            if (bankNumber.value === "" || bankName.value === "" || bankExpired.value === "" || bankCVC.value === "") {
+                alert("Please enter full card information.");
                 return false;
             }
-
-            var radioButtonChecked = false;
-            var radioButtons = document.getElementsByName('paymentMethod');
-            for (var i = 0; i < radioButtons.length; i++) {
-                if (radioButtons[i].checked) {
-                    radioButtonChecked = true;
-                    break;
-                }
-            }
-            if (!radioButtonChecked) {
-                alert("Please select a payment method.");
-                return false;
-            }
-
-            if (bankPayment) {
-                var bankNumber = document.getElementById('bank-number'),
-                    bankName = document.getElementById('bank-name'),
-                    bankExpired = document.getElementById('bank-expired'),
-                    bankCVC = document.getElementById('bank-cvc');
-
-                if (bankNumber.value === "" || bankName.value === "" || bankExpired.value === "" || bankCVC.value === "") {
-                    alert("Please enter full card information.");
-                    return false;
-                }
-            }
-            return true;
         }
+        return true;
+    }
     </script>
 
     <?php
     echo "<script>";
-    echo "$(document).ready(function () {";
+    echo "$(document).ready(function() {";
     echo "$('#receiver-city').val('{$row_customer['city']}').trigger('change');";
     echo "setTimeout(function() {";
-    echo "    $('#receiver-district').val('{$row_customer['district']}').trigger('change');";
+    echo "$('#receiver-district').val('{$row_customer['district']}').trigger('change');";
     echo "}, 150);";
     echo "setTimeout(function() {";
-    echo "    $('#receiver-ward').val('{$row_customer['ward']}');";
+    echo "$('#receiver-ward').val('{$row_customer['ward']}');";
     echo "}, 300);";
     echo "});";
     echo "</script>";
