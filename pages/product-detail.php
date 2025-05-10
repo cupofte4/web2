@@ -148,7 +148,7 @@ if (!$product) {
             <<span>
                 <a href="category.php?category_id=<?= htmlspecialchars($row_product['category_id']) ?>">
                     <?= htmlspecialchars($row_product['category_name']) ?></a>
-                << /span>
+                <</span>
                     <?php
                                 // Truy vấn để lấy tên của sản phẩm từ cơ sở dữ liệu
                                 $sql_name = "SELECT name FROM product WHERE product.ProductID = '$product_id'";

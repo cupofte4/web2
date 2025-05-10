@@ -25,22 +25,8 @@ h1 {
 
 .checkout-layout {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 2rem;
-}
-
-@media (min-width: 1024px) {
-    .checkout-layout {
-        flex-direction: row;
-    }
-    
-    .payment-section {
-        flex: 1;
-    }
-    
-    .order-summary {
-        width: 33.333%;
-    }
 }
 
 .card {
@@ -325,7 +311,23 @@ button:nth-child(2):hover {
     background-color: #f9f9f9;
 }
 
+.infor-boxes {
+    margin-bottom: 10px;
+}
 
+.infor-boxes label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.infor-row {
+    display: flex;
+    gap: 20px;
+}
+
+.infor-row .infor-boxes {
+    flex: 1;
+}
 
 
 
