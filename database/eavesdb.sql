@@ -32,17 +32,7 @@ CREATE TABLE `customer` (
 -- 
 
 INSERT INTO `customer` (`customer_id`, `first-name`, `last-name`, `email`, `phone`, `street`, `ward`, `district`, `city`, `password`, `status`) VALUES
-('caheoom', 'Cá Heo Ốm', 'caheoom@gmail.com', '0908888123', '321 Lý Thái Tổ', '9607', '616', '55', '24712edee9f393134eafa36dff8c53d7', 1),
-('camapbonchan', 'Cá Mập Bốn Chân', 'camapbonchan@gmail.com', '0906666444', '55 Trần Hưng Đạo', '2882', '169', '16', '93d000e315fdc9c87c1d6677d1a50378', 1),
-('cavoimap', 'Cá Voi Mập', 'cavoimap@gmail.com', '0907777123', '123 Nguyễn Tri Phương', '2293', '135', '13', '95cf2f1685b2bdf1ce11c396f4cc824f', 1),
-('Cobedangiu', 'Cô Bé Đáng Iu', 'cobedangiu@gmail.com', '0906666233', '123 An Dương Vương', '8867', '562', '50', '0aba1b77614204a1d7f9c6e51620c614', 1),
-('concho', 'Con Chó', 'concho@gmail.com', '0906666345', '29 Triệu Quang Phục', '1081', '63', '5', '22d8c969d2227b3aae5322a8a87c6346', 0),
-('conmeo', 'Con Mèo', 'conmeo@gmail.com', '0906666234', '132 Lão Tử', '3095', '182', '17', '2605f3289471df3d8a384f09dba480c9', 1),
-('doanhtriet', 'Đỗ Anh Triết', 'doanhtriet@gmail.com', '0901234567', '69 Nguyễn Trãi', '2678', '159', '15', '6dd526b53c7f4617e53f435b8d417797', 1),
-('hualapthanh', 'Hứa Lập Thành', 'hualapthanh@gmail.com', '0906666233', '22 Cao Xuân Dục', '8891', '564', '50', 'bb84b27f5d01864abd556d62cef1a7ec', 1),
-('ledinhtrung', 'Lê Đình Trung', 'ledinhtrung@gmail.com', '0906666333', '25 Lý Thường Kiệt', '2662', '158', '15', 'b290e4f6a181bb803c81113aeec69497', 1),
-('nguyenquangvinh', 'Nguyễn Quang Vinh', 'nguyenquangvinh@gmail.com', '09012345678', '77 An Dương Vương', '2673', '159', '15', '705812d8e9d2877306f0381f21422c13', 1),
-('nguyenxuanthang', 'Nguyễn Xuân Thắng', 'nguyenxuanthang@gmail.com', '0906666321', '75 Lữ Gia', '3827', '227', '21', '58d3ef1c35712fa06c720f79cda218f5', 1);
+(1, 'Trần', 'Như', 'trannhu@gmail.com', '01687662528', '321 Lý Thái Tổ', '9607', '616', '55', 'c3eb4bd8dfc3dac74e8cfc3d7918d6b1', 1);
 
 -- 
 -- 
