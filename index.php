@@ -36,8 +36,8 @@ if (isset($_SESSION['notification'])) {
 
     <!-- js -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
     <!-- aos -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -55,8 +55,8 @@ if (isset($_SESSION['notification'])) {
                     <a href="index.php">EAVES</a>
                 </div>
                 <div class="header-icons">
-                   <!-- Tìm kiếm sản phẩm -->
-                   <form action="./pages/search.php" method="GET">
+                    <!-- Tìm kiếm sản phẩm -->
+                    <form action="./pages/search.php" method="GET">
                         <div class="search-box">
                             <input type="text" name="keyword" placeholder="Search" id="searchInput">
                             <button class="basicSearch" name="timkiem" type="submit">
@@ -107,16 +107,18 @@ if (isset($_SESSION['notification'])) {
                     </form>
                     <a href="#" class="icon search-icon"><i class="fas fa-search"></i></a>
                     <a href="#" class="icon"><i class="fas fa-heart"></i></a>
-                    <a href="cart.html" class="icon"><i class="fas fa-shopping-cart"></i></a>
+                    <a href="./pages/cart.php" class="icon"><i class="fas fa-shopping-cart"></i></a>
                     <div class="dropdown">
                         <a href="#" class="icon"><i class="fas fa-user"></i></a>
                         <div class="dropdown-content">
-                            <a href="<?php echo isset($_SESSION['email']) ? './pages/userInfo.php' : './pages/login.php'; ?>">My Account</a>
-                            <?php if (isset($_SESSION['email'])): ?>
-                                <a href="./pages/logout.php">Sign out</a>
+                            <a
+                                href="<?php echo isset($_SESSION['customer_id']) ? './pages/userInfo.php' : './pages/login.php'; ?>">My
+                                Account</a>
+                            <?php if (isset($_SESSION['customer_id'])): ?>
+                            <a href="./pages/logout.php">Sign out</a>
                             <?php else: ?>
-                                <a href="./pages/register.php">Register</a>
-                                <a href="./pages/login.php">Sign in</a>
+                            <a href="./pages/register.php">Register</a>
+                            <a href="./pages/login.php">Sign in</a>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -149,30 +151,40 @@ if (isset($_SESSION['notification'])) {
         <!-- Sản phẩm -->
         <div class="products">
             <?php
-            $sql = "SELECT * FROM product WHERE status = 1 AND category_id = 'men' ORDER BY ProductID DESC LIMIT 4"; // Giới hạn 8 sản phẩm mới nhất
+            $sql = "SELECT * FROM product WHERE status = 1 AND category_id = 'men' ORDER BY ProductID DESC LIMIT 4";
             $result = $conn->query($sql);
 
             while ($row = $result->fetch_assoc()):
             ?>
-                <div class="product" data-aos="zoom-in" data-aos-duration="1500">
-                    <a href="pages/product-detail.php?id=<?= $row['ProductID'] ?>">
-                        <img src="./images/products/<?php echo $row['image']; ?>" />
-                    </a>
-                    <i class="far fa-heart wishlist"></i>
-                    <div class="card-info">
-                        <h3>
-                            <a href="pages/product-detail.php?id=<?= $row['ProductID'] ?>">
-                                <?= htmlspecialchars($row['name']) ?>
-                            </a>
-                        </h3>
-                        <div class="price-cart">
-                            <p>$
-                                <?= number_format($row['price']) ?> USD
-                            </p>
-                            <a class="add-to-cart" href="#">ADD TO CART</a>
-                        </div>
+            <div class="product" data-aos="zoom-in" data-aos-duration="1500">
+                <a href="pages/product-detail.php?id=<?= $row['ProductID'] ?>">
+                    <img src="./images/products/<?php echo $row['image']; ?>" />
+                </a>
+                <i class="far fa-heart wishlist"></i>
+                <div class="card-info">
+                    <h3>
+                        <a href="pages/product-detail.php?id=<?= $row['ProductID'] ?>">
+                            <?= htmlspecialchars($row['name']) ?>
+                        </a>
+                    </h3>
+                    <div class="price-cart">
+                        <p>$
+                            <?= number_format($row['price']) ?> USD
+                        </p>
+                        <!-- <a class="add-to-cart" href="#">ADD TO CART</a> -->
+                        <?php if (isset($_SESSION['customer_id'])): ?>
+                        <button class="add-to-cart" type="button"
+                            data-product-id="<?php echo $row['ProductID']; ?>">
+                            ADD TO CART
+                        </button>
+                        <?php else: ?>
+                        <a class="add-to-cart" href="./pages/login.php">
+                            ADD TO CART
+                        </a>
+                        <?php endif; ?>
                     </div>
                 </div>
+            </div>
             <?php endwhile; ?>
         </div>
 
@@ -185,30 +197,30 @@ if (isset($_SESSION['notification'])) {
         <!-- Sản phẩm -->
         <div class="products">
             <?php
-            $sql = "SELECT * FROM product WHERE status = 1 AND category_id = 'women' ORDER BY ProductID DESC LIMIT 4"; // Giới hạn 8 sản phẩm mới nhất
+            $sql = "SELECT * FROM product WHERE status = 1 AND category_id = 'women' ORDER BY ProductID DESC LIMIT 4";
             $result = $conn->query($sql);
 
             while ($row = $result->fetch_assoc()):
             ?>
-                <div class="product" data-aos="zoom-in" data-aos-duration="1500">
-                    <a href="pages/product-detail.php?id=<?= $row['ProductID'] ?>">
-                        <img src="./images/products/<?php echo $row['image']; ?>" />
-                    </a>
-                    <i class="far fa-heart wishlist"></i>
-                    <div class="card-info">
-                        <h3>
-                            <a href="product-detail.php?id=<?= $row['ProductID'] ?>">
-                                <?= htmlspecialchars($row['name']) ?>
-                            </a>
-                        </h3>
-                        <div class="price-cart">
-                            <p>$
-                                <?= number_format($row['price']) ?> USD
-                            </p>
-                            <a class="add-to-cart" href="#">ADD TO CART</a>
-                        </div>
+            <div class="product" data-aos="zoom-in" data-aos-duration="1500">
+                <a href="pages/product-detail.php?id=<?= $row['ProductID'] ?>">
+                    <img src="./images/products/<?php echo $row['image']; ?>" />
+                </a>
+                <i class="far fa-heart wishlist"></i>
+                <div class="card-info">
+                    <h3>
+                        <a href="product-detail.php?id=<?= $row['ProductID'] ?>">
+                            <?= htmlspecialchars($row['name']) ?>
+                        </a>
+                    </h3>
+                    <div class="price-cart">
+                        <p>$
+                            <?= number_format($row['price']) ?> USD
+                        </p>
+                        <a class="add-to-cart" href="#">ADD TO CART</a>
                     </div>
                 </div>
+            </div>
             <?php endwhile; ?>
         </div>
         <div class="container">
@@ -344,8 +356,9 @@ if (isset($_SESSION['notification'])) {
     <!-- End sections: footer-group -->
 
     <script src="./js/index.js"></script>
+    <script src="./js/global.js"></script>
     <script>
-        AOS.init();
+    AOS.init();
     </script>
 </body>
 

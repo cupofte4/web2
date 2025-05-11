@@ -55,6 +55,11 @@
     font-weight: 500;
     margin-top: auto;
 }
+.price-cart button {
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 600;
+}
 
 .product .add-to-cart {
     display: none;
@@ -63,6 +68,7 @@
     padding: 10px 20px;
     font-size: 14px;
     background-color: black;
+    border: 1px solid black;
     color: white;
     text-decoration: none;
 }

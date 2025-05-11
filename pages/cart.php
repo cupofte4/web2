@@ -1,20 +1,11 @@
 <?php
+require('../connection/connect.php');
+require('../connection/connectDGHCVN.php');
 session_start();
 
-// Lấy dữ liệu giỏ hàng từ session
-$cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
-$total = 0;
-
-// Xử lý cập nhật số lượng nếu gửi form POST
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
-    foreach ($_POST['quantity'] as $key => $quantity) {
-        if (isset($cart[$key]) && $quantity > 0) {
-            $cart[$key]['quantity'] = (int)$quantity;
-        }
-    }
-    $_SESSION['cart'] = $cart;
-    header('Location: cart.php');
-    exit;
+if (!isset($_SESSION['customer_id'])) {
+    header("Location: login.php");
+    exit();
 }
 ?>
 
@@ -24,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EAVES</title>
+    <title>Cart - EAVES</title>
     <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -32,157 +23,170 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <link rel="stylesheet" href="/css/global.css" type="text/css">
-    <link rel="stylesheet" href="/css/cart.css">
-    <!-- aos -->
+    <link rel="stylesheet" href="../css/global.css" type="text/css">
+    <link rel="stylesheet" href="../css/cart.css">
+    <!-- JS -->
+    <script src="../js/index.js"></script>
+    <script src="../js/global.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- aos -->    
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <style>
-        .quantity-input { width: 60px; text-align: center; }
-        .btn-update, .btn-checkout {
-            background-color: black;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .btn-checkout { background-color: black; text-decoration: none; display: inline-block; }
-        .btn-delete { color: black; text-decoration: none; margin-top: 5px; display: inline-block; }
-    </style>
 </head>
 
 <body>
+    <!-- Begin sections: header-group -->
     <section class="header-group">
         <header class="sticky-header">
             <div class="announcement">
-                <h5>FREE SHIPPING ON ORDERS OVER USD 150!</h5>
+                <h5>FREE SHIPPING ON ORDERS OVER USD 350, 2pcs Extra 10% OFF, 3pcs+ Extra 15% OFF!</h5>
             </div>
             <div class="section-header">
                 <div class="heading-logo">
-                    <a href="home.html">EAVES</a>
+                    <a href="../index.php">EAVES</a>
                 </div>
                 <div class="header-icons">
-                    <!-- Toggle Button -->
-                    <div class="search-box">
-                        <input type="text" placeholder="Search" id="searchInput">
-                        <button class="advanced-search-toggle" id="advancedSearchToggle">
-                            <i class="fas fa-sliders-h"></i>
-                        </button>
-                        <a href="#" class="close-btn" id="closeSearch">&times;</a>
+                    <!-- Tìm kiếm sản phẩm -->
+                    <form action="search.php" method="GET">
+                        <div class="search-box">
+                            <input type="text" name="keyword" placeholder="Search" id="searchInput">
+                            <button class="basicSearch" name="timkiem" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <button class="advanced-search-toggle" id="advancedSearchToggle" type="button">
+                                <i class="fas fa-sliders-h"></i>
+                            </button>
+                            <a href="#" class="close-btn" id="closeSearch">&times;</a>
 
-                        <!-- Advanced Search Panel -->
-                        <div class="advanced-search" id="advancedSearch">
-                            <div class="search-filters">
-                                <div class="filter-group">
-                                    <label>Category:</label>
-                                    <select id="categoryFilter">
-                                        <option value="">All Categories</option>
-                                        <option value="jacket">Jackets</option>
-                                        <option value="jeans">Jeans</option>
-                                        <option value="sweatshirt">Sweatshirts</option>
-                                    </select>
-                                </div>
-                                <div class="filter-group">
-                                    <label>Price Range:</label>
-                                    <div class="price-range">
-                                        <input type="number" id="minPrice" placeholder="Min">
-                                        <span>-</span>
-                                        <input type="number" id="maxPrice" placeholder="Max">
+                            <!-- Advanced Search Panel -->
+                            <div class="advanced-search" id="advancedSearch">
+                                <div class="search-filters">
+                                    <div class="filter-group">
+                                        <label>Type:</label>
+                                        <select name="type_range">
+                                            <!-- Change name attribute to "type_range" -->
+                                            <option value="all" selected>All</option>
+                                            <?php
+                                                // Truy vấn danh sách các danh mục từ cơ sở dữ liệu
+                                                $sql_type = "SELECT * FROM type";
+                                                $result_type = mysqli_query($conn, $sql_type);
+
+                                                // Lặp qua kết quả và tạo ra các tùy chọn cho dropdown menu
+                                                while ($row_type = mysqli_fetch_assoc($result_type)) {
+                                                    echo '<option value="' . $row_type['type_id'] . '">' . $row_type['type_name'] . '</option>';
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="filter-group">
+                                        <label>Price Range:</label>
+                                        <select name="price_range">
+                                            <!-- Add name attribute to the select element -->
+                                            <option value="all">All</option>
+                                            <option value="below">Below 250$</option>
+                                            <option value="middle">Between 250$ - 450$</option>
+                                            <option value="upper">Above 450$</option>
+                                        </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="search-buttons">
-                                <button class="search-btn" id="applySearch">Search</button>
-                                <button class="reset-btn" id="resetSearch">Reset</button>
+                                <div class="search-buttons">
+                                    <button class="search-btn" id="applySearch" name="advancedSearch"
+                                        type="submit">Search</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                     <a href="#" class="icon search-icon"><i class="fas fa-search"></i></a>
                     <a href="#" class="icon"><i class="fas fa-heart"></i></a>
                     <a href="#" class="icon"><i class="fas fa-shopping-cart"></i></a>
                     <div class="dropdown">
                         <a href="#" class="icon"><i class="fas fa-user"></i></a>
                         <div class="dropdown-content">
-                            <a href=" /pages/userInfo.html">My Account</a>
-                            <a href="/pages/register.html">Register</a>
-                            <a href="/pages/login.html">Sign in</a>
+                            <a href="<?php echo isset($_SESSION['email']) ? 'userInfo.php' : 'login.php'; ?>">My
+                                Account</a>
+                            <?php if (isset($_SESSION['email'])): ?>
+                            <a href="logout.php">Sign out</a>
+                            <?php else: ?>
+                            <a href="register.php">Register</a>
+                            <a href="login.php">Sign in</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
             </div>
             <nav class="header-navbar">
-                <a href="whatsnew.html">WHAT'S NEW</a>
-                <a href="men.html">MEN</a>
-                <a href="women.html">WOMEN</a>
-                <a href="KID.html">KIZZU</a>
-                <a href="SALE.HTML" style="color: red;">SALE</a>
+                <a href="category.php?category_id=whatsnew">WHAT'S NEW</a>
+                <a href="category.php?category_id=men">MEN</a>
+                <a href="category.php?category_id=women">WOMEN</a>
             </nav>
         </header>
     </section>
+    <!-- End sections: header-group -->
 
-    <section class="body-group">
-        <section class="cart-container container">
-            <!-- Bên trái: danh sách sản phẩm -->
-            <div class="cart-left">
-                <div class="selected-products" id="selectedProductsBox">
-                    <h4>Your Items</h4>
+     <!-- Begin sections: main -->
+     <section class="main">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <a href="../index.php" title="EAVES">HOME</a> <
+            <span>CART</span>
+        </div>
 
-                    <?php if (empty($cart)): ?>
-                    <p>Giỏ hàng của bạn đang trống. <a href="index.php">Tiếp tục mua sắm</a></p>
-                    <?php else: ?>
-                    <form method="POST" action="cart.php">
-                        <ul id="selectedProductsList">
-                        <?php foreach ($cart as $key => $item):
-                            $name = htmlspecialchars($item['name']);
-                            $price = $item['price'];
-                            $quantity = $item['quantity'];
-                            $size = $item['size'];
-                            $image = htmlspecialchars($item['image']);
-                            $subtotal = $price * $quantity;
-                            $total += $subtotal;
-                        ?>
-                            <li class="cart-item">
-                                <img src="<?= $image ?>" alt="<?= $name ?>">
-                                <div class="cart-details">
-                                    <h3><?= $name ?></h3>
-                                    <p>Kích cỡ: <?= $size ?></p>
-                                    <p>Đơn giá: <?= number_format($price, 0, ',', '.') ?> đ</p>
-                                    <p>Số lượng: <input type="number" name="quantity[<?= $key ?>]" value="<?= $quantity ?>" class="quantity-input" min="1"></p>
-                                    <p>Thành tiền: <?= number_format($subtotal, 0, ',', '.') ?> đ</p>
-                                    <a href="remove_from_cart.php?key=<?= urlencode($key) ?>" class="btn-delete" onclick="return confirm('Xóa sản phẩm này?')">Xóa</a>
-                                </div>
-                            </li>
-                        <?php endforeach; ?>
-                        </ul>
+        <div class="container cart-information-container">
+            <div class="your-cart rounded">
+                <h2 class="fw-bold">Your shopping cart</h2>
+                <div class="cart-items" style="min-height: 200px; max-height: 500px; overflow-y: auto;">
+                    <?php
+                    if (count($_SESSION['cart']) > 0) {
+                        foreach ($_SESSION['cart'] as $product_id => $quantity) {
+                            $sql = "SELECT * FROM `product` WHERE `ProductID` = '{$product_id}'";
+                            $result = mysqli_query($conn, $sql);
+                            if (mysqli_num_rows($result) > 0) {
+                                $row_product = mysqli_fetch_assoc($result);
+                                echo '<div class="item my-1" data-product-id="' . $product_id . '" style="border: 2px solid rgb(235, 235, 235); border-radius: 5px; padding: 10px;">';
+                                echo '<div class="item-img">';
+                                echo '<img src="../images/products/' . $row_product['image'] . '" width="70px" height="auto">';
+                                echo '<div class="item-rm">';
+                                echo '<button type="button" name="delete-from-cart" class="delete-from-cart" style="background: none; color: white; border: none;">X</button>';
+                                echo '</div>';
+                                echo '</div>';
+                                echo '<div class="item-info">';
+                                echo '<div style="display: flex; flex-direction: column; justify-content: space-between;">';
+                                echo '<div class="item-name">' . $row_product["name"] . '</div>';
+                                echo '<div class="item-price">' . number_format($row_product["price"], 0, ".", ",") . '₫</div>';
+                                echo '</div>';
+                                echo '<div class="pt-5">';
+                                echo '<div class="input-group spinner">';
+                                echo '<button class="spinner-prev" type="button"><i class="fas fa-minus"></i></button>';
+                                echo '<input type="number" class="form-control text-center spinner-number" data-product-id="' . $product_id . '" value="' . $quantity . '" min="1" max="99" style="padding: 0; font-size: 14px;" readonly>';
+                                echo '<button class="spinner-next" type="button"><i class="fas fa-plus"></i></button>';
+                                echo '</div>';
+                                echo '</div>';
+                                echo '</div></div>';
+                            }
+                        }
+                    } else {
+                        echo '<div class="empty-cart">Your cart is empty... Continue shopping <a href="../index.php"> right here!</a></div>';
+                    }
 
-                        <?php
-                            $vat = 0.1 * $total;
-                            $grandTotal = $total + $vat;
-                        ?>
-       
-                        <div class="summary">
-                            <ul>
-                                <li class="subtotal">Tạm tính<span><?= number_format($total, 0, ',', '.') ?> đ</span></li>
-                                <li class="vat">VAT (10%)<span><?= number_format($vat, 0, ',', '.') ?> đ</span></li>
-                                <li class="total">Tổng cộng<span><?= number_format($grandTotal, 0, ',', '.') ?> đ</span></li>
-                            </ul>
-                            <button type="submit" name="update" class="btn-update">Cập nhật giỏ hàng</button>
-                        </div>
-        
-                        <div class="checkout-button">
-                            <a href="payment.php" class="btn-checkout">CHECK OUT</a>
-                        </div>
-                        <?php endif; ?>
-                    </div>
+                    ?>
                 </div>
-            </section>
-        </section>
+                <div style="display: flex; justify-content: end; align-items: flex-end; margin-top: 55px;">
+                    <?php 
+                        if(count($_SESSION['cart']) > 0) {
+                            echo '<a href="payment.php"><button type="button" name="payment" class="btn btn-primary btn-danger text-white fw-bold" >CONTINUE TO PAY</button></a>';
+                        } else {
+                            echo '<button type="button" name="payment" class="btn btn-primary btn-danger text-white fw-bold" disabled>CONTINUE TO PAY</button>';
+                        }
+                    ?>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End sections: main -->
 
-       
-
+    <!-- Begin sections: footer-group -->
     <section class="footer-group">
         <div class="top-bar">
             <ul>
@@ -286,8 +290,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
             <p>Owned by eaves.com</p>
         </div>
     </section>
-    <script src="/js/cart.js"></script>
-    <script src="/js/side.js"></script>
-    <script src="/js/user.js"></script>
+    <!-- End sections: footer-group -->
 </body>
 </html>

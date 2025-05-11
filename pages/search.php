@@ -96,7 +96,7 @@ $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : null;
                     </form>
                     <a href="#" class="icon search-icon"><i class="fas fa-search"></i></a>
                     <a href="#" class="icon"><i class="fas fa-heart"></i></a>
-                    <a href="cart.html" class="icon"><i class="fas fa-shopping-cart"></i></a>
+                    <a href="cart.php" class="icon"><i class="fas fa-shopping-cart"></i></a>
                     <div class="dropdown">
                         <a href="#" class="icon"><i class="fas fa-user"></i></a>
                         <div class="dropdown-content">
@@ -126,7 +126,7 @@ $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : null;
         <!-- Breadcrumbs -->
         <div class="breadcrumbs">
             <a href="../index.php" title="EAVES">HOME</a> >
-            <span class="default-breadcrumb">SEARCH RESULTS</span>
+            <span>SEARCH RESULTS</span>
         </div>
 
         <!-- Product Container -->

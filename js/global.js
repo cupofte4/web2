@@ -1,4 +1,4 @@
-const addCartBtns = document.querySelectorAll('.add-cart-btn');
+const addCartBtns = document.querySelectorAll('.add-to-cart');
 
 addCartBtns.forEach(element => {
     element.addEventListener('click', function cartAdded() {

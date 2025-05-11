@@ -255,7 +255,7 @@ if (isset($_POST["capnhat_info"]) && $_POST["capnhat_info"]) {
                     </form>
                     <a href="#" class="icon search-icon"><i class="fas fa-search"></i></a>
                     <a href="#" class="icon"><i class="fas fa-heart"></i></a>
-                    <a href="cart.html" class="icon"><i class="fas fa-shopping-cart"></i></a>
+                    <a href="cart.php" class="icon"><i class="fas fa-shopping-cart"></i></a>
                     <div class="dropdown">
                         <a href="#" class="icon"><i class="fas fa-user"></i></a>
                         <div class="dropdown-content">

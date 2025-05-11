@@ -113,7 +113,7 @@ if (isset($_GET['category_id'])) {
                     </form>
                     <a href="#" class="icon search-icon"><i class="fas fa-search"></i></a>
                     <a href="#" class="icon"><i class="fas fa-heart"></i></a>
-                    <a href="cart.html" class="icon"><i class="fas fa-shopping-cart"></i></a>
+                    <a href="cart.php" class="icon"><i class="fas fa-shopping-cart"></i></a>
                     <div class="dropdown">
                         <a href="#" class="icon"><i class="fas fa-user"></i></a>
                         <div class="dropdown-content">
@@ -143,7 +143,7 @@ if (isset($_GET['category_id'])) {
         <!-- Breadcrumbs -->
         <div class="breadcrumbs">
             <a href="../index.php" title="EAVES">HOME</a> >
-            <span class="default-breadcrumb"><?php echo $category_name; ?></span>
+            <span><?php echo $category_name; ?></span>
         </div>
 
         <!-- Product Container -->

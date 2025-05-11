@@ -106,7 +106,7 @@ if (!$product) {
                     </form>
                     <a href="#" class="icon search-icon"><i class="fas fa-search"></i></a>
                     <a href="#" class="icon"><i class="fas fa-heart"></i></a>
-                    <a href="cart.html" class="icon"><i class="fas fa-shopping-cart"></i></a>
+                    <a href="cart.php" class="icon"><i class="fas fa-shopping-cart"></i></a>
                     <div class="dropdown">
                         <a href="#" class="icon"><i class="fas fa-user"></i></a>
                         <div class="dropdown-content">
@@ -148,7 +148,7 @@ if (!$product) {
             <<span>
                 <a href="category.php?category_id=<?= htmlspecialchars($row_product['category_id']) ?>">
                     <?= htmlspecialchars($row_product['category_name']) ?></a>
-                <</span>
+                << /span>
                     <?php
                                 // Truy vấn để lấy tên của sản phẩm từ cơ sở dữ liệu
                                 $sql_name = "SELECT name FROM product WHERE product.ProductID = '$product_id'";
@@ -179,26 +179,21 @@ if (!$product) {
                     <p class="product-size">SIZE</p>
                     <a href="#" id="size-guide-link" class="size-guide-link">View Size Guide</a>
                 </div>
+                <select>
+                    <option hidden>CHOOSE SIZE</option>
+                    <option>S</option>
+                    <option>M</option>
+                    <option>L</option>
+                    <option>XL</option>
+                </select>
 
-                <form action="add_to_cart.php" method="POST">
-                    <input type="hidden" name="product_id" value="<?= $product_id ?>">
-
-                    <select name="size" required>
-                        <option hidden>CHOOSE SIZE</option>
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
-                    </select>
-
-                    <div class="buttons">
-                        <button class="add-to-cart" type="submit"><i class="fas fa-shopping-cart"></i>ADD TO
-                            CART</button>
-                        <button class="add-to-wishlist" type="button"><i class="fas fa-heart"></i>ADD TO
-                            WISHLIST</button>
-                    </div>
-
-                </form>
+                <div class="buttons">
+                    <button class="add-to-cart" type="submit"><i class="fas fa-shopping-cart"></i>ADD TO
+                        CART</button>
+                        
+                    <button class="add-to-wishlist" type="button"><i class="fas fa-heart"></i>ADD TO
+                        WISHLIST</button>
+                </div>
 
                 <div class="container">
                     <a href="#" class="contact-us"><i class="fas fa-envelope"></i>CONTACT US</a>
