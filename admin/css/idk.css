@@ -1,0 +1,168 @@
+main{
+    height: 820px;
+}
+
+.menu{
+    width: 250px;
+    justify-content: center;
+}
+
+.bg-green2 {
+    background-color: #B2C8BA;
+}
+
+.infor-container {
+    font-size: 23px;
+    width: 100%;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); 
+    margin: 1em 0;
+}
+
+.logOut{
+    position: absolute;
+    bottom: 20px;
+    left: 15px;
+}
+
+svg{
+    position: relative;
+}
+
+.infor-boxes{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.infor-boxes input{
+    border-radius: 5px;
+    padding: 10px 15px;
+}
+
+.tabShow{
+    transition: all .5s ease-in;
+    height: 600px;
+    width: 100%;
+    display: none;
+    padding: 1em;
+}
+
+input{
+    border: 0;
+    border-bottom: 1px solid #B2C8BA;
+    font-size: .7em;
+    padding: 7px 0;
+    outline: none;
+}
+
+li {
+    cursor: pointer;
+}
+
+/* lịch sử mua hàng */
+
+.table {
+    background-color: #B2C8BA;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px; /* Thêm khoảng cách giữa bảng và các phần khác */
+}
+
+table, th, td {
+    border: 1px solid #ddd; /* Màu và độ dày của đường kẻ */
+}
+
+th, td {
+    font-size: 15px;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid green;
+}
+
+td{
+    justify-content: center;
+    text-align: center;
+}
+
+th {
+    justify-content: center;
+    text-align: center;
+}
+
+.name {
+    width: 200px;
+    white-space: nowrap; /* Ngăn chặn quấn dòng */
+    overflow: hidden; /* Ẩn phần vượt quá chiều rộng */
+    text-overflow: ellipsis; /* Hiển thị dấu chấm cuối nếu có phần vượt quá chiều rộng */
+}
+
+/* bill */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.main-section {
+    height: 100%;
+    background-color: #F0F0F0;
+    padding: 4em;
+}
+
+
+.left {
+    width: 68%;
+    background-color: #FFF;
+    padding: 1em;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    height: auto;
+}
+
+.left table {
+    font-size: 18px;
+}
+
+.left table thead tr{
+    font-weight: bold;
+}
+
+.left table tbody tr:last-child {
+    border-bottom: 1px solid black;
+}
+
+.left table tbody tr td:nth-child(4) {
+    text-align: center;
+}
+
+/* .left table tbody tr td:nth-child(3),
+.left table tfoot tr td:nth-child(3) {
+    text-align: end;
+} */
+
+/* .left table tbody tr td:last-child,
+.left table tfoot tr td:last-child {
+    text-align: end;
+} */
+
+.left table tfoot tr:last-child{
+    border: 0px solid white;
+}
+
+.right{
+    width: 30%;
+    height: auto;
+}
+
+.right .user-detail,
+.right .order-detail {
+    background-color: #FFF;
+    padding: 1em;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    margin-bottom: 2em;
+}
+
+h3{
+    font-size: 1.2rem;
+}

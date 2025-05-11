@@ -20,8 +20,8 @@ $username = $_GET['username'];
     <script src="../vendor/jquery/ajax.googleapis.com_ajax_libs_jquery_3.5.1_jquery.min.js"></script>
     <!-- fontawesome -->
     <link rel="stylesheet" href="../../vendor/font-awesome/fontawesome-free-6.5.2-web/css/all.min.css">
-    <link rel="stylesheet" href="../../assets/css/myInfo.css">
-    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../css/idk.css">
+    <link rel="stylesheet" href="../css/global.css">
     <title>Hóa đơn chi tiết</title>
 </head>
 

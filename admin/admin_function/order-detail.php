@@ -26,7 +26,7 @@ if(isset($_POST['thaydoi']) && $_POST['thaydoi']) {
     <!-- fontawesome -->
     <link rel="stylesheet" href="../../vendor/font-awesome/fontawesome-free-6.5.2-web/css/all.min.css">
     <link rel="stylesheet" href="../css/order-detail.css">
-    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../css/global.css">
     <title>Đơn hàng</title>
 </head>
 
