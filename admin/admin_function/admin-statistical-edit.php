@@ -1,5 +1,5 @@
 <?php
-  require '../../connects/connect.php';
+  require '../../connection/connect.php';
 
   $username = $_GET['username']; 
 

@@ -1,7 +1,7 @@
 <?php
 session_start();
-require '../../connects/connect.php';
-require '../../connects/connectDGHCVN.php';
+require '../../connection/connect.php';
+require '../../connection/connectDGHCVN.php';
 
 if (!isset($_SESSION['logined-username'])) {
     $_SESSION['error_message'] = "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại!";
@@ -19,9 +19,9 @@ if (isset($_POST["themmoi"])) {
     $email = $_POST["admin-email"];
     $phone = $_POST["admin-phone"];
     $street = $_POST["admin-street"];
-    $ward = $_POST["admin-ward"];
-    $district = $_POST["admin-district"];
-    $city = $_POST["admin-city"];
+    $district = $_POST["admin-district"] ?? "";
+    $ward = $_POST["admin-ward"] ?? "";
+    $city = $_POST["admin-city"] ?? "";
     $password = md5($_POST["admin-password1"]);
     $repassword = md5($_POST["admin-password2"]);
 
@@ -162,8 +162,8 @@ if (isset($_POST["lock_username"])) {
                         <td><label for="admin-username">Tên tài khoản:</label></td>
                         <td><input size="45" type="text" name="admin-username" id="admin-username"></td>
                         <?php if(!empty($error_username)): ?>
-                                        <div style="color: red;"><?php echo $error_username; ?></div>
-                                    <?php endif; ?>
+                        <div style="color: red;"><?php echo $error_username; ?></div>
+                        <?php endif; ?>
                     </tr>
                     <tr>
                         <td><label for="admin-fullname">Họ và tên:</label></td>
@@ -215,13 +215,13 @@ if (isset($_POST["lock_username"])) {
                         <td><label for="admin-password1">Mật khẩu:</label></td>
                         <td><input size="45" type="password" name="admin-password1" id="admin-password1"></td>
                         <?php if(!empty($error_password)): ?>
-                                            <div style="color: red;"><?php echo $error_password; ?></div>
+                        <div style="color: red;"><?php echo $error_password; ?></div>
                         <?php endif; ?>
                     </tr>
                     <tr>
                         <td><label for="admin-password2">Nhập lại mật khẩu:</label></td>
                         <td><input size="45" type="password" name="admin-password2" id="admin-password2"></td>
-                        
+
                     </tr>
                     <tr style="display: flex; justify-content: end;">
                         <td>
@@ -234,11 +234,6 @@ if (isset($_POST["lock_username"])) {
         </div>
 
         <div class="records-section-container">
-            <!-- <div class="record-header">
-                <div class="browse">
-                    <input type="search" placeholder="Tìm kiếm" class="record-search">
-                </div>
-            </div> -->
             <div class="table-responsive">
                 <table class="table table-bordered" id="user-table" width="100%">
                     <thead class="table-secondary">
@@ -289,24 +284,6 @@ if (isset($_POST["lock_username"])) {
                         }
                         ;
                         ?>
-
-                        <!-- <tr>
-                            <td>nguyenquangvinh</td>
-                            <td>Nguyễn Quang Vinh</td>
-                            <td>quangvinhbeo@gmail.com</td>
-                            <td>0987654321</td>
-                            <td>273 An Dương Vương Phường 3 Quận 5</td>
-                            <td>Thành phố Hồ Chí Minh</td>
-
-                            <form action="admin-istrator.php" methor="post" onsubmit="return changeStatus()">
-                                <input type="hidden" name="lock_username" value="nguyenquangvinh">
-                                <td><button type="submit"><i class="fas fa-unlock fs-5"></i></button></td>
-                            </form>
-                            <td>
-                                <button onclick="selectRowToEdit(this)" class="btn btn-sm btn-outline-dark"><i
-                                        class="fas fa-pen-to-square fw-light small"></i></button>
-                            </td>
-                        </tr> -->
                     </tbody>
                 </table>
             </div>

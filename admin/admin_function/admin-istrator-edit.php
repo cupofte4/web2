@@ -1,6 +1,6 @@
 <?php
-require '../../connects/connect.php';
-require '../../connects/connectDGHCVN.php';
+require '../../connection/connect.php';
+require '../../connection/connectDGHCVN.php';
 
 $username = $_POST['edit_username'];
 $sql = "SELECT * FROM `manager` WHERE `username` = '{$username}'";

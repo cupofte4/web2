@@ -1,6 +1,6 @@
 <?php
-include '../../connects/connect.php';
-include '../../connects/connectDGHCVN.php';
+include '../../connection/connect.php';
+include '../../connection/connectDGHCVN.php';
 
 $order_id = $_POST['edit_order_id'];
 
@@ -8,7 +8,7 @@ if(isset($_POST['thaydoi']) && $_POST['thaydoi']) {
     $sql = "UPDATE `orders` SET `status` = " . $_POST['changed-status'] . " WHERE `OrderID` = " . $_POST['edit-order-id'];
     $result = mysqli_query($conn, $sql);
     if($result) {
-        header("Location: ./admin-order.php");
+        header("Location: ./admin-order.php")   ;
     }
 }
 ?>

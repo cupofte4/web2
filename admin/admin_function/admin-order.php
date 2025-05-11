@@ -1,7 +1,7 @@
 <?php
 session_start();
-require '../../connects/connectDGHCVN.php';
-require '../../connects/connect.php';
+require '../../connection/connectDGHCVN.php';
+require '../../connection/connect.php';
 if (!isset($_SESSION['logined-username'])) {
     $_SESSION['error_message'] = "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại!";
     header("Location: ../index.php");

@@ -1,7 +1,7 @@
 <?php
 session_start();
-require '../../connects/connect.php';
-require '../../connects/connectDGHCVN.php';
+require '../../connection/connect.php';
+require '../../connection/connectDGHCVN.php';
 $OrderID = $_GET['OrderID'];
 $username = $_GET['username'];
 ?>

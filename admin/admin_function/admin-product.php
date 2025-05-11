@@ -1,25 +1,22 @@
 <?php
 session_start();
-require '../../connects/connect.php';
+require '../../connection/connect.php';
 if (!isset($_SESSION['logined-username'])) {
     $_SESSION['error_message'] = "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại!";
     header("Location: ../index.php");
 }
 if (isset($_POST['them']) && $_POST['them']) {
     $tmp_name = $_FILES["product-image-url"]["tmp_name"];
-    $fldimageurl = "../../assets/products/" . $_FILES["product-image-url"]["name"];
+    $fldimageurl = "../../images/products/" . $_FILES["product-image-url"]["name"];
     move_uploaded_file($tmp_name, $fldimageurl);
 
-    $sql = "INSERT INTO `product`(`ProductID`, `title`, `image`, `category_id`, `author`, `publisher`, `cover`, `price`, `stock`, `description`, `status`) VALUES(
+    $sql = "INSERT INTO `product`(`ProductID`, `name`, `image`, `category_id`, `type_id`, `price`, `description`, `status`) VALUES(
         NULL, 
-        '{$_POST["product-title"]}', 
+        '{$_POST["product-name"]}', 
         '{$_FILES["product-image-url"]["name"]}', 
         '{$_POST["product-category"]}', 
-        '{$_POST["product-author"]}', 
-        '{$_POST["product-publisher"]}', 
-        '{$_POST["product-cover"]}',
+        '{$_POST["product-type"]}', 
         '{$_POST["product-price"]}', 
-        '{$_POST["product-stock"]}', 
         '{$_POST["product-description"]}', 
         0)";
 
@@ -130,68 +127,51 @@ if (isset($_POST['hien']) && $_POST['hien']) {
                     <tr>
                         <td>
                             <div>
-                                <label for="product-title">Tựa sách</label>
-                                <input size="34" type="text" name="product-title" id="product-title">
+                                <label for="product-name">Tên sản phẩm</label>
+                                <input size="34" type="text" name="product-name" id="product-name">
                             </div>
                         </td>
                         <td>
-                            <div>
-                                <label for="product-authour">Tác giả</label>
-                                <input size="34" type="text" name="product-author" id="product-author">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div>
-                                <label for="product-category">Thể loại</label>
-                                <select name="product-category" id="product-category" style="width: 288px;">
-                                    <option value="" disabled selected>Chọn thể loại -</option>
-                                    <option value="ton-giao-tam-linh">Tôn giáo - tâm linh</option>
-                                    <option value="triet-hoc-khoa-hoc">Triết học - khoa học</option>
-                                    <option value="van-hoa-nghe-thuat">Văn hóa - nghệ thuật</option>
-                                    <option value="tam-ly-ky-nang">Tâm lý - kỹ năng</option>
-                                    <option value="kien-thuc-tong-hop">Kiến thức tổng hợp</option>
-                                    <option value="lich-su">Lịch sử</option>
-                                    <option value="van-hoc">Văn học</option>
-                                    <option value="kinh-te-chinh-tri">Kinh tế - chính trị</option>
-                                    <option value="thieu-nhi">Thiếu nhi</option>
-                                </select>
-                            </div>
-                        </td>
-                        <td>
-                            <div>
-                                <label for="product-publisher">Nhà xuất bản</label>
-                                <input size="34" type="text" name="product-publisher" id="product-publisher">
-                            </div>
+                            <label for="product-category">Danh mục</label>
+                            <select name="product-category" id="product-category" style="width: 288px;">
+                                <option value="" disabled selected>Chọn danh mục -</option>
+                                <option value="men">Đồ Nam</option>
+                                <option value="women">Đồ Nữ</option>
+                                <option value="whatsnew">Đồ mới</option>
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                    <td>
                             <div>
                                 <label for="product-img">Hình ảnh</label>
-                                <input type="file" name="product-image-url" id="product-image-url" onchange="loadFile(event)">
+                                <input type="file" name="product-image-url" id="product-image-url"
+                                    onchange="loadFile(event)" style="outline: none; border: none;">
                             </div>
                         </td>
                         <td>
                             <div>
-                                <label for="product-cover">Loại bìa</label>
-                                <select name="product-cover" id="product-cover" style="width: 288px;">
-                                    <option value="" disabled selected>Chọn loại bìa -</option>
-                                    <option value="mem">Bìa mềm</option>
-                                    <option value="cung">Bìa cứng</option>
+                                <label for="product-type">Thể loại</label>
+                                <select name="product-type" id="product-type" style="width: 288px;">
+                                    <option value="" disabled selected>Chọn thể loại -</option>
+                                    <option value="jacket">Jacket</option>
+                                    <option value="jean">Jean</option>
+                                    <option value="sweatshirt">Sweatshirt</option>
                                 </select>
                             </div>
                         </td>
                     </tr>
+                    
                     <tr>
-                        <td rowspan="2">
+                        <td rowspan="1">
                             <div class="img-display-container" style="display: flex;">
                                 <p>Xem trước ảnh</p>
                                 <img id="selected-img" height="80px" style="margin-right: 45%;">
                             </div>
                         </td>
-                        <td>
+                    </tr>
+
+                    <tr>
+                    <td>
                             <div>
                                 <label for="product-price">Giá</label>
                                 <input size="34" type="text" name="product-price" id="product-price">
@@ -199,18 +179,10 @@ if (isset($_POST['hien']) && $_POST['hien']) {
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <div>
-                                <label for="product-stock">Số lượng</label>
-                                <input size="34" type="text" name="product-stock" id="product-stock">
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
                         <td colspan="2">
                             <label for="product-description" class="mb-1">Thông tin sản phẩm</label><br>
-                            <textarea name="product-description" id="product-description" rows="5" cols="125"></textarea>
+                            <textarea name="product-description" id="product-description" rows="5"
+                                cols="125"></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -227,24 +199,16 @@ if (isset($_POST['hien']) && $_POST['hien']) {
 
 
         <div class="records-section-container">
-            <!-- <div class="record-header">
-                <div class="browse">
-                    <input type="search" placeholder="Tìm kiếm" class="record-search">
-                </div>
-            </div> -->
             <div class="table-responsive">
                 <table class="table table-bordered" id="product-table" width="100%">
                     <thead class="table-secondary">
                         <tr>
-                            <th scope="col">Mã sách</th>
+                            <th scope="col">Mã sản phẩm</th>
                             <th scope="col">Hình ảnh</th>
-                            <th scope="col">Tiêu đề</th>
+                            <th scope="col">Tên sản phẩm</th>
+                            <th scope="col">Danh mục</th>
                             <th scope="col">Thể loại</th>
-                            <th scope="col">Tác giả</th>
-                            <th scope="col">Nhà xuất bản</th>
-                            <th scope="col">Loại bìa</th>
                             <th scope="col">Giá</th>
-                            <th scope="col">Số lượng</th>
                             <th scope="col">Trạng thái</th>
                             <th scope="col">Chỉnh sửa</th>
                         </tr>
@@ -256,14 +220,11 @@ if (isset($_POST['hien']) && $_POST['hien']) {
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo '<tr>';
                             echo '<td style="text-align: center;">' . $row["ProductID"] . '</td>';
-                            echo '<td style="text-align: center;"><img src="../../assets/products/' . $row["image"] . '"></td>';
-                            echo '<td>' . $row["title"] . '</td>';
+                            echo '<td style="text-align: center;"><img src="../../images/products/' . $row["image"] . '"></td>';
+                            echo '<td>' . $row["name"] . '</td>';
                             echo '<td>' . $row["category_id"] . '</td>';
-                            echo '<td>' . $row["author"] . '</td>';
-                            echo '<td>' . $row["publisher"] . '</td>';
-                            echo '<td>' . $row["cover"] . '</td>';
+                            echo '<td>' . $row["type_id"] . '</td>';
                             echo '<td>' . number_format($row["price"], 0, '.', ',') . '</td>';
-                            echo '<td style="text-align: center">' . $row["stock"] . '</td>';
                             if ($row["status"] == 0 || $row["status"] == 1) {
                                 echo '<td style="text-align: center"><i class="fas fa-eye"></i></td>';
                             } else {

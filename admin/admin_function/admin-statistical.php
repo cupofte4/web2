@@ -1,5 +1,5 @@
 <?php
-require '../../connects/connect.php';
+require '../../connection/connect.php';
 session_start();
 if (!isset($_SESSION['logined-username'])) {
     $_SESSION['error_message'] = "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại!";

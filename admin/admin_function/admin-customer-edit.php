@@ -16,7 +16,7 @@ if (isset($_POST["update"]) && $_POST["update"]) {
     $street = $_POST["customer-street"];
     $ward = $_POST["customer-ward"];
     $district = $_POST["customer-district"];
-    $city = $_POST["customer-city"];
+    $city = $_POST["customer-city"];    
 
     $sql = "UPDATE `customer` 
             SET `first_name` = '$first_name', `last_name` = '$last_name', `email` = '$email', 

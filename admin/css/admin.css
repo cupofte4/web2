@@ -45,6 +45,19 @@ body {
     padding: 2em;
 }
 
+select {
+    padding: 8px 10px;
+    width: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input {
+    padding: 8px 10px;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
 #input-table {
     width: 650px;
 }
@@ -56,7 +69,7 @@ body {
 }
 
 #input-table tr td {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .main-section .inputs .textarea-input {
@@ -103,12 +116,14 @@ i.fa-lock {
 /* Products */
 
 #product-input-table tr td {
-    padding: 5px 5px;
+    padding: 10px 5px;
 }
 
 #product-input-table tr td div{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 20px;
+    align-items: center;
 }
 
 #product-table tbody img {
