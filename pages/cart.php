@@ -15,22 +15,21 @@ if (!isset($_SESSION['customer_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart - EAVES</title>
+    <title>CART - EAVES</title>
     <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css.map">
+    <!-- jQuery (required for the spinner functionality) -->
+    <script src="../vendor/jquery/ajax.googleapis.com_ajax_libs_jquery_3.5.1_jquery.min.js"></script>
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="../vendor/font-awesome/fontawesome-free-6.5.2-web/css/all.min.css">
     <link rel="stylesheet" href="../css/global.css" type="text/css">
     <link rel="stylesheet" href="../css/cart.css">
     <!-- JS -->
-    <script src="../js/index.js"></script>
+    <script src="../js/trac.js"></script>
     <script src="../js/global.js"></script>
-    <script src="../js/cart.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- aos -->    
+    <!-- aos -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
@@ -124,12 +123,12 @@ if (!isset($_SESSION['customer_id'])) {
     </section>
     <!-- End sections: header-group -->
 
-     <!-- Begin sections: main -->
-     <section class="main">
+    <!-- Begin sections: main -->
+    <section class="main">
         <!-- Breadcrumbs -->
         <div class="breadcrumbs">
-            <a href="../index.php" title="EAVES">HOME</a> <
-            <span>CART</span>
+            <a href="../index.php" title="EAVES">HOME</a>
+            < <span>CART</span>
         </div>
 
         <div class="container cart-information-container">
@@ -153,7 +152,7 @@ if (!isset($_SESSION['customer_id'])) {
                                 echo '<div class="item-info">';
                                 echo '<div style="display: flex; flex-direction: column; justify-content: space-between;">';
                                 echo '<div class="item-name">' . $row_product["name"] . '</div>';
-                                echo '<div class="item-price">' . number_format($row_product["price"], 0, ".", ",") . '₫</div>';
+                                echo '<div class="item-price">' . number_format($row_product["price"], 0, ".", ",") . '$</div>';
                                 echo '</div>';
                                 echo '<div class="pt-5">';
                                 echo '<div class="input-group spinner">';
@@ -179,7 +178,6 @@ if (!isset($_SESSION['customer_id'])) {
                             echo '<button type="button" name="payment" class="btn btn-primary btn-danger text-white fw-bold" disabled>CONTINUE TO PAY</button>';
                         }
                     ?>
-                    
                 </div>
             </div>
         </div>
@@ -292,4 +290,5 @@ if (!isset($_SESSION['customer_id'])) {
     </section>
     <!-- End sections: footer-group -->
 </body>
+
 </html>

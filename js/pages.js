@@ -65,4 +65,3 @@ function addToCart(product_id) {
             console.log('Có lỗi xảy ra khi cập nhật giỏ hàng.');
         });
 }
-

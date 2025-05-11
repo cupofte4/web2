@@ -129,3 +129,29 @@
 	background-color: rgb(170, 0, 0);
 	color: white;
 }
+
+.input-group {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	gap: 4px;
+	margin: 10px 0;
+}
+
+.spinner-prev,
+.spinner-next {
+	cursor: pointer;
+	padding: 2px 4px;
+	border: 1px solid black;
+	border-radius: 4px;
+}
+
+
+input[type="number"] {
+	width: 32px;
+	text-align: center;
+	padding: 2px;
+	align-items: center;
+	border: 1px solid black;
+	border-radius: 4px;
+}

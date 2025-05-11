@@ -32,10 +32,16 @@ h2 {
     gap: 2rem;
 }
 
+#bank-payment-input {
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
 .card {
     background: white;
-    padding: 1.5rem;
-    border-radius: 0.5rem;
+    padding: 1.2rem;
+    border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     margin-bottom: 1.5rem;
 }

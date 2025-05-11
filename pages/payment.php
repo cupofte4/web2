@@ -101,7 +101,6 @@ if (isset($_POST['submit-bill']) && $_POST['submit-bill']) {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../js/global.js"></script>
     <script src="../js/pages.js"></script>
-    <script src="../js/cart.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </head>
 
@@ -117,7 +116,8 @@ if (isset($_POST['submit-bill']) && $_POST['submit-bill']) {
                         <hr>
                         <h2>SHIPPING ADDRESS</h2>
                         <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-                            <button type="button" id="btn-default" class="selected" onclick="defaultDeliveryInfo(true)">Default</button>
+                            <button type="button" id="btn-default" class="selected"
+                                onclick="defaultDeliveryInfo(true)">Default</button>
                             <button type="button" id="btn-change" onclick="defaultDeliveryInfo(false)">Other
                                 Address</button>
                         </div>
@@ -217,7 +217,7 @@ if (isset($_POST['submit-bill']) && $_POST['submit-bill']) {
                 </div>
 
                 <!-- BÊN PHẢI -->
-                <div class="order-summary" style="width: 35%;">
+                <div class="order-summary" style="width: 38%;">
                     <div class="d-none" id="bank-payment-input">
                         <div class="form-group">
                             <label for="bank-number">Card Number</label>
@@ -255,14 +255,22 @@ if (isset($_POST['submit-bill']) && $_POST['submit-bill']) {
                             $total = 0;
                             $count = 1;
                             foreach ($_SESSION['cart'] as $product_id => $quantity) {
-                                $sql = "SELECT * FROM `product` WHERE `ProductID` = " . $product_id;
+                                $product_id = intval($product_id); // ép kiểu an toàn
+                            
+                                if ($product_id <= 0) continue; // bỏ qua nếu ID không hợp lệ
+                            
+                                $sql = "SELECT * FROM `product` WHERE `ProductID` = $product_id";
                                 $result = mysqli_query($conn, $sql);
                                 $row_product = mysqli_fetch_assoc($result);
+                            
+                                if (!$row_product) continue; // nếu không có sản phẩm thì bỏ qua
+                            
+                                // hiển thị sản phẩm...
                                 echo '<div style="display: flex; justify-content: space-between;">';
-                                echo '<div style="width: 50%; text-align: justify;">' . $count . ") " . $row_product['name'] . '</div>';
-                                echo '<div style="width: 15%; text-align: justify;">' . number_format($row_product['price'], 0, '.', ',') . '₫</div>';
+                                echo '<div style="width: 50%; text-align: flex-start;">' . $count . ") " . $row_product['name'] . '</div>';
+                                echo '<div style="width: 15%; text-align: justify;">' . number_format($row_product['price'], 0, '.', ',') . '$</div>';
                                 echo '<div style="width: 5%; text-align: justify;">' . $quantity . '</div>';
-                                echo '<div style="width: 15%; text-align: end;">' . number_format($row_product['price'] * $quantity, 0, '.', ',') . '₫</div>';
+                                echo '<div style="width: 15%; text-align: end;">' . number_format($row_product['price'] * $quantity, 0, '.', ',') . '$</div>';
                                 echo '</div>';
                                 $total += ($row_product['price'] * $quantity);
                                 $count++;
@@ -278,7 +286,7 @@ if (isset($_POST['submit-bill']) && $_POST['submit-bill']) {
                                         <?php
                                         echo number_format($total, 0, '.', ',');
                                         ?>
-                                    </span>₫
+                                    </span>$
                                 </div>
                             </div>
                         </div>

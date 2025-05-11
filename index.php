@@ -171,10 +171,9 @@ if (isset($_SESSION['notification'])) {
                         <p>$
                             <?= number_format($row['price']) ?> USD
                         </p>
-                        <!-- <a class="add-to-cart" href="#">ADD TO CART</a> -->
+
                         <?php if (isset($_SESSION['customer_id'])): ?>
-                        <button class="add-to-cart" type="button"
-                            data-product-id="<?php echo $row['ProductID']; ?>">
+                        <button class="add-to-cart" type="button" data-product-id="<?php echo $row['ProductID']; ?>">
                             ADD TO CART
                         </button>
                         <?php else: ?>
@@ -217,7 +216,15 @@ if (isset($_SESSION['notification'])) {
                         <p>$
                             <?= number_format($row['price']) ?> USD
                         </p>
-                        <a class="add-to-cart" href="#">ADD TO CART</a>
+                        <?php if (isset($_SESSION['customer_id'])): ?>
+                        <button class="add-to-cart" type="button" data-product-id="<?php echo $row['ProductID']; ?>">
+                            ADD TO CART
+                        </button>
+                        <?php else: ?>
+                        <a class="add-to-cart" href="./pages/login.php">
+                            ADD TO CART
+                        </a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -356,7 +363,7 @@ if (isset($_SESSION['notification'])) {
     <!-- End sections: footer-group -->
 
     <script src="./js/index.js"></script>
-    <script src="./js/global.js"></script>
+    <script src="./js/cart.js"></script>
     <script>
     AOS.init();
     </script>

@@ -188,9 +188,16 @@ if (!$product) {
                 </select>
 
                 <div class="buttons">
-                    <button class="add-to-cart" type="submit"><i class="fas fa-shopping-cart"></i>ADD TO
-                        CART</button>
-                        
+                    <?php if (isset($_SESSION['customer_id'])): ?>
+                    <button class="add-to-cart" data-product-id="<?php echo $row_product['ProductID']; ?>">
+                        ADD TO CART
+                    </button>
+                    <?php else: ?>
+                    <a class="add-to-cart" href="./pages/login.php">
+                        ADD TO CART
+                    </a>
+                    <?php endif; ?>
+
                     <button class="add-to-wishlist" type="button"><i class="fas fa-heart"></i>ADD TO
                         WISHLIST</button>
                 </div>
@@ -407,6 +414,7 @@ if (!$product) {
     </section>
     <!-- End sections: footer-group -->
     <script src="../js/index.js"></script>
+    <script src="../js/pages.js"></script>
 </body>
 
 </html>

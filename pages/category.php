@@ -185,7 +185,15 @@ if (isset($_GET['category_id'])) {
                         <p>$
                             <?= number_format($row_product['price']) ?> USD
                         </p>
-                        <a class="add-to-cart" href="#">ADD TO CART</a>
+                        <?php if (isset($_SESSION['customer_id'])): ?>
+                        <button class="add-to-cart" type="button"
+                            data-product-id="<?php echo $row_product['ProductID']; ?>"> ADD TO CART
+                        </button>
+                        <?php else: ?>
+                        <a class="add-to-cart" href="./pages/login.php">
+                            ADD TO CART
+                        </a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -313,6 +321,7 @@ if (isset($_GET['category_id'])) {
     </section>
     <!-- End sections: footer-group -->
     <script src="../js/index.js"></script>
+    <script src="../js/pages.js"></script>
     <script>
     AOS.init();
     </script>

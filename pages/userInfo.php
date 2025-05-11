@@ -552,7 +552,7 @@ if (isset($_POST["capnhat_info"]) && $_POST["capnhat_info"]) {
 
     <!-- JS -->
     <script src="../js/index.js"></script>
-    <script src="../js/userInfo.js"></script>
+    <script src="../js/global.js"></script>
 
     <script>
     AOS.init();
