@@ -34,6 +34,7 @@ CREATE TABLE `customer` (
 INSERT INTO `customer` (`customer_id`, `first_name`, `last_name`, `email`, `phone`, `street`, `ward`, `district`, `city`, `password`, `status`) VALUES
 (1, 'Trần', 'Như', 'trannhu@gmail.com', '01212729580', '400 Âu Cơ', '8736', '554', '50', 'c3eb4bd8dfc3dac74e8cfc3d7918d6b1', 1);
 
+
 -- 
 -- 
 
@@ -85,6 +86,7 @@ CREATE TABLE `type` (
 -- 
 -- 
 
+
 INSERT INTO `type` (`type_id`, `type_name`) VALUES
 ('jacket', "Jacket"),
 ('jean', 'Jean'),
@@ -92,6 +94,8 @@ INSERT INTO `type` (`type_id`, `type_name`) VALUES
 
 -- 
 -- 
+
+
 
 CREATE TABLE `product` (
   `ProductID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -106,6 +110,7 @@ CREATE TABLE `product` (
 
 -- 
 -- 
+
 
 INSERT INTO `product` (`ProductID`, `name`, `image`, `category_id`, `type_id`, `price`, `description`, `status`) VALUES
 (1, 'allover crinkle logo print regular fit padded bomber jacket', 'mjacket1.jpg', 'men','jacket', 385, "Crafted in a muted charcoal gray, this bomber jacket is adorned with subtle, wrinkled EK logo prints that add depth to its design. The front pocket features a refined orange brand woven label, elevating the jacket's overall distinction.", 1),
@@ -147,6 +152,45 @@ INSERT INTO `product` (`ProductID`, `name`, `image`, `category_id`, `type_id`, `
 (37, "Daicock and Seagull Print Relax Fit 2-in-1 Denim Worker Shirt Jacket", "njacket4.jpg", 'whatsnew', 'jacket', 410, "Highlighted by a Daicock and seagull print, this 2-in-1 shirt jacket features unique faded print details that align seamlessly with the retro theme. The vintage wash finish adds a touch of personality and classic appeal. The varied pocket shapes bring depth and structure, allowing for a layered, stylish look even when worn on its own, perfect for those who value both fashion and individuality.", 1),
 (38, "Deconstructed with Multi-pocket Loose Fit Denim Jacket", 'njacket5.webp', 'whatsnew', 'jacket', 440, "Combining collage techniques and deconstruction elements from graffiti art, this denim set presents a unique washed multi-pocket design. The pockets were removed and reattached post-wash, forming a shadowy outline of dark blue pockets for a displaced, layered effect. The asymmetrical deconstruction enhances texture and personality, making the design both fun and infused with a bold streetwear aesthetic.", 1);
 
+--
+-- 
+CREATE TABLE `orderdetail`(
+  `OrderID` INT (11) NOT NULL,
+  `ProductID` INT (11) NOT NULL,
+  `price` INT (11) NOT NULL,
+  `quantity` INT (11) NOT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- 
+-- 
+
+INSERT INTO `oderdetail` (`OrderID`, `ProductID`, `price`, `quantity`) VALUES
+(1, 1, 385, 2);
+
+
+-- 
+-- 
+CREATE TABLE `orders`(
+  `OrderID` INT(11) NOT NULL,
+  `customerID` INT(11) NOT NULL,
+  `receiver` varchar(50) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `street` varchar(50) NOT NULL,
+  `ward` varchar(50) NOT NULL,
+  `district` varchar(50) NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `status` INT(11) NOT NULL,
+  `order_date` datetime NOT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `orders`(`OrderID`, `customerID`, `receiver`, `email`, `phone`, `street`, `ward`, `district`, `city`, `status`, `order_date`) VALUES  
+(1,1,'Trần Thị Quỳnh Như','trannhu@gmail.com','01212729580','400 Âu Cơ','8891','564','50',1,'2025-5-4 18:23:46');
+
+-- 
+-- 
+
+-- 
+-- 
 -- 
 -- 
 
@@ -171,7 +215,6 @@ ALTER TABLE `product`
 
 ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`);
-COMMIT;
 
 --
 --
@@ -183,9 +226,30 @@ ALTER TABLE `customer`
 
 ALTER TABLE `manager`
   ADD PRIMARY KEY (`username`);
+-- 
+-- 
+ALTER TABLE `orderdetail`
+  ADD PRIMARY KEY (`OrderID`,`ProductID`),
+  ADD KEY `ProductID` (`ProductID`),
+  ADD KEY `OrderID`(`OrderID`);
 
 -- 
 -- 
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`OrderID`),
+  ADD KEY `customer_id` (`customer_id`)
+-- 
+-- 
+ALTER TABLE `orderdetail`
+  ADD CONSTRAINT `oderdetail_ibfk_1` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`OrderID`),
+  ADD CONSTRAINT `oderdetail_ibfk_2` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`);
+-- 
+-- 
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`);
+-- 
+-- 
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
