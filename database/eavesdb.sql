@@ -155,7 +155,7 @@ INSERT INTO `product` (`ProductID`, `name`, `image`, `category_id`, `type_id`, `
 --
 -- 
 CREATE TABLE `orderdetail`(
-  `OrderID` INT (11) NOT NULL,
+  `OrderID` INT (11) NOT NULL AUTO_INCREMENT,
   `ProductID` INT (11) NOT NULL,
   `price` INT (11) NOT NULL,
   `quantity` INT (11) NOT NULL
@@ -170,7 +170,7 @@ INSERT INTO `oderdetail` (`OrderID`, `ProductID`, `price`, `quantity`) VALUES
 -- 
 -- 
 CREATE TABLE `orders`(
-  `OrderID` INT(11) NOT NULL,
+  `OrderID` INT(11) NOT NULL AUTO_INCREMENT,
   `customerID` INT(11) NOT NULL,
   `receiver` varchar(50) NOT NULL,
   `email` varchar(150) NOT NULL,
@@ -236,7 +236,7 @@ ALTER TABLE `orderdetail`
 -- 
 -- 
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`OrderID`),
+  ADD PRIMARY KEY (`OrderID`) ,
   ADD KEY `customer_id` (`customer_id`)
 -- 
 -- 
