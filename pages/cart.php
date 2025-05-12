@@ -15,7 +15,7 @@ if (!isset($_SESSION['customer_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CART - EAVES</title>
+    <title>CART-EAVES</title>
     <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css.map">
