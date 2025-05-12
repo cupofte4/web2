@@ -330,15 +330,15 @@ if (isset($_POST["capnhat_info"]) && $_POST["capnhat_info"]) {
                     </li>
 
                     <li onclick="tabs(1)">
-                        <h3>Change Password</h3>
+                        <h3>My orders</h3>
                     </li>
 
                     <li onclick="tabs(2)">
-                        <h3>Change Email</h3>
+                        <h3>Change Password</h3>
                     </li>
 
                     <li onclick="tabs(3)">
-                        <h3>My orders</h3>
+                        <h3>Change Email</h3>
                     </li>
 
                     <li>
@@ -426,7 +426,15 @@ if (isset($_POST["capnhat_info"]) && $_POST["capnhat_info"]) {
                     </form>
                 </div>
 
-                <!-- Tab 1: Đổi mật khẩu -->
+                <!-- Tab 1: Lịch sử -->
+                <div class="history tabShow">
+                    <?php
+                        include './orders.php';
+                    ?>
+                </div>
+
+
+                <!-- Tab 2: Đổi mật khẩu -->
                 <div class="changePassword tabShow">
                     <form method="POST" action="userInfo.php">
 
@@ -455,7 +463,7 @@ if (isset($_POST["capnhat_info"]) && $_POST["capnhat_info"]) {
                     </form>
                 </div>
 
-                <!-- Tab 2: Đổi email -->
+                <!-- Tab 3: Đổi email -->
                 <div class="changeEmail tabShow">
                     <form method="POST" action="userInfo.php">
 
@@ -483,14 +491,6 @@ if (isset($_POST["capnhat_info"]) && $_POST["capnhat_info"]) {
                         </div>
                     </form>
                 </div>
-
-                <!-- Tab 3: Lịch sử -->
-                <div class="history tabShow">
-                    <?php
-                        include './orders.php';
-                    ?>
-                </div>
-
             </div>
         </div>
     </section>
@@ -612,16 +612,16 @@ if (isset($_POST["capnhat_info"]) && $_POST["capnhat_info"]) {
     </script>
 
     <script>
-   const tabBtn = document.querySelectorAll(".tab");
-            const tab = document.querySelectorAll(".tabShow");
+    const tabBtn = document.querySelectorAll(".tab");
+    const tab = document.querySelectorAll(".tabShow");
 
-            function tabs(panelIndex) {
-                tab.forEach(function(node) {
-                    node.style.display = "none";
-                });
-                tab[panelIndex].style.display = "block";
-            }
-            tabs(0);
+    function tabs(panelIndex) {
+        tab.forEach(function(node) {
+            node.style.display = "none";
+        });
+        tab[panelIndex].style.display = "block";
+    }
+    tabs(0);
     </script>
 
     <?php

@@ -1,12 +1,9 @@
 <?php
 require '../../connection/connect.php';
 
-$productID = $_POST['edit_product_id'];
-$sql = "SELECT * FROM `product` WHERE `ProductID` = '{$productID}'";
-$result = mysqli_query($conn, $sql);
-$edit_row = $result->fetch_assoc();
-
 if (isset($_POST["capnhat"]) && $_POST["capnhat"]) {
+    $productID = $_POST["product-id"];
+
     if (!empty($_FILES["product-image-url"]["tmp_name"])) {
         $tmp_name = $_FILES["product-image-url"]["tmp_name"];
         $fldimageurl = "../images/" . $_FILES["product-image-url"]["name"];
@@ -18,12 +15,11 @@ if (isset($_POST["capnhat"]) && $_POST["capnhat"]) {
         $image = $_POST["image-url"];
     }
 
-    $productID = $_POST["product-id"];
-    $name = $_POST["product-name"];
-    $category_id = $_POST["product-category"];
-    $type = $_POST["product-type"];
-    $price = $_POST["product-price"];
-    $description = $_POST["product-description"];
+    $name = mysqli_real_escape_string($conn, $_POST["product-name"]);
+    $category_id = isset($_POST["product-category"]) ? $_POST["product-category"] : 0;
+    $type = isset($_POST["product-type"]) ? $_POST["product-type"] : 0;
+    $price = mysqli_real_escape_string($conn, $_POST["product-price"]);
+    $description = mysqli_real_escape_string($conn, $_POST["product-description"]);
 
     $sql = "UPDATE `product` 
             SET `name` = '$name', 
@@ -33,14 +29,23 @@ if (isset($_POST["capnhat"]) && $_POST["capnhat"]) {
                 `price` = '$price', 
                 `description` = '$description'
             WHERE `ProductID` = '$productID'";
+    
     $result = mysqli_query($conn, $sql);
     if ($result) {
         header("location: admin-product.php");
+        exit();
     } else {
         echo "Có lỗi xảy ra khi cập nhật thông tin: " . mysqli_error($conn);
     }
+} else {
+    // Lấy ID từ POST nếu tồn tại
+    $productID = isset($_POST['edit_product_id']) ? $_POST['edit_product_id'] : '';
+    $sql = "SELECT * FROM `product` WHERE `ProductID` = '{$productID}'";
+    $result = mysqli_query($conn, $sql);
+    $edit_row = $result->fetch_assoc();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -68,17 +73,17 @@ if (isset($_POST["capnhat"]) && $_POST["capnhat"]) {
                 <td>
                     <label for="product-category">Danh mục:</label>
                     <select name="product-category" id="product-category" style="width: 288px;">
-                        <option value="1">Đồ nam</option>
-                        <option value="2">Đồ nữ</option>
-                        <option value="3">Đồ mới</option>
+                        <option value="men">Men</option>
+                        <option value="women">Women</option>
+                        <option value="whatsnew">New</option>
                     </select>
                 </td>
                 <td>
                     <label for="product-type">Loại:</label>
                     <select name="product-type" id="product-type" style="width: 288px;">
-                        <option value="1">Jacket</option>
-                        <option value="2">Jean</option>
-                        <option value="2">Sweatshirt</option>
+                        <option value="jacket">Jacket</option>
+                        <option value="jean">Jean</option>
+                        <option value="sweatshirt">Sweatshirt</option>
                     </select>
                 </td>
             </tr>

@@ -6,67 +6,77 @@ require '../../connection/connectDGHCVN.php';
 if (!isset($_SESSION['logined-username'])) {
     $_SESSION['error_message'] = "Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại!";
     header("Location: ../index.php");
+    exit();
 }
 
 $empty_message = "";
 $error_username = "";
-$error_password = ""; 
+$error_password = "";
 
 if (isset($_POST["themmoi"])) {
-    
-    $username = $_POST["admin-username"];
-    $fullname = $_POST["admin-fullname"];
-    $email = $_POST["admin-email"];
-    $phone = $_POST["admin-phone"];
-    $street = $_POST["admin-street"];
+
+    $username = trim($_POST["admin-username"]);
+    $fullname = trim($_POST["admin-fullname"]);
+    $email = trim($_POST["admin-email"]);
+    $phone = trim($_POST["admin-phone"]);
+    $street = trim($_POST["admin-street"]);
     $district = $_POST["admin-district"] ?? "";
     $ward = $_POST["admin-ward"] ?? "";
     $city = $_POST["admin-city"] ?? "";
-    $password = md5($_POST["admin-password1"]);
-    $repassword = md5($_POST["admin-password2"]);
+    $password_raw = $_POST["admin-password1"];
+    $repassword_raw = $_POST["admin-password2"];
 
-    $email_pattern = '/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/';
+    $email_pattern = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
     $phone_pattern = '/^0\d{9}$/';
     $password_pattern = '/^(?=.*[A-Z])(?=.*\d).{8,}$/';
 
-    if (!empty($fullname) && !empty($username) && !empty($phone) && !empty($street) && !empty($email) && !empty($repassword)) {
+    if (!empty($fullname) && !empty($username) && !empty($phone) && !empty($street) && !empty($email) && !empty($repassword_raw)) {
+
         if (preg_match('/\s/', $username)) {
             $error_username = "Tên đăng nhập không được chứa khoảng trắng.";
         }
         if (!preg_match($phone_pattern, $phone)) {
-            $empty_message = "Số điện thoại không hợp lệ. Vui lòng nhập lai.";
+            $empty_message = "Số điện thoại không hợp lệ.";
         }
         if (!preg_match($email_pattern, $email)) {
-            $empty_message = "Email không hợp lệ. Vui lòng nhập lại.";
+            $empty_message = "Email không hợp lệ.";
         }
-        if ($password !== $repassword) {
+        if ($password_raw !== $repassword_raw) {
             $error_password = "Mật khẩu nhập lại không khớp.";
         }
-        if (!preg_match($password_pattern, $password)) {
+        if (!preg_match($password_pattern, $password_raw)) {
             $error_password = "Mật khẩu phải ít nhất 8 ký tự, bao gồm ít nhất một chữ viết hoa và một chữ số.";
         }
-    
-        $check_username_sql = "SELECT * FROM manager WHERE username = '$username'";
-        $result = $conn->query($check_username_sql);
-        if ($result->num_rows > 0) {
-            $error_username = "Tên đăng nhập đã tồn tại. Vui lòng chọn tên đăng nhập khác.";
+
+        // Check username tồn tại
+        $stmt = $conn->prepare("SELECT username FROM Manager WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows > 0) {
+            $error_username = "Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác.";
         }
-        if (empty($empty_message) && empty($error_username)) {
-            $sql = "INSERT INTO `Manager`(username, fullname, email, phone, street, ward, district, city, password, status)
-                VALUES ('{$username}', '{$fullname}', '{$email}', '{$phone}', '{$street}', '{$ward}', '{$district}', '{$city}', '{$password}', 1)";
-            // mysqli_query($conn, $sql);
-            // header("location: admin-istrator.php");
-            if ($conn->query($sql) === TRUE) {
-                header("location: admin-istrator.php");
+
+        if (empty($empty_message) && empty($error_username) && empty($error_password)) {
+            $password_hashed = password_hash($password_raw, PASSWORD_DEFAULT);
+
+            $stmt_insert = $conn->prepare("INSERT INTO Manager (username, fullname, email, phone, street, ward, district, city, password, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)");
+            $stmt_insert->bind_param("sssssssss", $username, $fullname, $email, $phone, $street, $ward, $district, $city, $password_hashed);
+
+            if ($stmt_insert->execute()) {
+                header("Location: admin-istrator.php");
                 exit();
             } else {
-                echo "Error: {$sql}" . $conn->error;
+                echo "Lỗi khi thêm quản trị viên: " . $stmt_insert->error;
             }
         }
     } else {
         $empty_message = "Vui lòng điền đầy đủ thông tin.";
     }
 }
+
+
 
 
 if (isset($_POST["lock_username"])) {
@@ -160,10 +170,11 @@ if (isset($_POST["lock_username"])) {
                 <table id="input-table">
                     <tr>
                         <td><label for="admin-username">Tên tài khoản:</label></td>
-                        <td><input size="45" type="text" name="admin-username" id="admin-username"></td>
+                        <td><input size="45" type="text" name="admin-username" id="admin-username">
                         <?php if(!empty($error_username)): ?>
                         <div style="color: red;"><?php echo $error_username; ?></div>
                         <?php endif; ?>
+                        </td>
                     </tr>
                     <tr>
                         <td><label for="admin-fullname">Họ và tên:</label></td>
@@ -262,7 +273,7 @@ if (isset($_POST["lock_username"])) {
                             echo "<td>" . $row['fullname'] . "</td>";
                             echo "<td>" . $row['email'] . "</td>";
                             echo "<td>" . $row['phone'] . "</td>";
-                            echo "<td>{$row['street']} {$district['name']} {$ward['name']}</td>";
+                            echo "<td>{$row['street']}, {$district['name']}, {$ward['name']}</td>";
                             echo "<td>{$city['name']}</td>";
                             echo '<td>';
                             if(!($row['username'] == $_SESSION['logined-username'])) {

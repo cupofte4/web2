@@ -91,7 +91,7 @@ $OrderID=$_GET['OrderID'];
                         <p><b>Phone: </b><?php echo $row_product['phone']; ?>
                         </p>
                         <p><b>Address: </b>
-                            <?php echo $row_product['street'] . " " . $district['name'] . " " . $ward['name'] . " " . $city['name'] ?>
+                            <?php echo $row_product['street'] . ", " . $district['name'] . ", " . $ward['name'] . ", " . $city['name'] ?>
                         </p>
 
                     </div>

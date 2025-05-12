@@ -109,7 +109,7 @@ $order_id = mysqli_fetch_assoc($results);
                         <p><b>Email: </b><?php echo $row_product['email']; ?></p>
                         <p><b>Phone: </b><?php echo $row_product['phone']; ?></p>
                         <p><b>Address: </b>
-                            <?php echo $row_product['street'] . " " . $district['name'] . " " . $ward['name'] . " " . $city['name']; ?>
+                            <?php echo $row_product['street'] . ", " . $district['name'] . ", " . $ward['name'] . ", " . $city['name']; ?>
                         </p>
                         <p><b>Order Time:</b> <?php echo $row_product['order_date']; ?></p>
                     </div>

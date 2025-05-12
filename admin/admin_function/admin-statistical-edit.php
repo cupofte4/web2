@@ -1,14 +1,14 @@
 <?php
   require '../../connection/connect.php';
 
-  $username = $_GET['username']; 
+  $customer_id = $_GET['customer_id']; 
 
 // Kiểm tra xem id_khachhang đã được gửi từ URL hay không
-if(isset($_GET['username'])){
-    $username = $_GET['username']; 
+if(isset($_GET['customer_id'])){
+    $customer_id = $_GET['customer_id']; 
     
     // Truy vấn SQL để lấy tất cả các hóa đơn của người dùng cụ thể
-    $query = "SELECT * FROM orders WHERE username = '$username'";
+    $query = "SELECT * FROM orders WHERE customer_id = '$customer_id'";
     $result = mysqli_query($conn, $query); 
 
     // Kiểm tra xem truy vấn có thành công không
@@ -162,7 +162,7 @@ if(isset($_GET['username'])){
                     <td><?php echo $donhang['order_date']; ?></td>
                     <td>
                         <!-- Tạo liên kết để xem chi tiết từng hóa đơn -->
-                        <a href="admin-statistical-orderdetails.php?OrderID=<?php echo $donhang['OrderID']; ?>&username=<?php echo $username; ?>">Xem chi tiết</a>
+                        <a href="admin-statistical-orderdetails.php?OrderID=<?php echo $donhang['OrderID']; ?>&customer_id=<?php echo $customer_id; ?>">Xem chi tiết</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -200,11 +200,11 @@ if(isset($_GET['username'])){
               <?php
 
         // Kiểm tra xem id_khachhang đã được gửi từ URL hay không
-        if(isset($_GET['username'])){
-          $username = $_GET['username']; 
+        if(isset($_GET['customer_id'])){
+          $customer_id = $_GET['customer_id']; 
           
           // Truy vấn SQL để lấy tất cả các hóa đơn của người dùng cụ thể
-          $query = "SELECT * FROM orders WHERE username = '$username'";
+          $query = "SELECT * FROM orders WHERE customer_id = '$customer_id'";
           $result = mysqli_query($conn, $query); 
 
           // Kiểm tra xem truy vấn có thành công không
@@ -215,7 +215,7 @@ if(isset($_GET['username'])){
                   while($order = mysqli_fetch_assoc($result)) {
                       $OrderID = $order['OrderID'];
                       // Truy vấn SQL để lấy thông tin khách hàng của mỗi hóa đơn
-                      $customer_query = "SELECT * FROM customer WHERE username = '$username' ";
+                      $customer_query = "SELECT * FROM customer WHERE customer_id = '$customer_id' ";
                       $customer_result = mysqli_query($conn, $customer_query);
                       if($customer_result && mysqli_num_rows($customer_result) > 0) {
                           $customer = mysqli_fetch_assoc($customer_result);

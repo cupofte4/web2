@@ -42,9 +42,9 @@ if(isset($_POST['thaydoi']) && $_POST['thaydoi']) {
                     <table class="table">
                         <thead class="border-black border-bottom">
                             <tr>
-                                <td scope="col" style="text-align: left">Tên sách</td>
+                                <td scope="col" style="text-align: left">Tên sản phẩm</td>
                                 <td scope="col">Số lượng</td>
-                                <td scope="col">Giá 1 cuốn sách</td>
+                                <td scope="col">Giá </td>
                                 <td scope="col">Tổng</td>
                             </tr>
                         </thead>
@@ -59,16 +59,16 @@ if(isset($_POST['thaydoi']) && $_POST['thaydoi']) {
                                     ?>
                                     <tr style="text-align: center;">
                                         <td style="text-align: left">
-                                            <?php echo $row_product['title']; ?>
+                                            <?php echo $row_product['name']; ?>
                                         </td>
                                         <td>
                                             <?php echo $row_product['quantity']; ?>
                                         </td>
                                         <td>
-                                            <?php echo number_format($row_product['price'], 0, '.', ','); ?>₫
+                                            <?php echo ($row_product['price']); ?>$
                                         </td>
                                         <td>
-                                            <?php echo number_format($row_product['quantity'] * $row_product['price'], 0, '.', ',') ?>₫
+                                            <?php echo ($row_product['quantity'] * $row_product['price']) ?>$
                                         </td>
                                     </tr>
                                 <?php }
@@ -77,7 +77,7 @@ if(isset($_POST['thaydoi']) && $_POST['thaydoi']) {
                         <tr>
                             <td scope="col" style="text-align: left; font-weight: bold;" colspan="3">Tổng tiền</td>
                             <td scope="col">
-                                <?php echo number_format($total, 0, '.', ',') ?>đ
+                                <?php echo ($total) ?>$
                             </td>
                         </tr>
                     </table>

@@ -135,9 +135,9 @@ if (isset($_POST['hien']) && $_POST['hien']) {
                             <label for="product-category">Danh mục</label>
                             <select name="product-category" id="product-category" style="width: 288px;">
                                 <option value="" disabled selected>Chọn danh mục -</option>
-                                <option value="men">Đồ Nam</option>
-                                <option value="women">Đồ Nữ</option>
-                                <option value="whatsnew">Đồ mới</option>
+                                <option value="men">Men</option>
+                                <option value="women">Women</option>
+                                <option value="whatsnew">New</option>
                         </td>
                     </tr>
                     <tr>

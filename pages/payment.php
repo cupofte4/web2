@@ -104,7 +104,7 @@ if (isset($_POST['submit-bill']) && $_POST['submit-bill']) {
     <link rel="stylesheet" href="../css/payment.css">
 
     <!-- JS -->
-    <script src="../js/global.js"></script>
+    <script src="../js/payment.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </head>
 
