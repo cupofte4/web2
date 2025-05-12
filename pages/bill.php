@@ -29,14 +29,9 @@ $order_id = mysqli_fetch_assoc($results);
     <script src="../vendor/jquery/ajax.googleapis.com_ajax_libs_jquery_3.5.1_jquery.min.js"></script>
     <!-- font-awesome -->
     <link rel="stylesheet" href="../vendor/font-awesome/fontawesome-free-6.5.2-web/css/all.min.css">
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/cart.css">
-    <link rel="stylesheet" href="../css/myInfo.css">
+    <link rel="stylesheet" href="../css/bill.css">
+
     <!-- JS -->
-    <script src="../js/global.js"></script>
-    <script src="../js/pages.js"></script>
-    <script src="../js/cart.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <title>Bill</title>
 </head>
@@ -72,7 +67,7 @@ $order_id = mysqli_fetch_assoc($results);
                                         <?php echo $row_product['quantity']; ?>
                                     </td>
                                     <td>
-                                        <?php echo ($row_product['price']); ?>₫
+                                        <?php echo ($row_product['price']); ?>$
                                     </td>
                                     <td>
                                         <?php echo ($row_product['quantity'] * $row_product['price']) ?>
@@ -91,7 +86,7 @@ $order_id = mysqli_fetch_assoc($results);
                     </tr>
                 </table>
                 <div style="display: flex; justify-content: end;">
-                    <a href="./index.php">
+                    <a href="../index.php">
                         <button class="btn btn-info" style="color: white;">Back</button>
                     </a>
                 </div>

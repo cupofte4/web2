@@ -107,7 +107,7 @@ input[type="email"] {
     padding: 5px 10px;
     border-radius: 6px;
     border: 1px solid #9b9b9b;
-    width: 15%;
+    width: 18%;
     font-size: 14px;
     height: 40px;
     line-height: 38px;
@@ -135,6 +135,39 @@ input[type="email"] {
     background-color: gray;
 }
 
+/* Lịch sử */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px; /* Thêm khoảng cách giữa bảng và các phần khác */
+}
+
+table, th, td {
+    border: 1px solid #ddd; /* Màu và độ dày của đường kẻ */
+}
+
+th, td {
+    font-size: 15px;
+    padding: 10px;
+    text-align: left;
+}
+
+td{
+    justify-content: center;
+    text-align: center;
+}
+
+th {
+    justify-content: center;
+    text-align: center;
+}
+
+.name {
+    width: 200px;
+    white-space: nowrap; /* Ngăn chặn quấn dòng */
+    overflow: hidden; /* Ẩn phần vượt quá chiều rộng */
+    text-overflow: ellipsis; /* Hiển thị dấu chấm cuối nếu có phần vượt quá chiều rộng */
+}
 
 
 

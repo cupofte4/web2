@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.main-section {
+    height: 100%;
+    background-color: #F0F0F0;
+    padding: 4em;
+}
+
+.left {
+    width: 68%;
+    background-color: #FFF;
+    padding: 1em;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    height: auto;
+}
+
+.left table {
+    font-size: 18px;
+}
+
+.left table thead tr{
+    font-weight: bold;
+}
+
+.left table tbody tr:last-child {
+    border-bottom: 1px solid black;
+}
+
+.left table tbody tr td:nth-child(4) {
+    text-align: center;
+}
+
+.left table tfoot tr:last-child{
+    border: 0px solid white;
+}
+
+.right{
+    width: 30%;
+    height: auto;
+}
+
+.right .user-detail,
+.right .order-detail {
+    background-color: #FFF;
+    padding: 1em;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    margin-bottom: 2em;
+}
+
+h3{
+    font-size: 1.2rem;
+}

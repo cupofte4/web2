@@ -95,8 +95,6 @@ INSERT INTO `type` (`type_id`, `type_name`) VALUES
 -- 
 -- 
 
-
-
 CREATE TABLE `product` (
   `ProductID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(200) NOT NULL,
@@ -110,7 +108,6 @@ CREATE TABLE `product` (
 
 -- 
 -- 
-
 
 INSERT INTO `product` (`ProductID`, `name`, `image`, `category_id`, `type_id`, `price`, `description`, `status`) VALUES
 (1, 'allover crinkle logo print regular fit padded bomber jacket', 'mjacket1.jpg', 'men','jacket', 385, "Crafted in a muted charcoal gray, this bomber jacket is adorned with subtle, wrinkled EK logo prints that add depth to its design. The front pocket features a refined orange brand woven label, elevating the jacket's overall distinction.", 1),
@@ -155,7 +152,7 @@ INSERT INTO `product` (`ProductID`, `name`, `image`, `category_id`, `type_id`, `
 --
 -- 
 CREATE TABLE `orderdetail`(
-  `OrderID` INT (11) NOT NULL AUTO_INCREMENT,
+  `OrderID` INT (11) NOT NULL,
   `ProductID` INT (11) NOT NULL,
   `price` INT (11) NOT NULL,
   `quantity` INT (11) NOT NULL
@@ -163,15 +160,14 @@ CREATE TABLE `orderdetail`(
 -- 
 -- 
 
-INSERT INTO `oderdetail` (`OrderID`, `ProductID`, `price`, `quantity`) VALUES
+INSERT INTO `orderdetail` (`OrderID`, `ProductID`, `price`, `quantity`) VALUES
 (1, 1, 385, 2);
-
 
 -- 
 -- 
 CREATE TABLE `orders`(
-  `OrderID` INT(11) NOT NULL AUTO_INCREMENT,
-  `customerID` INT(11) NOT NULL,
+  `OrderID` INT(11) NOT NULL,
+  `customer_id` INT(11) NOT NULL,
   `receiver` varchar(50) NOT NULL,
   `email` varchar(150) NOT NULL,
   `phone` varchar(20) NOT NULL,
@@ -183,14 +179,9 @@ CREATE TABLE `orders`(
   `order_date` datetime NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `orders`(`OrderID`, `customerID`, `receiver`, `email`, `phone`, `street`, `ward`, `district`, `city`, `status`, `order_date`) VALUES  
+INSERT INTO `orders`(`OrderID`, `customer_id`, `receiver`, `email`, `phone`, `street`, `ward`, `district`, `city`, `status`, `order_date`) VALUES  
 (1,1,'Trần Thị Quỳnh Như','trannhu@gmail.com','01212729580','400 Âu Cơ','8891','564','50',1,'2025-5-4 18:23:46');
 
--- 
--- 
-
--- 
--- 
 -- 
 -- 
 
@@ -231,22 +222,17 @@ ALTER TABLE `manager`
 ALTER TABLE `orderdetail`
   ADD PRIMARY KEY (`OrderID`,`ProductID`),
   ADD KEY `ProductID` (`ProductID`),
-  ADD KEY `OrderID`(`OrderID`);
+  ADD KEY `OrderID`(`OrderID`),
+  ADD CONSTRAINT `orderdetail_ibfk_1` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`OrderID`),
+  ADD CONSTRAINT `orderdetail_ibfk_2` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`);
 
 -- 
 -- 
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`OrderID`) ,
-  ADD KEY `customer_id` (`customer_id`)
--- 
--- 
-ALTER TABLE `orderdetail`
-  ADD CONSTRAINT `oderdetail_ibfk_1` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`OrderID`),
-  ADD CONSTRAINT `oderdetail_ibfk_2` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`);
--- 
--- 
-ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`);
+  ADD KEY `customer_id` (`customer_id`),
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
+  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT;
 -- 
 -- 
 COMMIT;

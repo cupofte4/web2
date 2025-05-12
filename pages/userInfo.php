@@ -283,7 +283,6 @@ if (isset($_POST["capnhat_info"]) && $_POST["capnhat_info"]) {
                                 echo '</div>';
                                 echo '</form>';
                                 echo '</div>';
-                                echo '<span class="line" style="width: 95%"></span>';
                             }
                                 }else {
                                     echo '<div class="my-4" style="display: flex; flex-direction: column;">';
@@ -331,15 +330,15 @@ if (isset($_POST["capnhat_info"]) && $_POST["capnhat_info"]) {
                     </li>
 
                     <li onclick="tabs(1)">
-                        <h3>My orders</h3>
-                    </li>
-
-                    <li onclick="tabs(2)">
                         <h3>Change Password</h3>
                     </li>
 
-                    <li onclick="tabs(3)">
+                    <li onclick="tabs(2)">
                         <h3>Change Email</h3>
+                    </li>
+
+                    <li onclick="tabs(3)">
+                        <h3>My orders</h3>
                     </li>
 
                     <li>
@@ -426,14 +425,8 @@ if (isset($_POST["capnhat_info"]) && $_POST["capnhat_info"]) {
                         </div>
                     </form>
                 </div>
-                <!-- Tab 1: Lịch sử mua hàng -->
-                <div class="history tabShow">
-                    <?php
-                        include './orders.php';
-                    ?>
-                </div>
 
-                <!-- Tab 2: Đổi mật khẩu -->
+                <!-- Tab 1: Đổi mật khẩu -->
                 <div class="changePassword tabShow">
                     <form method="POST" action="userInfo.php">
 
@@ -462,7 +455,7 @@ if (isset($_POST["capnhat_info"]) && $_POST["capnhat_info"]) {
                     </form>
                 </div>
 
-                <!-- Tab 3: Đổi email -->
+                <!-- Tab 2: Đổi email -->
                 <div class="changeEmail tabShow">
                     <form method="POST" action="userInfo.php">
 
@@ -488,9 +481,16 @@ if (isset($_POST["capnhat_info"]) && $_POST["capnhat_info"]) {
                         <div class="btn-save">
                             <input class="btn-primary" type="submit" value="Save" name="capnhat_email">
                         </div>
-
                     </form>
                 </div>
+
+                <!-- Tab 3: Lịch sử -->
+                <div class="history tabShow">
+                    <?php
+                        include './orders.php';
+                    ?>
+                </div>
+
             </div>
         </div>
     </section>
@@ -612,28 +612,17 @@ if (isset($_POST["capnhat_info"]) && $_POST["capnhat_info"]) {
     </script>
 
     <script>
-    const tab = document.querySelectorAll(".tabShow");
+   const tabBtn = document.querySelectorAll(".tab");
+            const tab = document.querySelectorAll(".tabShow");
 
-    function tabs(panelIndex) {
-        tab.forEach(function(node) {
-            node.style.display = "none";
-        });
-        tab[panelIndex].style.display = "block";
-    }
-
-    let defaultTab = <?php
-        if (isset($_GET['tab'])) {
-            echo (int)$_GET['tab'];
-        } elseif (isset($tab_active)) {
-            echo (int)$tab_active;
-        } else {
-            echo 0;
-        }
-    ?>;
-
-    tabs(defaultTab);
+            function tabs(panelIndex) {
+                tab.forEach(function(node) {
+                    node.style.display = "none";
+                });
+                tab[panelIndex].style.display = "block";
+            }
+            tabs(0);
     </script>
-
 
     <?php
     echo "<script>";

@@ -123,7 +123,6 @@ $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : null;
                                 echo '</div>';
                                 echo '</form>';
                                 echo '</div>';
-                                echo '<span class="line" style="width: 95%"></span>';
                             }
                                 }else {
                                     echo '<div class="my-4" style="display: flex; flex-direction: column;">';

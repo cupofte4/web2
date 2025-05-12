@@ -94,13 +94,17 @@ if (isset($_POST['submit-bill']) && $_POST['submit-bill']) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secure Checkout</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css.map">
+    <!-- jQuery (required for the spinner functionality) -->
+    <script src="../vendor/jquery/ajax.googleapis.com_ajax_libs_jquery_3.5.1_jquery.min.js"></script>
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="../vendor/font-awesome/fontawesome-free-6.5.2-web/css/all.min.css">
     <!-- CSS -->
     <link rel="stylesheet" href="../css/payment.css">
 
     <!-- JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../js/global.js"></script>
-    <script src="../js/pages.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </head>
 
@@ -330,8 +334,8 @@ if (isset($_POST['submit-bill']) && $_POST['submit-bill']) {
             email = document.getElementById('receiver-email'),
             phone = document.getElementById('receiver-phone'),
             city = document.getElementById('receiver-city'),
-            ward = document.getElementById('receiver-ward'),
             district = document.getElementById('receiver-district'),
+            ward = document.getElementById('receiver-ward'),
             street = document.getElementById('receiver-street');
 
         if (choice) {

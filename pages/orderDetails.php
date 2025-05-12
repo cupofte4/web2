@@ -14,24 +14,14 @@ $OrderID=$_GET['OrderID'];
     <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css.map">
     <script src="../vendor/jquery/ajax.googleapis.com_ajax_libs_jquery_3.5.1_jquery.min.js"></script>
     <link rel="stylesheet" href="../vendor/font-awesome/fontawesome-free-6.5.2-web/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/myInfo.css">
+    <link rel="stylesheet" href="../css/bill.css">
     <link rel="stylesheet" href="../assets/css/global.css">
 </head>
 <body>
     <div class="main-section" style="height: 100vh;">
-        <div class="breadcrumb-container">
-            <ul class="breadcrumb">
-                <li><a href="./userInfo.php">Back</a></li>
-                <li>Order of 
-                    <?php echo $_SESSION['last_name'];
-                    ?>
-                </li>
-            </ul>
-        </div>
         <h1 class="mb-5">
             Order ID:
             <?php echo $OrderID; ?>
-            
         </h1>
         <div class="d-flex align-items-start justify-content-between">
             <div class="left">
@@ -62,7 +52,7 @@ $OrderID=$_GET['OrderID'];
                                         <?php echo $row_product['quantity']; ?>
                                     </td>
                                     <td>
-                                        <?php echo number_format($row_product['price']); ?>₫
+                                        <?php echo number_format($row_product['price']); ?>$
                                     </td>
                                     <td>
                                         <?php echo number_format($row_product['quantity'] * $row_product['price']) ?>

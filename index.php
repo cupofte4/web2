@@ -134,7 +134,6 @@ if (isset($_SESSION['notification'])) {
                                 echo '</div>';
                                 echo '</form>';
                                 echo '</div>';
-                                echo '<span class="line" style="width: 95%"></span>';
                             }
                                 }else {
                                     echo '<div class="my-4" style="display: flex; flex-direction: column;">';
@@ -145,7 +144,7 @@ if (isset($_SESSION['notification'])) {
                             ?>
                         </div>
                         <span class="line"></span>
-                        <a href="./pages/cart.php" class="w-100" style="margin-top: 16px;">
+                        <a href="./pages/cart.php" class="w-100">
                             <button type="submit" class="btn btn-danger text-white w-100">CHECK YOUR CART</button>
                         </a>
                     </div>
