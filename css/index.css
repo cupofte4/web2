@@ -303,6 +303,99 @@ nav a:hover {
     display: none;
 }
 
+
+/* Cart */
+.cart-dropdown {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1em;
+    width: 400px;
+    height: auto;
+    background-color: white;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    display: none;
+}
+
+.cart-dropdown.show {
+    display: flex !important;
+}
+
+.cart-dropdown .cart-dropdown-items {
+    max-height: 320px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.fs-4 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 2px 0;
+    text-align: center;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    background-color: rgba(128, 128, 128, 0.23);
+}
+
+.btn-danger {
+	padding: 10px;
+    margin: 5px 0;
+	color: white;
+	background-color: rgb(180, 2, 2);
+	border: 1px solid rgb(180, 2, 2);
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background 0.3s ease;
+	font-weight: 600;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.btn-danger:hover {
+	background-color: rgb(170, 0, 0);
+	color: white;
+}
+
+.cart-dropdown-item span {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.cart-dropdown-item form > div:last-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.spinner {
+    display: flex;
+    gap: 4px;
+}
+
+.spinner-prev,
+.spinner-next {
+	cursor: pointer;
+	padding: 2px 4px;
+	border: 1px solid black;
+	border-radius: 4px;
+}
+
+
+input[type="number"] {
+	width: 32px;
+	text-align: center;
+	padding: 2px;
+	align-items: center;
+	border: 1px solid black;
+	border-radius: 4px;
+}
+
 /* Hero Section */
 .hero {
     background-size: cover;

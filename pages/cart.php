@@ -23,11 +23,9 @@ if (!isset($_SESSION['customer_id'])) {
     <script src="../vendor/jquery/ajax.googleapis.com_ajax_libs_jquery_3.5.1_jquery.min.js"></script>
     <!-- font-awesome -->
     <link rel="stylesheet" href="../vendor/font-awesome/fontawesome-free-6.5.2-web/css/all.min.css">
-    <link rel="stylesheet" href="../css/global.css" type="text/css">
     <link rel="stylesheet" href="../css/cart.css">
     <!-- JS -->
     <script src="../js/trac.js"></script>
-    <script src="../js/global.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- aos -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -128,7 +126,7 @@ if (!isset($_SESSION['customer_id'])) {
         <!-- Breadcrumbs -->
         <div class="breadcrumbs">
             <a href="../index.php" title="EAVES">HOME</a>
-            < <span>CART</span>
+            > <span>CART</span>
         </div>
 
         <div class="container cart-information-container">
@@ -289,6 +287,7 @@ if (!isset($_SESSION['customer_id'])) {
         </div>
     </section>
     <!-- End sections: footer-group -->
+    <script src="../js/index.js"></script>
 </body>
 
 </html>

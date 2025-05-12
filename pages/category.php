@@ -30,19 +30,20 @@ if (isset($_GET['category_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CATEGORY-EAVES</title>
 
-    <!-- css -->
     <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Bootstrap -->
+      <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css.map">
+    <!-- jQuery (required for the spinner functionality) -->
+    <script src="../vendor/jquery/ajax.googleapis.com_ajax_libs_jquery_3.5.1_jquery.min.js"></script>
+    <!-- css -->
+    <link rel="stylesheet" href="../vendor/font-awesome/fontawesome-free-6.5.2-web/css/all.min.css">
     <link rel="stylesheet" href="../css/category.css" type="text/css">
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/product-display.css">
 
     <!-- js -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script scr ="../js/pages.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- aos -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -113,7 +114,49 @@ if (isset($_GET['category_id'])) {
                     </form>
                     <a href="#" class="icon search-icon"><i class="fas fa-search"></i></a>
                     <a href="#" class="icon"><i class="fas fa-heart"></i></a>
-                    <a href="cart.php" class="icon"><i class="fas fa-shopping-cart"></i></a>
+                    <div class="rounded d-none cart-dropdown js-cart-dropdown">
+                        <p class="fs-4">CART</p>
+                        <span class="line"></span>
+                        <div class="cart-dropdown-items" style="display: flex; flex-direction: column;">
+                        <?php
+                        if (count($_SESSION['cart']) > 0) {
+                            foreach ($_SESSION['cart'] as $product_id => $quantity) {
+                                $sql = "SELECT * FROM `product` WHERE `ProductID` = '{$product_id}'";
+                                $result = mysqli_query($conn, $sql);
+                                $row = mysqli_fetch_assoc($result);
+                                echo '<div class="cart-dropdown-item" data-product-id="' . $product_id . '" style="display: flex; padding: 12px 0 12px 0; width: 100%;">';
+                                echo '<img src="../images/products/' . $row['image'] . ' " alt="picture" style="width: 70px; height: auto;">';
+                                echo '<form method="POST" style="display: flex; flex-direction: column; width: 100%; justify-content: space-between; margin-left: 10px;">';
+                                echo '<div style="display: flex; justify-content: space-between;">';
+                                echo '<span style="font-size: 14px; text-align: start;">' . $row['name'] . '</span>';
+                                echo '<button type="button" class="delete-from-cart" style="margin-left: 13px; border: none; background: none; display: flex; align-item: start;">X</button>';
+                                echo '</div>';
+                                echo '<div style="display: flex; justify-content: space-between;">';
+                                echo '<div class="input-group spinner" style="width: 80px;">';
+                                echo '<button class="spinner-prev" type="button" name="minus-quantity"><i class="fas fa-minus"></i></button>';
+                                echo '<input type="number" class="form-control text-center spinner-number" name="product-quantity" value="' . $quantity . '" data-product-id="' . $product_id . '" min="1" max="99" style="padding: 0; font-size: 14px;" readonly>';
+                                echo '<button class="spinner-next" type="button" name="plus-quantity"><i class="fas fa-plus"></i></button>';
+                                echo '</div>';
+                                echo '<span style="font-size: 14px;">' . number_format($row["price"], 0, ".", ",") . '$</span>';
+                                echo '</div>';
+                                echo '</form>';
+                                echo '</div>';
+                                echo '<span class="line" style="width: 95%"></span>';
+                            }
+                                }else {
+                                    echo '<div class="my-4" style="display: flex; flex-direction: column;">';
+                                    echo '<i class="fas fa-cart-shopping text-warning fs-1 mb-3" style="text-align: center"></i>';
+                                    echo '<span style="text-align: center;">Hiện chưa có sản phẩm</span>';
+                                    echo '</div>';
+                                }
+                            ?>
+                        </div>
+                        <span class="line"></span>
+                        <a href="cart.php" class="w-100">
+                            <button type="submit" class="btn btn-danger text-white w-100">CHECK YOUR CART</button>
+                        </a>
+                    </div>
+                    <a href="javascript:void(0);" class="icon js-toggle-cart"><i class="fas fa-shopping-cart"></i></a>
                     <div class="dropdown">
                         <a href="#" class="icon"><i class="fas fa-user"></i></a>
                         <div class="dropdown-content">

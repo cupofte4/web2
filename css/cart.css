@@ -1,3 +1,285 @@
+/* Global Styles */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Header Section */
+header {
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+}
+
+.heading-logo a {
+    font-size: 65px;
+    color: #ffffff;
+    text-decoration: none;
+    font-family: 'Audiowide';
+}
+
+.announcement {
+    color: #eee;
+    font-size: 14px;
+    padding: 5px 0;
+}
+
+.section-header {
+    padding: 0 24px;
+}
+
+/* Sticky Header */
+.sticky-header {
+    position: fixed;
+    background: linear-gradient(to bottom, black, rgba(63, 63, 63, 0.918));
+    z-index: 1;
+    transition: background-color 0.3s ease;
+}
+
+.sticky-header:hover {
+    background: linear-gradient(to bottom, black, rgb(63, 63, 63));
+}
+
+.sticky .announcement {
+    display: none;
+}
+
+/* Header Icons */
+.header-icons {
+    display: flex;
+    align-items: center;
+    float: right;
+    margin-top: -58px;
+    position: relative;
+}
+
+.icon {
+    text-align: center;
+    font-size: 14px;
+    padding-right: 20px;
+    color: white;
+    transition: font-size 0.3s ease;
+    display: inline-block;
+}
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 22px;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    overflow: hidden;
+    min-width: 120px;
+    z-index: 100;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: black;
+    font-size: 13px;
+    border-bottom: 1px solid #ddd;
+    font-weight: 500;
+}
+
+.dropdown-content a:hover {
+    background-color: #f0f0f0;
+    text-decoration: underline;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Navigation */
+.header-navbar {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 0;
+    background-color: transparent;
+    font-size: 16px;
+}
+
+.header-navbar a {
+    text-decoration: none;
+    color: #eee;
+    transition: color 0.3s ease;
+    border-bottom: 5px solid transparent;
+}
+
+nav a:hover {
+    color: red;
+}
+
+/* Search */
+.search-box {
+    display: none;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-19%);
+    width: 0;
+    overflow: visible;
+    background: white;
+    border-radius: 4px;
+    border: 2px solid black;
+}   
+
+/* Advanced Search Panel */
+.advanced-search {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 250px;
+    background: white;
+    border-radius: 4px;
+    padding: 15px;
+    margin-top: 5px;
+}
+
+.advanced-search.show {
+    display: block;
+    border: 1px solid black;
+}
+
+.search-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.filter-group label {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+    text-align: left;
+}
+
+.filter-group select {
+    padding: 8px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.filter-group option {
+    text-align: center;
+}
+
+.price-range {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.search-buttons {
+    display: block;
+    text-align: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.search-btn {
+    padding: 8px 60px;
+    border: 1px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.search-btn {
+    background: #000;
+    color: white;
+}
+
+.search-btn:hover {
+    background: #222;
+}
+
+/* Modify existing styles */
+.header-icons.expanded .search-box {
+    display: block;
+    width: 350px;
+}
+
+.search-box #searchInput {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+/* Advanced search toggle button */
+.advanced-search-toggle {
+    position: absolute;
+    right: 45px;
+    /* Adjusted to accommodate close button */
+    top: 53%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.basicSearch {
+    position: absolute;
+    right: 74px;
+    /* Adjusted to accommodate close button */
+    top: 53%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.search-box .close-btn {
+    position: absolute;
+    right: 15px;
+    font-size: 30px;
+    top: 42%;
+    transform: translateY(-50%);
+    color: #333;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.header-icons.expanded .icon:not(.search-icon) {
+    display: none;
+}
+
+.header-icons.expanded .search-icon {
+    display: none;
+}
+
 /* Main */
 .main {
 	padding-top: 154px;
@@ -22,8 +304,9 @@
 
 .fw-bold {
 	font-weight: 600;
-	color: rgb(6, 6, 50);
+	color: rgb(8, 8, 98);
 	text-transform: uppercase;
+	font-family: 'Audiowide';
 }
 
 .cart-information-container {
@@ -97,15 +380,15 @@
 	justify-content: space-between;
 }
 
-.cart-items .item .item-info .item-title {
-	font-size: 18px;
-	font-weight: normal;
+.cart-items .item .item-info .item-name {
+	font-size: 16px;
+	font-weight: 600;
 }
 
 .cart-items .item .item-info .item-price {
 	font-size: 16px;
 	font-weight: bolder;
-	color: #8F9BB3;
+	color: #333;
 }
 
 .empty-cart {
@@ -123,6 +406,9 @@
 	border: 1px solid rgb(180, 2, 2);
 	border-radius: 4px;
 	cursor: pointer;
+	transition: background 0.3s ease;
+	font-weight: 600;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .btn-danger:hover {
@@ -138,6 +424,11 @@
 	margin: 10px 0;
 }
 
+.spinner {
+    display: flex;
+    gap: 4px;
+}
+
 .spinner-prev,
 .spinner-next {
 	cursor: pointer;
@@ -146,7 +437,6 @@
 	border-radius: 4px;
 }
 
-
 input[type="number"] {
 	width: 32px;
 	text-align: center;
@@ -154,4 +444,226 @@ input[type="number"] {
 	align-items: center;
 	border: 1px solid black;
 	border-radius: 4px;
+}
+
+
+/* Footer */
+.footer-group {
+    padding: 32px 0;
+    border: 1px solid #000000;
+    border-left: none;
+    border-right: none;
+}
+
+.top-bar ul {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0px;
+    padding: 0 250px;
+    list-style: none;
+    justify-items: center;
+    margin: 0;
+}
+
+.top-bar li {
+    align-items: center;
+    display: flex;
+    text-align: left;
+}
+
+.top-bar-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-bar i {
+    font-size: 30px;
+    margin-right: 10px;
+}
+
+.top-bar p {
+    font-size: 16px;
+    color: black;
+}
+
+/* Footer links */
+.footer {
+    background-color: black;
+    padding: 36px 0;
+}
+
+/* <!-- Footer Section (left) --> */
+.footer-section {
+    width: 50%;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 0 180px;
+    padding: 0 20px;
+}
+
+.footer-section .footer-heading a {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    font-size: 45px;
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+    font-family: 'Audiowide';
+}
+
+.footer-news {
+    margin-top: 35px;
+}
+
+.footer-news h2 {
+    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 1.25;
+    font-weight: 400;
+    color: #fff;
+    margin: 0;
+    text-align: start;
+}
+
+.footer-news p {
+    line-height: 1.25;
+    color: #bebebe;
+    font-size: 16px;
+    text-transform: none;
+    margin-top: 0;
+    margin-bottom: 40px;
+    text-align: start;
+}
+
+.footer-news .sign-up-field .filed-input {
+    margin: 0;
+    background: 0 0;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #707070;
+    height: 42px;
+    width: 85%;
+    border-radius: 0;
+    padding: 0;
+    font-size: 14px;
+    color: #fff;
+}
+
+.footer-news .actions {
+    margin-top: 35px;
+}
+
+.footer-news .actions .btn-subscribe {
+    font-size: 12px;
+    padding: 0 36px;
+    height: 42px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #fff;
+    border-radius: 0;
+    font-weight: 400;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    width: auto;
+    font-family: inherit;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.footer-news .actions .btn-subscribe:hover {
+    background-color: #000000;
+    color: #cfcfcf;
+    border-color: #cfcfcf;
+}
+
+/* <!-- Footer Columns (right) --> */
+.footer-columns {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    width: 50%;
+    padding-top: 95px;
+}
+
+.footer-column {
+    margin-left: 50px;
+    text-align: left;
+}
+
+.footer-column h3 {
+    color: white;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.footer-column ul li a:hover {
+    color: gray;
+    text-decoration: underline;
+}
+
+/* <!-- Social Icons --> */
+.social-icons {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.social-icons a {
+    align-items: center;
+    text-align: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 44px;
+    background-color: #777;
+    color: white;
+    font-size: 32px;
+    margin-right: 20px;
+    text-decoration: none;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.social-icons a:hover {
+    background-color: #444;
+    color: #bbb;
+}
+
+.social-icons i {
+    font-size: 30px;
+}
+
+.footer-bottom {
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    padding: 0 24px;
+}
+
+.footer-bottom p {
+    margin-top: 15px;
 }

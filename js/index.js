@@ -52,3 +52,22 @@ document.addEventListener('click', (e) => {
         advancedSearch.classList.remove('show');
     }
 });
+
+// Giỏ hàng
+document.addEventListener("DOMContentLoaded", function () {
+    const cartToggle = document.querySelector(".js-toggle-cart");
+    const cartDropdown = document.querySelector(".js-cart-dropdown");
+
+    cartToggle.addEventListener("click", function (e) {
+        e.stopPropagation();
+        cartDropdown.classList.toggle("show");
+    });
+
+    // Ẩn dropdown nếu click bên ngoài
+    document.addEventListener("click", function (e) {
+        if (!cartDropdown.contains(e.target) && !cartToggle.contains(e.target)) {
+            cartDropdown.classList.remove("show");
+        }
+    });
+});
+

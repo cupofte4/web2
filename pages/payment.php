@@ -244,11 +244,11 @@ if (isset($_POST['submit-bill']) && $_POST['submit-bill']) {
                     </div>
                     <div class="card summary-card">
                         <span class="h2">ORDERS LIST</span>
-                        <div style="display: flex; justify-content: space-between;">
-                            <div style="width: 50%; text-align: justify;">Name</div>
-                            <div style="width: 15%; text-align: justify;">Price</div>
-                            <div style="width: 5%; text-align: justify;">Qty</div>
-                            <div style="width: 15%; text-align: end;">Total</div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                            <div style="width: 50%; text-align: justify; font-weight: 600;">Name</div>
+                            <div style="width: 15%; text-align: justify; font-weight: 600;">Price</div>
+                            <div style="width: 15%; text-align: justify; font-weight: 600;">Qty</div>
+                            <div style="width: 10%; text-align: justify; font-weight: 600;">Total</div>
                         </div>
                         <div style="display: flex; flex-direction: column; max-height: 150px; overflow-y: auto;">
                             <?php
