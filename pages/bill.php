@@ -12,9 +12,9 @@ if(isset($_SESSION['notification'])){
 else{
     $notification="";
 }
-$sql ="SELECT MAX('OrderID') AS max_id FROM 'orders'";
-$results = mysqli_query($conn,$sql);
-$order_id=mysqli_fetch_assoc($results);
+$sql = "SELECT MAX(`OrderID`) AS max_id FROM `orders`";
+$results = mysqli_query($conn, $sql);
+$order_id = mysqli_fetch_assoc($results);
 
 ?>
 <!DOCTYPE html>
@@ -110,17 +110,13 @@ $order_id=mysqli_fetch_assoc($results);
                         ?>
                         <h4>User Receiver</h4>
                         <hr>
-                        <p><b>Name: </b><?php echo $row_product['receiver']; ?>
-                        </p>
-                        <p><b>Email: </b><?php echo $row_product['email']; ?>
-                        </p>
-                        <p><b>Phone: </b><?php echo $row_product['phone']; ?>
-                        </p>
+                        <p><b>Name: </b><?php echo $row_product['receiver']; ?></p>
+                        <p><b>Email: </b><?php echo $row_product['email']; ?></p>
+                        <p><b>Phone: </b><?php echo $row_product['phone']; ?></p>
                         <p><b>Address: </b>
-                            <?php echo $row_product['street'] . " " . $district['name'] . " " . $ward['name'] . " " . $city['name'] ?>
+                            <?php echo $row_product['street'] . " " . $district['name'] . " " . $ward['name'] . " " . $city['name']; ?>
                         </p>
-                        <p><b>Order Time:</b> <?php echo $row_order['order_date']; ?></p>
-
+                        <p><b>Order Time:</b> <?php echo $row_product['order_date']; ?></p>
                     </div>
                 </div>
                 
