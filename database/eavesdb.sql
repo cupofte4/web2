@@ -193,25 +193,13 @@ ALTER TABLE `category`
 -- 
 
 ALTER TABLE `product`
-  ADD PRIMARY KEY (`ProductID`),
   ADD KEY `category_id` (`category_id`) USING BTREE;
-
--- 
--- 
-
-ALTER TABLE `product`
-  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT;
 
 -- 
 --
 
 ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`);
-
---
---
-ALTER TABLE `customer`
-  ADD PRIMARY KEY (`customer_id`);
 
 -- 
 --
