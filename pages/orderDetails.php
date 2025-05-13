@@ -2,8 +2,15 @@
 session_start();
 require '../connection/connect.php';
 require '../connection/connectDGHCVN.php';
-$OrderID=$_GET['OrderID'];
-?>
+if (isset($_GET['OrderID']) && is_numeric($_GET['OrderID'])) {
+    $OrderID = $_GET['OrderID'];
+    $_SESSION['OrderID'] = $OrderID; // lưu lại để dùng ở dưới
+} elseif (isset($_SESSION['OrderID'])) {
+    $OrderID = $_SESSION['OrderID'];
+} else {
+    echo "Lỗi: Không tìm thấy mã đơn hàng.";
+    exit();
+}?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

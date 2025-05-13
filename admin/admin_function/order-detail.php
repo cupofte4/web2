@@ -51,7 +51,7 @@ if(isset($_POST['thaydoi']) && $_POST['thaydoi']) {
                         <tbody>
                             <?php
                             $total = 0;
-                            $sql = "SELECT * FROM oderdetail JOIN product ON oderdetail.ProductID = product.ProductID WHERE `OrderID` = " . $order_id;
+                            $sql = "SELECT * FROM orderdetail JOIN product ON orderdetail.ProductID = product.ProductID WHERE `OrderID` =$order_id ";
                             $result_orderDetails = mysqli_query($conn, $sql);
                             if (mysqli_num_rows($result_orderDetails) > 0) {
                                 while ($row_product = mysqli_fetch_assoc($result_orderDetails)) {

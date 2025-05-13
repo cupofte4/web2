@@ -172,7 +172,7 @@ if (!isset($findType)) {
                 <thead class="table-secondary">
                     <tr>
                         <th scope="col">Mã đơn</th>
-                        <th scope="col">Tên tài khoản</th>
+                        <th scope="col">Mã khách hàng</th>
                         <th scope="col">Địa chỉ</th>
                         <th scope="col">Thành phố</th>
                         <th scope="col">Thời gian đặt hàng</th>
@@ -189,8 +189,8 @@ if (!isset($findType)) {
                             $district = mysqli_query($connDGHCVN, "SELECT * FROM `district` WHERE `city_id` = {$row['city']} AND `district_id` = {$row['district']}")->fetch_assoc();
                             $ward = mysqli_query($connDGHCVN, "SELECT * FROM `wards` WHERE `district_id` = {$row['district']} AND `wards_id` = {$row['ward']}")->fetch_assoc();
                             echo "<td>" . $row['OrderID'] . "</td>";
-                            echo "<td>" . $row['username'] . "</td>";
-                            echo "<td>" . $row['street'] . " " . $district['name'] . " " . $ward['name'] . "</td>";
+                            echo "<td>" . $row['customer_id'] . "</td>";
+                            echo "<td>" . $row['street'] . ", " . $ward['name'] . ", " . $district['name'] . "</td>";
                             echo "<td>" . $city['name'] . "</td>";
                             echo "<td>" . $row['order_date'] . "</td>";
                             if ($row['status'] == 0) {

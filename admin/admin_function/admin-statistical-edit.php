@@ -80,10 +80,6 @@ if(isset($_GET['customer_id'])){
         height: auto;
       }
     </style>
-    <script type="text/javascript" src="./bootstrap/js/bootstrap.js"></script>
-    <script src="./assets/js/order.js"></script>
-    <script src="./main.js"></script>
-    <script src="./assets/js/fix_delete.js"></script>
     <div class="sidebar">
         <div class="sidebar-menu bg-dark">
             <ul>
@@ -94,7 +90,7 @@ if(isset($_GET['customer_id'])){
                     </a>
                 </li>
                 <li>
-                    <a href="./admin-user.php">
+                    <a href="./admin-customer.php">
                         <i class="fas fa-user fs-3"></i><br>
                         Khách Hàng
                     </a>
@@ -224,7 +220,7 @@ if(isset($_GET['customer_id'])){
                           echo '<div class="card-body" style="height: 491px;">';
                           echo '<h3 class="h6 mb-4" style="font-size: 20px;">Thông tin tài khoản</h3>';
                           echo '<hr>';
-                          echo '<p>Tên khách hàng: ' . $customer['fullname'] . '</p>';
+                          echo '<p>Tên khách hàng: ' . $customer['last_name'] . '</p>';
                           echo '<p>Địa chỉ: ' . $order['street'] . '</p>';
                           echo '<p>Số điện thoại: ' . $customer['phone'] . '</p>';
                           // Thêm thông tin khác của người dùng nếu cần

@@ -132,12 +132,12 @@ if (!isset($_SESSION['logined-username'])) {
         $end_date = mysqli_real_escape_string($conn, $_POST['end_date']);
 
         // Thực hiện truy vấn SQL sử dụng prepared statements để ngăn chặn SQL Injection
-        $sql = "SELECT cus.username, cus.fullname, ors.OrderID, SUM(ord.price * ord.quantity) AS total_purchase, ors.status, ors.order_date
+        $sql = "SELECT cus.customer_id, cus.last_name, ors.OrderID, SUM(ord.price * ord.quantity) AS total_purchase, ors.status, ors.order_date
                 FROM customer cus
-                INNER JOIN orders ors ON cus.username = ors.username
-                INNER JOIN oderdetail ord ON ors.OrderID = ord.OrderID
+                INNER JOIN orders ors ON cus.customer_id = ors.customer_id
+                INNER JOIN orderdetail ord ON ors.OrderID = ord.OrderID
                 WHERE ors.order_date BETWEEN ? AND ? AND ors.status = '1' AND ors.OrderID = ord.OrderID
-                GROUP BY cus.username
+                GROUP BY cus.customer_id
                 ORDER BY total_purchase DESC
                 LIMIT 5";
 
@@ -152,7 +152,7 @@ if (!isset($_SESSION['logined-username'])) {
                 <thead>
                     <tr>
                         <th>Tên tài khoản</th>
-                        <th>Họ và tên</th>
+                        <th>Tên khách hàng</th>
                         <th>Tổng tiền mua hàng</th>
                         <th>Tình trạng đơn hàng</th>
                     </tr>
@@ -161,14 +161,14 @@ if (!isset($_SESSION['logined-username'])) {
                     <?php
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo "<tr>
-                        <td>" . htmlspecialchars($row["username"]) . "</td>
-                        <td>" . htmlspecialchars($row["fullname"]) . "</td>
-                        <td>" . number_format($row["total_purchase"], 0, ',', ',') . '₫' . "</td>
+                        <td>" . htmlspecialchars($row["customer_id"]) . "</td>
+                        <td>" . htmlspecialchars($row["last_name"]) . "</td>
+                        <td>" . number_format($row["total_purchase"], 0, ',', ',') . '$' . "</td>
 
                         <td>";
 
                         // Lấy thông tin chi tiết các đơn hàng của khách hàng này trong cùng một truy vấn
-                        echo "<a href='admin-statistical-edit.php?username=" . $row["username"] . "'>Xem chi tiết đơn hàng</a>";
+                        echo "<a href='admin-statistical-edit.php?customer_id=" . $row["customer_id"] . "'>Xem chi tiết đơn hàng</a>";
 
                         echo "</td></tr>";
                     }

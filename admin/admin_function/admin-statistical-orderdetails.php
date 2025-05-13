@@ -3,7 +3,7 @@ session_start();
 require '../../connection/connect.php';
 require '../../connection/connectDGHCVN.php';
 $OrderID = $_GET['OrderID'];
-$username = $_GET['username'];
+$customer_id = $_GET['customer_id'];
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +45,7 @@ $username = $_GET['username'];
                     <tbody style="max-height: 400px; overflow-y: auto;">
                         <?php
                         $total = 0;
-                        $sql = "SELECT * FROM oderdetail JOIN product ON oderdetail.ProductID = product.ProductID WHERE `OrderID` = " . $OrderID ;
+                        $sql = "SELECT * FROM orderdetail JOIN product ON orderdetail.ProductID = product.ProductID WHERE `OrderID` = " . $OrderID ;
                         $result_orderDetails = mysqli_query($conn, $sql);
                         if (mysqli_num_rows($result_orderDetails) > 0) {
                             while ($row_product = mysqli_fetch_assoc($result_orderDetails)) {
@@ -76,7 +76,7 @@ $username = $_GET['username'];
                     </tr>
                 </table>
                 <div style="display: flex; justify-content: end;">
-                    <a href="./admin-statistical-edit.php?username=<?php echo $username; ?>">
+                    <a href="./admin-statistical-edit.php?customer_id=<?php echo $customer_id; ?>">
                         <button class="btn btn-info" style="color: white;">Quay lại</button>
                     </a>
                 </div>
@@ -102,7 +102,7 @@ $username = $_GET['username'];
                         <p><b>SĐT: </b><?php echo $row_product['phone']; ?>
                         </p>
                         <p><b>Địa chỉ: </b>
-                            <?php echo $row_product['street'] . " " . $district['name'] . " " . $ward['name'] . " " . $city['name'] ?>
+                            <?php echo $row_product['street'] . ", " . $ward['name'] . ", " . $district['name'] . ", " . $city['name'] ?>
                         </p>
 
                     </div>

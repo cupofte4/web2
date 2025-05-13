@@ -63,7 +63,7 @@ INSERT INTO `manager` (`username`, `fullname`, `email`, `phone`, `street`, `ward
 --
 
 CREATE TABLE `category` (
-  `category_id` varchar(50) NOT NULL PRIMARY KEY,
+  `category_id` varchar(50) NOT NULL,
   `category_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -165,8 +165,9 @@ INSERT INTO `orderdetail` (`OrderID`, `ProductID`, `price`, `quantity`) VALUES
 
 -- 
 -- 
+
 CREATE TABLE `orders`(
-  `OrderID` INT(11) NOT NULL,
+  `OrderID` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `customer_id` INT(11) NOT NULL,
   `receiver` varchar(50) NOT NULL,
   `email` varchar(150) NOT NULL,
@@ -180,7 +181,7 @@ CREATE TABLE `orders`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `orders`(`OrderID`, `customer_id`, `receiver`, `email`, `phone`, `street`, `ward`, `district`, `city`, `status`, `order_date`) VALUES  
-(1,1,'Trần Thị Quỳnh Như','trannhu@gmail.com','01212729580','400 Âu Cơ','8891','564','50',1,'2025-5-4 18:23:46');
+(1, 1,'Trần Thị Quỳnh Như','trannhu@gmail.com','01212729580','400 Âu Cơ','8891','564','50',1,'2025-5-4 18:23:46');
 
 -- 
 -- 
@@ -229,10 +230,8 @@ ALTER TABLE `orderdetail`
 -- 
 -- 
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`OrderID`) ,
   ADD KEY `customer_id` (`customer_id`),
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT;
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`);
 -- 
 -- 
 COMMIT;
