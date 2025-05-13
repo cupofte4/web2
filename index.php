@@ -258,7 +258,7 @@ if (isset($_SESSION['notification'])) {
                             <?= number_format($row['price']) ?> USD
                         </p>
                         <?php if (isset($_SESSION['customer_id'])): ?>
-                        <button class="add-to-cart" type="button" data-product-id="<?php echo $row['ProductID']; ?>">
+                        <button class="add-to-cart btn-cart " type="button" data-product-id="<?php echo $row['ProductID']; ?>">
                             ADD TO CART
                         </button>
                         <?php else: ?>

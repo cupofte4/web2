@@ -234,7 +234,7 @@ if (!$product) {
                         ADD TO CART
                     </button>
                     <?php else: ?>
-                    <a class="add-to-cart" href="./pages/login.php">
+                    <a class="add-to-cart" href="login.php">
                         ADD TO CART
                     </a>
                     <?php endif; ?>

@@ -232,7 +232,7 @@ if (isset($_GET['category_id'])) {
                             data-product-id="<?php echo $row_product['ProductID']; ?>"> ADD TO CART
                         </button>
                         <?php else: ?>
-                        <a class="add-to-cart" href="./pages/login.php">
+                        <a class="add-to-cart" href="login.php">
                             ADD TO CART
                         </a>
                         <?php endif; ?>

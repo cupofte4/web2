@@ -25,9 +25,19 @@ $(document).ready(function () {
     });
 
     $('.add-to-cart').click(function () {
+          // Nếu là thẻ <a> thì không gọi addToCart
+    if ($(this).prop("tagName").toLowerCase() === 'a') {
+        return; // để trình duyệt tự chuyển hướng tới login.php
+    }
+
+    var $product = $(this);
+    addToCart($product.data('product-id'));
+    });
+    $('.btn-cart').click(function () {
         var $product = $(this);
         addToCart($product.data('product-id'));
     });
+
 });
 
 function updateCart(product_id, quantity) {

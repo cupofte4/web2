@@ -221,7 +221,16 @@ $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : null;
                         <p>$
                             <?= number_format($row_product['price']) ?> USD
                         </p>
-                        <a class="add-to-cart" href="#">ADD TO CART</a>
+                        <?php if (isset($_SESSION['customer_id'])): ?>
+                        <button class="add-to-cart btn-cart " type="button"
+                            data-product-id="<?php echo $row['ProductID']; ?>">
+                            ADD TO CART
+                        </button>
+                        <?php else: ?>
+                        <a class="add-to-cart" href="login.php">
+                            ADD TO CART
+                        </a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
