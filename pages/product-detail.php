@@ -13,7 +13,7 @@ if ($product_id === 0) {
 $sql = "SELECT p.*, c.category_name, c.category_id
         FROM product p
         JOIN category c ON p.category_id = c.category_id
-        WHERE p.ProductID = $product_id AND p.status = 1";
+        WHERE p.ProductID = $product_id";
 
 $result = mysqli_query($conn, $sql);
 $product = mysqli_fetch_assoc($result);
@@ -34,8 +34,8 @@ if (!$product) {
     <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css.map">
     <link href='https://fonts.googleapis.com/css?family=Afacad' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
-     <!-- jQuery (required for the spinner functionality) -->
-     <script src="../vendor/jquery/ajax.googleapis.com_ajax_libs_jquery_3.5.1_jquery.min.js"></script>
+    <!-- jQuery (required for the spinner functionality) -->
+    <script src="../vendor/jquery/ajax.googleapis.com_ajax_libs_jquery_3.5.1_jquery.min.js"></script>
     <!-- css -->
     <link rel="stylesheet" href="../vendor/font-awesome/fontawesome-free-6.5.2-web/css/all.min.css">
     <link rel="stylesheet" href="../css/global.css">
@@ -75,14 +75,14 @@ if (!$product) {
                                             <!-- Change name attribute to "type_range" -->
                                             <option value="all" selected>All</option>
                                             <?php
-                                                // Truy vấn danh sách các danh mục từ cơ sở dữ liệu
-                                                $sql_type = "SELECT * FROM type";
-                                                $result_type = mysqli_query($conn, $sql_type);
+                                            // Truy vấn danh sách các danh mục từ cơ sở dữ liệu
+                                            $sql_type = "SELECT * FROM type";
+                                            $result_type = mysqli_query($conn, $sql_type);
 
-                                                // Lặp qua kết quả và tạo ra các tùy chọn cho dropdown menu
-                                                while ($row_type = mysqli_fetch_assoc($result_type)) {
-                                                    echo '<option value="' . $row_type['type_id'] . '">' . $row_type['type_name'] . '</option>';
-                                                }
+                                            // Lặp qua kết quả và tạo ra các tùy chọn cho dropdown menu
+                                            while ($row_type = mysqli_fetch_assoc($result_type)) {
+                                                echo '<option value="' . $row_type['type_id'] . '">' . $row_type['type_name'] . '</option>';
+                                            }
                                             ?>
                                         </select>
                                     </div>
@@ -111,35 +111,35 @@ if (!$product) {
                         <span class="line"></span>
                         <div class="cart-dropdown-items" style="display: flex; flex-direction: column;">
                             <?php
-                        if (count($_SESSION['cart']) > 0) {
-                            foreach ($_SESSION['cart'] as $product_id => $quantity) {
-                                $sql = "SELECT * FROM `product` WHERE `ProductID` = '{$product_id}'";
-                                $result = mysqli_query($conn, $sql);
-                                $row = mysqli_fetch_assoc($result);
-                                echo '<div class="cart-dropdown-item" data-product-id="' . $product_id . '" style="display: flex; padding: 12px 0 12px 0; width: 100%;">';
-                                echo '<img src="../images/products/' . $row['image'] . ' " alt="picture" style="width: 70px; height: auto;">';
-                                echo '<form method="POST" style="display: flex; flex-direction: column; width: 100%; justify-content: space-between; margin-left: 10px;">';
-                                echo '<div style="display: flex; justify-content: space-between;">';
-                                echo '<span style="font-size: 14px; text-align: start;">' . $row['name'] . '</span>';
-                                echo '<button type="button" class="delete-from-cart" style="margin-left: 13px; border: none; background: none; display: flex; align-item: start;">X</button>';
-                                echo '</div>';
-                                echo '<div style="display: flex; justify-content: space-between;">';
-                                echo '<div class="input-group spinner" style="width: 80px;">';
-                                echo '<button class="spinner-prev" type="button" name="minus-quantity"><i class="fas fa-minus"></i></button>';
-                                echo '<input type="number" class="form-control text-center spinner-number" name="product-quantity" value="' . $quantity . '" data-product-id="' . $product_id . '" min="1" max="99" style="padding: 0; font-size: 14px;" readonly>';
-                                echo '<button class="spinner-next" type="button" name="plus-quantity"><i class="fas fa-plus"></i></button>';
-                                echo '</div>';
-                                echo '<span style="font-size: 14px;">' . number_format($row["price"], 0, ".", ",") . '$</span>';
-                                echo '</div>';
-                                echo '</form>';
-                                echo '</div>';
-                            }
-                                }else {
-                                    echo '<div class="my-4" style="display: flex; flex-direction: column;">';
-                                    echo '<i class="fas fa-cart-shopping text-warning fs-1 mb-3" style="text-align: center"></i>';
-                                    echo '<span style="text-align: center;">Hiện chưa có sản phẩm</span>';
+                            if (count($_SESSION['cart']) > 0) {
+                                foreach ($_SESSION['cart'] as $product_id => $quantity) {
+                                    $sql = "SELECT * FROM `product` WHERE `ProductID` = '{$product_id}'";
+                                    $result = mysqli_query($conn, $sql);
+                                    $row = mysqli_fetch_assoc($result);
+                                    echo '<div class="cart-dropdown-item" data-product-id="' . $product_id . '" style="display: flex; padding: 12px 0 12px 0; width: 100%;">';
+                                    echo '<img src="../images/products/' . $row['image'] . ' " alt="picture" style="width: 70px; height: auto;">';
+                                    echo '<form method="POST" style="display: flex; flex-direction: column; width: 100%; justify-content: space-between; margin-left: 10px;">';
+                                    echo '<div style="display: flex; justify-content: space-between;">';
+                                    echo '<span style="font-size: 14px; text-align: start;">' . $row['name'] . '</span>';
+                                    echo '<button type="button" class="delete-from-cart" style="margin-left: 13px; border: none; background: none; display: flex; align-item: start;">X</button>';
+                                    echo '</div>';
+                                    echo '<div style="display: flex; justify-content: space-between;">';
+                                    echo '<div class="input-group spinner" style="width: 80px;">';
+                                    echo '<button class="spinner-prev" type="button" name="minus-quantity"><i class="fas fa-minus"></i></button>';
+                                    echo '<input type="number" class="form-control text-center spinner-number" name="product-quantity" value="' . $quantity . '" data-product-id="' . $product_id . '" min="1" max="99" style="padding: 0; font-size: 14px;" readonly>';
+                                    echo '<button class="spinner-next" type="button" name="plus-quantity"><i class="fas fa-plus"></i></button>';
+                                    echo '</div>';
+                                    echo '<span style="font-size: 14px;">' . number_format($row["price"], 0, ".", ",") . '$</span>';
+                                    echo '</div>';
+                                    echo '</form>';
                                     echo '</div>';
                                 }
+                            } else {
+                                echo '<div class="my-4" style="display: flex; flex-direction: column;">';
+                                echo '<i class="fas fa-cart-shopping text-warning fs-1 mb-3" style="text-align: center"></i>';
+                                echo '<span style="text-align: center;">Hiện chưa có sản phẩm</span>';
+                                echo '</div>';
+                            }
                             ?>
                         </div>
                         <span class="line"></span>
@@ -154,10 +154,10 @@ if (!$product) {
                             <a href="<?php echo isset($_SESSION['email']) ? 'userInfo.php' : 'login.php'; ?>">My
                                 Account</a>
                             <?php if (isset($_SESSION['email'])): ?>
-                            <a href="logout.php">Sign out</a>
+                                <a href="logout.php">Sign out</a>
                             <?php else: ?>
-                            <a href="register.php">Register</a>
-                            <a href="login.php">Sign in</a>
+                                <a href="register.php">Register</a>
+                                <a href="login.php">Sign in</a>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -183,107 +183,107 @@ if (!$product) {
         $result_infoProduct = mysqli_query($conn, $sql_info_products);
         while ($row_product = mysqli_fetch_assoc($result_infoProduct)) {
         ?>
-        <!-- Breadcrumbs -->
-        <div class="breadcrumbs">
-            <a href="../index.php" title="EAVES">HOME</a>
-            <<span>
-                <a href="category.php?category_id=<?= htmlspecialchars($row_product['category_id']) ?>">
-                    <?= htmlspecialchars($row_product['category_name']) ?></a>
-                << /span>
-                    <?php
-                                // Truy vấn để lấy tên của sản phẩm từ cơ sở dữ liệu
-                                $sql_name = "SELECT name FROM product WHERE product.ProductID = '$product_id'";
-                                $result_name = mysqli_query($conn, $sql_name);
-                                if (mysqli_num_rows($result_name) > 0) {
-                                    $row_name = mysqli_fetch_assoc($result_name);
-                                    $prd_name = $row_name['name'];
-                                    echo "<span>$prd_name</span>";
-                                } else {
-                                    exit;
-                                }
-                                ?>
-        </div>
-
-        <!-- Product details -->
-        <div class="product-detail-container">
-            <div class="single-pro-img">
-                <img id="product-img" src="../images/products/<?php echo $row_product['image']; ?>" alt="">
+            <!-- Breadcrumbs -->
+            <div class="breadcrumbs">
+                <a href="../index.php" title="EAVES">HOME</a>
+                <<span>
+                    <a href="category.php?category_id=<?= htmlspecialchars($row_product['category_id']) ?>">
+                        <?= htmlspecialchars($row_product['category_name']) ?></a>
+                    <</span>
+                        <?php
+                        // Truy vấn để lấy tên của sản phẩm từ cơ sở dữ liệu
+                        $sql_name = "SELECT name FROM product WHERE product.ProductID = '$product_id'";
+                        $result_name = mysqli_query($conn, $sql_name);
+                        if (mysqli_num_rows($result_name) > 0) {
+                            $row_name = mysqli_fetch_assoc($result_name);
+                            $prd_name = $row_name['name'];
+                            echo "<span>$prd_name</span>";
+                        } else {
+                            exit;
+                        }
+                        ?>
             </div>
-            <div class=" product-info">
-                <?php if ($row_product['category_id'] === 'whatsnew'): ?>
-                <span class="new">NEW ARRIVAL</span>
-                <?php endif; ?>
-                <h1 id="product-name"><?php echo $row_product['name']; ?></h1>
-                <hr>
-                <p id="product-price">$<?php echo number_format($row_product['price']); ?></p>
-                <div class="size-row">
-                    <p class="product-size">SIZE</p>
-                    <a href="#" id="size-guide-link" class="size-guide-link">View Size Guide</a>
-                </div>
-                <select>
-                    <option hidden>CHOOSE SIZE</option>
-                    <option>S</option>
-                    <option>M</option>
-                    <option>L</option>
-                    <option>XL</option>
-                </select>
 
-                <div class="buttons">
-                    <?php if (isset($_SESSION['customer_id'])): ?>
-                    <button class="add-to-cart" data-product-id="<?php echo $row_product['ProductID']; ?>">
-                        ADD TO CART
-                    </button>
-                    <?php else: ?>
-                    <a class="add-to-cart" href="login.php">
-                        ADD TO CART
-                    </a>
+            <!-- Product details -->
+            <div class="product-detail-container">
+                <div class="single-pro-img">
+                    <img id="product-img" src="../images/products/<?php echo $row_product['image']; ?>" alt="">
+                </div>
+                <div class=" product-info">
+                    <?php if ($row_product['category_id'] === 'whatsnew'): ?>
+                        <span class="new">NEW ARRIVAL</span>
                     <?php endif; ?>
-
-                    <button class="add-to-wishlist" type="button"><i class="fas fa-heart"></i>ADD TO
-                        WISHLIST</button>
-                </div>
-
-                <div class="container">
-                    <a href="#" class="contact-us"><i class="fas fa-envelope"></i>CONTACT US</a>
-                </div>
-
-                <div class="product-introduce">
-                    <h3>PRODUCT DETAILS</h3>
+                    <h1 id="product-name"><?php echo $row_product['name']; ?></h1>
                     <hr>
-                    <p id="product-description"><?php echo $row_product['description']; ?></p>
-                    <h3>CARE</h3>
-                    <hr>
-                    <ul class="care-list">
-                        <li>HAND WASH COLD INSIDE OUT</li>
-                        <li>DO NOT BLEACH</li>
-                        <li>HANG DRY ONLY</li>
-                        <li>COOL IRON ON REVERSE SIDE IF NEEDED</li>
-                        <li>STEAM IRONING MAY CAUSE IRREVERSIBLE DAMAGE</li>
-                        <li>DO NOT DRY CLEAN</li>
-                        <li>DO NOT IRON ON PRINT</li>
-                    </ul>
+                    <p id="product-price">$<?php echo number_format($row_product['price']); ?></p>
+                    <div class="size-row">
+                        <p class="product-size">SIZE</p>
+                        <a href="#" id="size-guide-link" class="size-guide-link">View Size Guide</a>
+                    </div>
+                    <select>
+                        <option hidden>CHOOSE SIZE</option>
+                        <option>S</option>
+                        <option>M</option>
+                        <option>L</option>
+                        <option>XL</option>
+                    </select>
 
-                    <h3>RETURN POLICY</h3>
-                    <hr>
-                    <ul> of delivery for a
-                        refund or exchange.
-                        <li>
-                            - You can simply return any item within 14 calendar days from the date
-                        </li>
-                        <li>
-                            - Customer needs to bear the return shipping fee and any cost incurred.
-                        </li>
-                        <li>
-                            - Online Orders cannot be returned to any of Eaves' boutiques.
-                        </li>
-                        <li>
-                            - Read here (/pages/delivery-and-returns) for more details.
-                        </li>
-                    </ul>
+                    <div class="buttons">
+                        <?php if (isset($_SESSION['customer_id'])): ?>
+                            <button class="add-to-cart" data-product-id="<?php echo $row_product['ProductID']; ?>">
+                                ADD TO CART
+                            </button>
+                        <?php else: ?>
+                            <a class="add-to-cart" href="login.php">
+                                ADD TO CART
+                            </a>
+                        <?php endif; ?>
+
+                        <button class="add-to-wishlist" type="button"><i class="fas fa-heart"></i>ADD TO
+                            WISHLIST</button>
+                    </div>
+
+                    <div class="container">
+                        <a href="#" class="contact-us"><i class="fas fa-envelope"></i>CONTACT US</a>
+                    </div>
+
+                    <div class="product-introduce">
+                        <h3>PRODUCT DETAILS</h3>
+                        <hr>
+                        <p id="product-description"><?php echo $row_product['description']; ?></p>
+                        <h3>CARE</h3>
+                        <hr>
+                        <ul class="care-list">
+                            <li>HAND WASH COLD INSIDE OUT</li>
+                            <li>DO NOT BLEACH</li>
+                            <li>HANG DRY ONLY</li>
+                            <li>COOL IRON ON REVERSE SIDE IF NEEDED</li>
+                            <li>STEAM IRONING MAY CAUSE IRREVERSIBLE DAMAGE</li>
+                            <li>DO NOT DRY CLEAN</li>
+                            <li>DO NOT IRON ON PRINT</li>
+                        </ul>
+
+                        <h3>RETURN POLICY</h3>
+                        <hr>
+                        <ul> of delivery for a
+                            refund or exchange.
+                            <li>
+                                - You can simply return any item within 14 calendar days from the date
+                            </li>
+                            <li>
+                                - Customer needs to bear the return shipping fee and any cost incurred.
+                            </li>
+                            <li>
+                                - Online Orders cannot be returned to any of Eaves' boutiques.
+                            </li>
+                            <li>
+                                - Read here (/pages/delivery-and-returns) for more details.
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
             <?php } ?>
-        </div>
+            </div>
     </section>
     <!-- End sections: main -->
 
@@ -329,24 +329,24 @@ if (!$product) {
     </div>
 
     <script>
-    const sizeGuideLink = document.getElementById("size-guide-link");
-    const modal = document.getElementById("size-guide-modal");
-    const closeModal = document.querySelector(".close");
+        const sizeGuideLink = document.getElementById("size-guide-link");
+        const modal = document.getElementById("size-guide-modal");
+        const closeModal = document.querySelector(".close");
 
-    sizeGuideLink.onclick = function(event) {
-        event.preventDefault();
-        modal.style.display = "block";
-    }
+        sizeGuideLink.onclick = function(event) {
+            event.preventDefault();
+            modal.style.display = "block";
+        }
 
-    closeModal.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
+        closeModal.onclick = function() {
             modal.style.display = "none";
         }
-    }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     </script>
 
     <!-- Begin sections: footer-group -->

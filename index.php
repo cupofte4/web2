@@ -192,7 +192,7 @@ if (isset($_SESSION['notification'])) {
         <!-- Sản phẩm -->
         <div class="products">
             <?php
-            $sql = "SELECT * FROM product WHERE status = 1 AND category_id = 'men' ORDER BY ProductID DESC LIMIT 4";
+            $sql = "SELECT * FROM product WHERE NOT status = 2 AND category_id = 'men' ORDER BY ProductID DESC LIMIT 4";
             $result = $conn->query($sql);
 
             while ($row = $result->fetch_assoc()):
@@ -237,7 +237,7 @@ if (isset($_SESSION['notification'])) {
         <!-- Sản phẩm -->
         <div class="products">
             <?php
-            $sql = "SELECT * FROM product WHERE status = 1 AND category_id = 'women' ORDER BY ProductID DESC LIMIT 4";
+            $sql = "SELECT * FROM product WHERE NOT status = 2 AND category_id = 'women' ORDER BY ProductID DESC LIMIT 4";
             $result = $conn->query($sql);
 
             while ($row = $result->fetch_assoc()):

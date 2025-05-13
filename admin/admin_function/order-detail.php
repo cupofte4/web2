@@ -106,7 +106,7 @@ if(isset($_POST['thaydoi']) && $_POST['thaydoi']) {
                             <p><b>SĐT: </b><?php echo $row_order['phone']; ?>
                             </p>
                             <p><b>Địa chỉ: </b>
-                                <?php echo $row_order['street'] . " " . $district['name'] . " " . $ward['name'] . " " . $city['name'] ?>
+                                <?php echo $row_order['street'] . ", " . $ward['name'] . ", " . $district['name'] . ", " . $city['name'] ?>
                             </p>
                             <p><b>Thời gian đặt hàng:</b> <?php echo $row_order['order_date']; ?>
                             </p>

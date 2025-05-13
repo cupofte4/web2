@@ -112,22 +112,22 @@ CREATE TABLE `product` (
 INSERT INTO `product` (`ProductID`, `name`, `image`, `category_id`, `type_id`, `price`, `description`, `status`) VALUES
 (1, 'allover crinkle logo print regular fit padded bomber jacket', 'mjacket1.jpg', 'men','jacket', 385, "Crafted in a muted charcoal gray, this bomber jacket is adorned with subtle, wrinkled EK logo prints that add depth to its design. The front pocket features a refined orange brand woven label, elevating the jacket's overall distinction.", 1),
 (2, "distressed edges inserted daicock baggy jeans","mjean1.webp","men", 'jean',645,"These baggy cargo jeans feature an acid wash and multi-pockets, combined with a unique seagull print.", 1),
-(3, 'potassium spray seagull boxy long-sleeve t-shirt', 'msweatshirt1.webp','men', 'sweatshirt', 175, 'Relax in style with this sweatshirt featuring a logo and Ninja Daruma Daicock print for a bold, comfortable look.', 1),
+(3, 'potassium spray seagull boxy long-sleeve t-shirt', 'msweatshirt1.webp','men', 'sweatshirt', 175, 'Relax in style with this sweatshirt featuring a logo and Ninja Daruma Daicock print for a bold, comfortable look.', 0),
 (4, "Daruma Leather Patch Denim Jacket", "mjacket2.jpg", "men", 'jacket', 499, "This reversible denim jacket features a vintage tweed and wave print. Perfect for a stylish, boxy fit.", 1),
 (5, "Seagull Pocket and Slogan Print Relax Fit Sweatshirt", "msweatshirt2.webp", "men", 'sweatshirt', 235, "Embrace comfort with this relaxed-fit sweatshirt featuring bold graphics and dragon embroidery for a standout look.", 1),
 (6, "seagull print relax fit denim jacket", "mjacket3.jpg", "men",'jacket', 579, "This classic denim jacket features a mountain landscape print, providing a rugged yet fashionable look.", 1),
 (7, "Rseagull and slogan embroidery oversized denim coach jacket", "mjacket4.jpg", "men",'jacket', 309,"This oversized denim jacket features a bold patchwork and graphic print design, adding a unique retro vibe to any outfit.", 1),
 (8, "Seagull Metallic Embroidery Carrot Fit Jeans #2017", "mjean2.webp", "men",'jean', 325, "These loose-fit jeans have a distressed faded blue wash and utility pockets, perfect for a rugged and stylish look.", 1),
-(9, "Seagull Embroidery and Logo Appliqué Fashion Fit Leather Jacket", "mjacket1.webp", "men", 'jacket', 900, "This leather jacket is adorned with Seagull embroidery on the front and brand logo patch embroidery on the back. The edges of the jacket also feature intentionally distressed, vintage-inspired yellowed details. This design gives the jacket a unique antique style while showcasing the brand's logo and personality.", 1),
+(9, "Seagull Embroidery and Logo Appliqué Fashion Fit Leather Jacket", "mjacket1.webp", "men", 'jacket', 900, "This leather jacket is adorned with Seagull embroidery on the front and brand logo patch embroidery on the back. The edges of the jacket also feature intentionally distressed, vintage-inspired yellowed details. This design gives the jacket a unique antique style while showcasing the brand's logo and personality.", 0),
 (10, "Allover EK Logo Velvet Relax Fit Down Jacket", "mjacket2.webp", "men",'jacket', 645, "Are you in pursuit of high-quality design? This down jacket features allover EK logo velvet, with logo embroidery on the back. The overall design is luxurious and elegant, showcasing an unparalleled sense of opulence.", 1 ),
 (11, "Deconstructed Print and Logo Embroidery Relax Fit Down Jacket", "mjacket3.webp","men",'jacket', 605, "This down jacket cleverly incorporates a deconstructed style through prints, creating intentionally worn details that add a unique sense of fashion. The back features logo embroidery with various stitch patterns that showcase a three-dimensional effect, while the front is adorned with a Seagull embroidery decoration. The overall design is both warm and individualistic.", 1),
-(12, "Seagull and Eagle Embroidery Cropped Carrot Fit Jeans", "mjean1.webp", "men",'jean', 425, "Dreaming of eagle on the first day of the new year represents good luck and realisation of wishes since Edo period. Cut for a cropped carrot fit, these jeans are intricately embroidered with eagle, logo and seagull, bringing good vibes only to the trendsetters.", 1),
+(12, "Seagull and Eagle Embroidery Cropped Carrot Fit Jeans", "mjean1.webp", "men",'jean', 425, "Dreaming of eagle on the first day of the new year represents good luck and realisation of wishes since Edo period. Cut for a cropped carrot fit, these jeans are intricately embroidered with eagle, logo and seagull, bringing good vibes only to the trendsetters.", 0),
 (13, "Daruma and Logo Embroidery Relax Fit Sweatshirt", "msweatshirt3.webp", 'men','sweatshirt', 155, "With a streetwear-inspired design, this hoodie features intricate embroidery combining Daruma and EAVES logo on the chest, seamlessly blending Eastern culture with contemporary urban style. Its relaxed fit and soft fabric offer both comfort and fashion, making it perfect for everyday wear or standout street looks.", 1),
 (14, "Deconstructed Contrast Relax Fit Sweatshirt", "msweatshirt4.webp", 'men','sweatshirt', 235, "This sweatshirt from EAVES features a garment dyeing process, showcasing the brand's seagull, various logo fonts, and slogans on the front. Notably, the calligraphic logo spans across the entire garment.", 1),
 (15, "Garment Dyed Multi-Logo Print Relax Fit Sweatshirt", 'msweatshirt5.webp', 'men', 'sweatshirt', 235, "This sweatshirt features a multi-logo print, with a bold and contrasting design that adds a unique and stylish touch to any ensemble.", 1),
 (16, "Graffiti Prints Regular Fit Jeans #2000", "mjean4.webp", 'men', 'jean', 379, "Drawing inspiration from urban art, these jeans feature bold graffiti prints that celebrate a rebellious cultural vibe. Classic brand motifs like the logo, seagull, slogans, Godhead and Daruma are seamlessly integrated, creating a design rich in meaning and character. The washed denim offers both toughness and a retro aesthetic.", 1),
-(17, "Dip-dyed Oversize Sweatshirt", "wsweatshirt2.webp", "women",'sweatshirt', 235, "A lightweight, loose-fit blouse adorned with delicate floral embroidery, perfect for achieving a boho-chic look.", 1),
-(18, "Embossed Slogan Cropped Sweatshirt", "wsweatshirt3.webp", "women",'sweatshirt', 219, "Classic high-waisted straight-leg jeans featuring a vintage wash, offering a timeless and versatile style.", 1),
+(17, "Dip-dyed Oversize Sweatshirt", "wsweatshirt2.webp", "women",'sweatshirt', 235, "A lightweight, loose-fit blouse adorned with delicate floral embroidery, perfect for achieving a boho-chic look.", 0),
+(18, "Embossed Slogan Cropped Sweatshirt", "wsweatshirt3.webp", "women",'sweatshirt', 219, "Classic high-waisted straight-leg jeans featuring a vintage wash, offering a timeless and versatile style.", 0),
 (19, "Graffiti Kamon Print Sweatshirt", "wsweatshirt4.webp", "women",'sweatshirt', 259, "A sleek leather biker jacket with studded details, adding an edgy vibe to any ensemble.", 1),
 (20, "Deconstructed Seagull Embossed Fashion Fit Skirt-Jeans", "wjean2.webp", "women", 'jean', 385, "A sleek leather biker jacket featuring studded details and an asymmetrical zip, perfect for an edgy, bold look.", 1),
 (21, "Pixel Seagull Embroidery Relax Jeans", "wjean3.webp", "women",'jean', 370, "A cozy, oversized hoodie with a vibrant tie-dye design, offering both comfort and style for casual outings.", 1),
@@ -136,18 +136,22 @@ INSERT INTO `product` (`ProductID`, `name`, `image`, `category_id`, `type_id`, `
 (24, "Allover Rhinestone Seagull Loose Fit Denim Jacket", "wjacket4.webp", "women",'jacket', 625, "A classic slip dress with a satin finish and delicate spaghetti straps, ideal for elegant evening wear or layering.", 1),
 (25, "Kamon EmbroideredDown Jacket", "wjacket1.webp", "women", 'jacket', 515, "A sleek leather biker jacket featuring studded details and an asymmetrical zip, perfect for an edgy, bold look.", 1),
 (26, "Seagull Embroidery High-Waist Skinny Jeans", "wjean1.webp", "women", 'jean', 325, "Elegant wide-leg palazzo trousers featuring a flowing silhouette, versatile for both formal and casual settings.", 1),
-(27, "Logo Appliquéd Leather Bomber Jacket", "wjacket2.webp", "women", 'jacket', 385, "A sleek leather biker jacket with studded details, adding an edgy vibe to any ensemble.", 1),
+(27, "Logo Appliquéd Leather Bomber Jacket", "wjacket2.webp", "women", 'jacket', 385, "A sleek leather biker jacket with studded details, adding an edgy vibe to any ensemble.", 0),
 (28, "Seagull Brocade Appliqué and Logo Embroidery Regular Fit Sweatshirt", "wsweatshirt1.webp", "women", 'sweatshirt', 215, "A cozy, oversized hoodie with a vibrant tie-dye design, offering both comfort and style for casual outings.", 1),
 (29, "Ishigaki Camouflage Inserted Daicock Slim Fit Jeans", "njean1.webp", "whatsnew", "jeans", 385, "These distressed skinny jeans feature a classic blue wash, perfect for a casual yet trendy look.", 1),
-(30, "Seagull Print and Hybrid Ishigaki Camouflage Regular Fit Shirt Jacket", "njacket1.webp", "whatsnew", "jacket", 385, "A cozy oversized sweatshirt showcasing a bold graphic design, ideal for staying warm and stylish.", 1),
-(31, "Seagull Print and Logo Tape Regular Fit Down Jacket", "njacket2.webp", "whatsnew", "jacket", 515, "These relaxed fit mom jeans come with a high waist and frayed hem, combining comfort and style effortlessly.", 1),
+(30, "Seagull Print and Hybrid Ishigaki Camouflage Regular Fit Shirt Jacket", "njacket1.webp", "whatsnew", "jacket", 385, "A cozy oversized sweatshirt showcasing a bold graphic design, ideal for staying warm and stylish.", 0),
+(31, "Seagull Print and Logo Tape Regular Fit Down Jacket", "njacket2.webp", "whatsnew", "jacket", 515, "These relaxed fit mom jeans come with a high waist and frayed hem, combining comfort and style effortlessly.", 0),
 (32, "Brushstroke Seagull Print Straight Fit Jeans", "njean2.webp", "whatsnew", "jeans", 349, "A soft cotton fleece sweatshirt featuring an embroidered logo, perfect for a casual, sporty look.", 1),
 (33, "Allover Logo Jacquard and Seagull Embroidery Boyfriend Fit Denim Shirt Jacket", "njacket3.webp", "whatsnew", "jacket", 385, "This classic denim jacket features distressed details, making it a timeless piece for any wardrobe.", 1),
 (34, "SLEEK PULLOVER SWEATSHIRT WITH RIBBED CUFFS", "nsweatshirt1.webp", "whatsnew", "sweatshirt", 235, "A sleek pullover sweatshirt with ribbed cuffs, perfect for layering and staying warm on cooler days.", 1),
 (35, "Deconstructed Contrast Relax Fit Sweatshirt", "nsweatshirt2.webp", "whatsnew", "sweatshirt", 220, "This relaxed fit boxy jacket features utility pockets, providing both style and functionality for everyday wear.", 1),
 (36, "Seagull Brocade Appliqué and Logo Embroidery Regular Fit Sweatshirt", "nsweatshirt3.webp", "whatsnew", "sweatshirt", 219, "With embroidery as the theme, this sweatshirt features a Seagull brocade appliqué on the front and logo embroidery on the back. Showcasing brand identity and exquisite embroidery craftsmanship, it adds a delicate and artistic atmosphere to this sweatshirt.", 1),
 (37, "Daicock and Seagull Print Relax Fit 2-in-1 Denim Worker Shirt Jacket", "njacket4.jpg", 'whatsnew', 'jacket', 410, "Highlighted by a Daicock and seagull print, this 2-in-1 shirt jacket features unique faded print details that align seamlessly with the retro theme. The vintage wash finish adds a touch of personality and classic appeal. The varied pocket shapes bring depth and structure, allowing for a layered, stylish look even when worn on its own, perfect for those who value both fashion and individuality.", 1),
-(38, "Deconstructed with Multi-pocket Loose Fit Denim Jacket", 'njacket5.webp', 'whatsnew', 'jacket', 440, "Combining collage techniques and deconstruction elements from graffiti art, this denim set presents a unique washed multi-pocket design. The pockets were removed and reattached post-wash, forming a shadowy outline of dark blue pockets for a displaced, layered effect. The asymmetrical deconstruction enhances texture and personality, making the design both fun and infused with a bold streetwear aesthetic.", 1);
+(38, "Deconstructed with Multi-pocket Loose Fit Denim Jacket", 'njacket5.webp', 'whatsnew', 'jacket', 440, "Combining collage techniques and deconstruction elements from graffiti art, this denim set presents a unique washed multi-pocket design. The pockets were removed and reattached post-wash, forming a shadowy outline of dark blue pockets for a displaced, layered effect. The asymmetrical deconstruction enhances texture and personality, making the design both fun and infused with a bold streetwear aesthetic.", 1),
+(39, "Playful Seagull Print Pocket Loose Fit Jeans #2038", "njean4.jpg", "whatsnew", "jean", 309, "These jeans are designed with a removable buckle belt, blending functionality with fashion and offering adjustable waist sizing. The rear highlights a reimagined seagull motif—featuring its eyes and beak—for a whimsical flair. Infused with bold streetwear energy, this piece adds a dynamic spirit to any outfit, ideal for those seeking both trendiness and personality.", 1 ),
+(40, "Hand-Drawn Seagull Print 3D Fit Jeans", "mjean5.webp", "men", "jean", 309, "Designed with 3D tailoring, these jeans perfectly contour the legs, delivering a bold, 3D silhouette. The front knee’s folded detail brings an artistic, unique vibe, making it the standout feature of your look. Adorned with a hand-drawn seagull print on the back pocket, they reflect the brand’s distinct style. Made from dark, washed denim, they’re stylishly resilient, an essential for any fashion-forward closet.", 0),
+(41, "Seagull Badge Alpaca Sweater", "wsweatshirt5.webp", "women", "sweatshirt", 295, "This beige sweater is embroidered with a seagull at chest and classic EVISU at the back, offering an elevated winter staple for the cool girls. The piece is crafted from a Alpaca-blend yarn to give you a comfortable wearing experience.", 0),
+(42, "Hummingbird and Magnolia Embroidery Oversized Sweatshirt", "wsweatshirt6.webp", "women", "sweatshirt", 185, "This sweatshirt skillfully combines exquisite craftsmanship with unique brand elements. The front features delicate branded hardware, while the back showcases an enchanting scene of hummingbirds dancing among magnolia for the new season—hummingbirds frolicking amidst the magnolias, with falling petals cleverly clinging to the printed text and logo. Knots are interwoven among the letters, brimming with natural vitality and energy, making it suitable for various casual occasions.", 1);
 
 --
 -- 
@@ -161,7 +165,11 @@ CREATE TABLE `orderdetail`(
 -- 
 
 INSERT INTO `orderdetail` (`OrderID`, `ProductID`, `price`, `quantity`) VALUES
-(1, 1, 385, 2);
+(1, 1, 385, 2),
+(2, 13, 155, 1),
+(3, 16, 379, 1), 
+(4, 42, 185, 1),
+(5, 40, 309, 1);
 
 -- 
 -- 
@@ -181,7 +189,11 @@ CREATE TABLE `orders`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `orders`(`OrderID`, `customer_id`, `receiver`, `email`, `phone`, `street`, `ward`, `district`, `city`, `status`, `order_date`) VALUES  
-(1, 1,'Trần Thị Quỳnh Như','trannhu@gmail.com','01212729580','400 Âu Cơ','8891','564','50',1,'2025-5-4 18:23:46');
+(1, 1, 'Trần Như', 'trannhu@gmail.com', '01212729580', '400 Âu Cơ', '8891', '564', '50', 1, '2025-5-4 18:23:46'),
+(2, 1, 'Trần Như', 'trannhu@gmail.com', '01212729580', '400 Æu Cơ', '8891', '564', '50', 1, '2025-05-13 14:10:25'),
+(3, 1, 'Trần Như', 'trannhu@gmail.com', '01212729580', '400 Æu Cơ', '8891', '564', '50', 1, '2025-05-13 14:17:04'),
+(4, 1, 'Trần Như', 'trannhu@gmail.com', '01212729580', '400 Æu Cơ', '8891', '564', '50', 0, '2025-05-13 18:34:10'),
+(5, 1, 'Trần Như', 'trannhu@gmail.com', '01212729580', '400 Æu Cơ', '8891', '564', '50', 2, '2025-05-13 18:38:57');
 
 -- 
 -- 

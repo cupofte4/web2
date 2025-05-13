@@ -29,7 +29,7 @@ if (isset($_POST["capnhat"]) && $_POST["capnhat"]) {
                 `price` = '$price', 
                 `description` = '$description'
             WHERE `ProductID` = '$productID'";
-    
+
     $result = mysqli_query($conn, $sql);
     if ($result) {
         header("location: admin-product.php");
@@ -49,13 +49,20 @@ if (isset($_POST["capnhat"]) && $_POST["capnhat"]) {
 
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
-    <title>Thay đổi thông tin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/admin.css">
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css.map">
+    <!-- Jquery -->
     <script src="../../vendor/jquery/jquery-3.6.4.js"></script>
+    <script src="../js/admin-product.js"></script>
+    <title>Thay đổi thông tin</title>
 </head>
+
 <body class="d-flex justify-content-center mt-5">
     <form method="POST" enctype="multipart/form-data">
         <table id="product-input-table">
@@ -97,6 +104,22 @@ if (isset($_POST["capnhat"]) && $_POST["capnhat"]) {
                     <input size="34" type="text" name="product-price" id="product-price" value="<?= $edit_row['price'] ?>">
                 </td>
             </tr>
+             <tr>
+                <td>
+                    <div>
+                        <label for="product-stock">Trạng thái:</label>
+                        
+                        <?php
+                            if($edit_row["status"] == 1 || $edit_row["status"] == 0) {
+                                echo '<input size="34" type="text" name="product-status" id="product-status" value="Đang bán" readonly>';
+                            } else {
+                                echo '<input size="34" type="text" name="product-status" id="product-status" value="Đã ẩn" readonly>';
+                            }
+                        ?>
+                        
+                    </div>
+                </td>
+            </tr>
             <tr>
                 <td colspan="2">
                     <label for="product-description">Mô tả:</label><br>
@@ -107,7 +130,7 @@ if (isset($_POST["capnhat"]) && $_POST["capnhat"]) {
                 <td>
                     <input type="hidden" name="image-url" value="<?= $edit_row['image'] ?>">
                     <label>Xem trước ảnh:</label><br>
-                    <img id="selected-img" height="80px" src="../../assets/products/<?= $edit_row['image'] ?>">
+                    <img id="selected-img" height="80px" src="../../images/products/<?= $edit_row['image'] ?>">
                 </td>
                 <td style="text-align: right;">
                     <a href="admin-product.php" class="btn btn-outline-dark">Quay lại</a>
@@ -120,10 +143,12 @@ if (isset($_POST["capnhat"]) && $_POST["capnhat"]) {
     <script>
         document.getElementById('product-category').value = "<?= $edit_row['category_id'] ?>";
         document.getElementById('product-type').value = "<?= $edit_row['type_id'] ?>";
+
         function loadFile(event) {
             const output = document.getElementById('selected-img');
             output.src = URL.createObjectURL(event.target.files[0]);
         }
     </script>
 </body>
+
 </html>

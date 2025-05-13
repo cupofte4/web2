@@ -14,7 +14,7 @@ dbname = "diagioihanhchinhvn";
 username = "root";
 password = "";
 
-# user account
+# customer account
 - Tai khoan: trannhu@gmail.com
 - Mat khau : zxcvbNm99 (it nhat 8 ky tu, 1 chu viet hoa va 1 chu so)
 
